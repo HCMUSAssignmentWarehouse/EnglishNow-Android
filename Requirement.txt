@@ -1,0 +1,17 @@
+the more using Technology in this below list, the better.
+* Design Pattern: 
+- Creational:
+ + Create new object by instance.
+ + Factory.
+ + Abstract class.
+ + Prototype.
+ + Singleton.
+- Structural:
+ + Composite.
+ + Adapter.
+
+* Middleware:
+- Transport:
+ + Distributed object: Handle, register, dictionary,...
+ + Message.
+
