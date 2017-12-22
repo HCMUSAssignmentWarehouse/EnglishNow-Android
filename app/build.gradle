@@ -27,6 +27,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 coveralls {
@@ -37,9 +40,34 @@ task testProdDebugUnitTest { finalizedBy jacocoTestReport }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //Support libraries
     implementation "com.android.support:appcompat-v7:${rootProject.supportLibraryVersion}"
-    implementation "com.android.support.constraint:constraint-layout:${rootProject.constraintLayout}"
+    implementation "com.android.support:design:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
+
+    //Rx
+    implementation "io.reactivex.rxjava2:rxandroid:${rootProject.rxAndroidVersion}"
+    implementation "io.reactivex.rxjava2:rxjava:${rootProject.rxJavaVersion}"
+
+    //UI
+    implementation "com.android.support.constraint:constraint-layout:${rootProject.constraintLayoutVersion}"
+
+    //Dagger 2
+    implementation "com.google.dagger:dagger:${rootProject.daggerVersion}"
+    implementation "com.google.dagger:dagger-android:${rootProject.daggerVersion}"
+    implementation "com.google.dagger:dagger-android-support:${rootProject.daggerVersion}"
+
+    //Others
+    implementation "com.jakewharton:butterknife:${rootProject.butterKnifeVersion}"
+
+    //Test dependency
     testImplementation "junit:junit:${rootProject.junitVersion}"
     androidTestImplementation "com.android.support.test:runner:${rootProject.runnerVersion}"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:${rootProject.espressoVersion}"
+
+    //Annotation processor
+    annotationProcessor "com.jakewharton:butterknife-compiler:${rootProject.butterKnifeVersion}"
+    annotationProcessor "com.google.dagger:dagger-compiler:${rootProject.daggerVersion}"
 }
