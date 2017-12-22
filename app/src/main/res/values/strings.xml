@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">EnglishNow</string>
+    <string name="login">Sign In</string>
 </resources>
