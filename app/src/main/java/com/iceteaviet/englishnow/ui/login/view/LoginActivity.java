@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -19,6 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 //TODO: Add Smart Lock for passwords: https://developers.google.com/identity/smartlock-passwords/android/
+// Disable login button base on input
 public class LoginActivity extends AppCompatActivity {
 
     @BindView(R.id.btn_login)
@@ -33,6 +35,12 @@ public class LoginActivity extends AppCompatActivity {
     protected TextInputEditText passwordInput;
     @BindView(R.id.progress_bar)
     protected ProgressBar progressBar;
+    @BindView(R.id.btn_sign_up)
+    protected TextView btnSignUp;
+    @BindView(R.id.btn_forgot_password)
+    protected TextView btnForgotPassword;
+    @BindView(R.id.btn_try_anonymous)
+    protected TextView btnTryAnonymous;
 
     //Variables
     private FirebaseAuth mAuth;
@@ -48,6 +56,23 @@ public class LoginActivity extends AppCompatActivity {
 
         loginButton.setOnClickListener(view -> {
             onLoginButtonClicked();
+        });
+
+        btnSignUp.setOnClickListener(view -> {
+            onSignUpButtonClicked();
+        });
+    }
+
+    private void onSignUpButtonClicked() {
+        SignUpDialog dialog = SignUpDialog.showDialog(this);
+        dialog.setOnRegisterResultListener(task -> {
+            if (task.isSuccessful()) {
+                //If successful, it also user has signed in into the app
+                Intent intent = new Intent(this, PostLoginNavigateActivity.class);
+                startActivity(intent);
+            } else {
+                CommonUtils.showAlertDialog(this, task.getException().getMessage());
+            }
         });
     }
 

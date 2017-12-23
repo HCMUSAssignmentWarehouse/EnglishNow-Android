@@ -1,7 +1,17 @@
 <resources>
-    <string name="app_name">EnglishNow</string>
+    <string name="app_name">English Now</string>
     <string name="login">Sign In</string>
     <string name="invalid_email">Not a valid email address!</string>
+    <string name="invalid_username">Not a valid username!</string>
     <string name="invalid_password">Not a valid password!</string>
     <string name="email_password_incorrect">The email or password you entered is incorrect. Please try again.</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="sign_up">Sign up</string>
+    <string name="try_anonymous">Try anonymous</string>
+    <string name="register">Register</string>
+    <string name="input_email">Input email…</string>
+    <string name="input_password">Input password…</string>
+    <string name="re_input_password">Input password…</string>
+    <string name="input_username">Input username…</string>
+    <string name="re_password_not_match">Re-entered password does not match!</string>
 </resources>

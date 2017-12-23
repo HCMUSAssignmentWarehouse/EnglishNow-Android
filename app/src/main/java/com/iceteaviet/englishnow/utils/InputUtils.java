@@ -24,6 +24,10 @@ public class InputUtils {
         return password.length() > 5;
     }
 
+    public static boolean validateUsername(String username) {
+        return username.length() > 3;
+    }
+
     public static String loadJSONFromAsset(Context context, String jsonFileName)
             throws IOException {
 

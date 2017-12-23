@@ -2,5 +2,15 @@
 <resources>
     <string name="invalid_email">Địa chỉ email không hợp lệ!</string>
     <string name="invalid_password">Mật khẩu không hợp lệ!</string>
+    <string name="invalid_username">Username không hợp lệ!</string>
     <string name="email_password_incorrect">Email hoặc mật khẩu không đúng. Vui lòng thử lại.</string>
+    <string name="forgot_password">Quên mật khẩu?</string>
+    <string name="sign_up">Đăng ký</string>
+    <string name="try_anonymous">Dùng thử ẩn danh</string>
+    <string name="register">Đăng ký</string>
+    <string name="input_email">Nhập email…</string>
+    <string name="input_password">Nhập mật khẩu…</string>
+    <string name="re_input_password">Nhập lại mật khẩu…</string>
+    <string name="input_username">Nhập username…</string>
+    <string name="re_password_not_match">Mật khẩu nhập lại không trùng khớp!</string>
 </resources>
