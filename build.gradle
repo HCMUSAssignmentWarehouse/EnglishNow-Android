@@ -3,15 +3,13 @@
 buildscript {
     
     repositories {
-        //google()
+        google()
         jcenter()
-        maven {
-            url 'https://maven.google.com'
-        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
         classpath "org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.2"
+        classpath 'com.google.gms:google-services:3.1.1' // google-services plugin
         
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -32,7 +30,7 @@ task clean(type: Delete) {
 
 // Dependency version
 ext {
-    supportLibraryVersion = '26.1.0'
+    supportLibraryVersion = '27.0.2'
     junitVersion = '4.12'
     runnerVersion = '1.0.1'
     espressoVersion = '3.0.1'
@@ -41,4 +39,7 @@ ext {
     rxAndroidVersion = '2.0.1'
     rxJavaVersion = '2.1.7'
     daggerVersion = '2.14'
+    googlePlayServiceVersion = '11.8.0'
+    facebookVersion = '4.29.0'
+    timberVersion = '4.6.0'
 }

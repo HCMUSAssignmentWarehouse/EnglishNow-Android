@@ -1,1 +1,9 @@
-/build
+*.iml
+.gradle
+/local.properties
+.idea/
+.DS_Store
+/buildgit status
+/captures
+build/
+/app/src/main/res/values/secret.xml
