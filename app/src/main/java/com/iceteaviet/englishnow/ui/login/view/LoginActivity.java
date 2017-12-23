@@ -1,13 +1,19 @@
 package com.iceteaviet.englishnow.ui.login.view;
 
-import android.support.design.widget.TextInputEditText;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.iceteaviet.englishnow.R;
+import com.iceteaviet.englishnow.utils.CommonUtils;
+import com.iceteaviet.englishnow.utils.InputUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -15,9 +21,21 @@ import butterknife.ButterKnife;
 //TODO: Add Smart Lock for passwords: https://developers.google.com/identity/smartlock-passwords/android/
 public class LoginActivity extends AppCompatActivity {
 
-    @BindView(R.id.btn_login) protected Button loginButton;
-    @BindView(R.id.txt_email) protected TextInputEditText emailEditText;
-    @BindView(R.id.txt_password) protected TextInputEditText passwordEditText;
+    @BindView(R.id.btn_login)
+    protected RelativeLayout loginButton;
+    @BindView(R.id.email_input_layout)
+    protected TextInputLayout emailInputLayout;
+    @BindView(R.id.password_input_layout)
+    protected TextInputLayout passwordInputLayout;
+    @BindView(R.id.edt_email)
+    protected TextInputEditText emailInput;
+    @BindView(R.id.edt_password)
+    protected TextInputEditText passwordInput;
+    @BindView(R.id.progress_bar)
+    protected ProgressBar progressBar;
+
+    //Variables
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +44,49 @@ public class LoginActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        mAuth = FirebaseAuth.getInstance();
+
         loginButton.setOnClickListener(view -> {
-            String email = emailEditText.getText().toString();
-            String password = passwordEditText.getText().toString();
+            onLoginButtonClicked();
         });
+    }
+
+    private void onLoginButtonClicked() {
+        String email = emailInput.getText().toString();
+        String password = passwordInput.getText().toString();
+
+        if (!InputUtils.validateEmail(email)) {
+            emailInputLayout.setError(getString(R.string.invalid_email));
+        } else if (!InputUtils.validatePassword(password)) {
+            passwordInputLayout.setError(getString(R.string.invalid_password));
+        } else {
+            emailInputLayout.setErrorEnabled(false);
+            passwordInputLayout.setErrorEnabled(false);
+            doLogin(email, password);
+        }
+    }
+
+    private void doLogin(String email, String password) {
+        CommonUtils.hideKeyboard(this, this.getCurrentFocus());
+        progressBar.setVisibility(View.VISIBLE);
+
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        FirebaseUser user = mAuth.getCurrentUser();
+
+                        if (user != null) {
+                            //Go to post login activity
+                            Intent intent = new Intent(this, PostLoginNavigateActivity.class);
+                            startActivity(intent);
+                        }
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        CommonUtils.showAlertDialog(this, getString(R.string.email_password_incorrect));
+                        passwordInput.setText("");
+                    }
+                    progressBar.setVisibility(View.GONE);
+                });
     }
 }

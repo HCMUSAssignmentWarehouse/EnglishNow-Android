@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">EnglishNow</string>
     <string name="login">Sign In</string>
+    <string name="invalid_email">Not a valid email address!</string>
+    <string name="invalid_password">Not a valid password!</string>
+    <string name="email_password_incorrect">The email or password you entered is incorrect. Please try again.</string>
 </resources>

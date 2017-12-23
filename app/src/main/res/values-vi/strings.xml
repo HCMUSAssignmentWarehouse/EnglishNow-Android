@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="invalid_email">Địa chỉ email không hợp lệ!</string>
+    <string name="invalid_password">Mật khẩu không hợp lệ!</string>
+    <string name="email_password_incorrect">Email hoặc mật khẩu không đúng. Vui lòng thử lại.</string>
+</resources>

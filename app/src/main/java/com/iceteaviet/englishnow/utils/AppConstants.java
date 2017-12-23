@@ -5,4 +5,5 @@ package com.iceteaviet.englishnow.utils;
  */
 
 public class AppConstants {
+    public static final String TIMESTAMP_FORMAT = "yyyyMMdd_HHmmss";
 }

@@ -53,15 +53,17 @@
                 android:src="@drawable/ic_account_grey" />
 
             <android.support.design.widget.TextInputLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/email_input_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Input password...">
+                android:layout_marginLeft="8dp"
+                android:hint="Input email...">
+
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/txt_email"
+                    android:id="@+id/edt_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:hint="Input email..." />
+                    android:inputType="textEmailAddress" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
@@ -86,28 +88,45 @@
                 android:src="@drawable/ic_lock_grey" />
 
             <android.support.design.widget.TextInputLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/password_input_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
                 android:hint="Input password...">
+
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/txt_password"
+                    android:id="@+id/edt_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:layout_marginLeft="8dp"
-                    android:hint="Input password..."/>
+                    android:inputType="textPassword" />
             </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>
     </LinearLayout>
 
-    <Button
+    <RelativeLayout
         android:id="@+id/btn_login"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:background="@color/colorPrimary"
-        android:text="@string/login"
-        android:textColor="@android:color/white"
-        app:layout_constraintTop_toBottomOf="@id/input_wrapper" />
+        app:layout_constraintTop_toBottomOf="@id/input_wrapper">
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@id/progress_bar"
+            android:gravity="center"
+            android:text="@string/login"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
