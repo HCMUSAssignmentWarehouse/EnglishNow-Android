@@ -67,6 +67,12 @@ dependencies {
     implementation "com.google.dagger:dagger-android:${rootProject.daggerVersion}"
     implementation "com.google.dagger:dagger-android-support:${rootProject.daggerVersion}"
 
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:${rootProject.retrofitVersion}"
+    implementation "com.squareup.retrofit2:converter-gson:${rootProject.retrofitVersion}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${rootProject.retrofitVersion}"
+
+
     //Others
     implementation "com.jakewharton:butterknife:${rootProject.butterKnifeVersion}"
     implementation "com.jakewharton.timber:timber:${rootProject.timberVersion}"

@@ -43,4 +43,5 @@ ext {
     facebookVersion = '4.29.0'
     timberVersion = '4.6.0'
     circleImageViewVersion = '2.2.0'
+    retrofitVersion = '2.3.0'
 }
