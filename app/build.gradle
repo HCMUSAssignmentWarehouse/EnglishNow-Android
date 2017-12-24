@@ -60,6 +60,7 @@ dependencies {
 
     //UI
     implementation "com.android.support.constraint:constraint-layout:${rootProject.constraintLayoutVersion}"
+    implementation "de.hdodenhof:circleimageview:${rootProject.circleImageViewVersion}"
 
     //Dagger 2
     implementation "com.google.dagger:dagger:${rootProject.daggerVersion}"

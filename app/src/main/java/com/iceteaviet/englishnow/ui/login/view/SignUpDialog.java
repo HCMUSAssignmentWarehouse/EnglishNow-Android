@@ -140,17 +140,13 @@ public class SignUpDialog extends DialogFragment {
 
     private void doRegister(String email, String username, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
+                .addOnCompleteListener(getActivity(), task -> {
+                    if (task.isSuccessful()) {
+                        //TODO: Write user info to firebase.
+                    } else{
 
-                        } else {
-
-                        }
-
-                        listener.onComplete(task);
                     }
+                    listener.onComplete(task);
                 });
     }
 

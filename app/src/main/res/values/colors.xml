@@ -7,4 +7,6 @@
     <color name="colorGrey500">#9E9E9E</color>
     <color name="colorGrey900">#212121</color>
     <color name="colorGrey800">#424242</color>
+    <color name="colorYellow100">#FFF9C4</color>
+    <color name="colorGrey100">#F5F5F5</color>
 </resources>

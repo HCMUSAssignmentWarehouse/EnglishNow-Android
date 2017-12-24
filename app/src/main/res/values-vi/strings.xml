@@ -13,4 +13,6 @@
     <string name="re_input_password">Nhập lại mật khẩu…</string>
     <string name="input_username">Nhập username…</string>
     <string name="re_password_not_match">Mật khẩu nhập lại không trùng khớp!</string>
+    <string name="find">Tìm kiếm</string>
+    <string name="find_a_speaker">Hãy tìm một người khác và cùng luyện tập nói Tiếng Anh</string>
 </resources>

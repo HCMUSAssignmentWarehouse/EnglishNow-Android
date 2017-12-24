@@ -9,8 +9,8 @@ import android.view.WindowManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.iceteaviet.englishnow.ui.login.view.LoginActivity;
-import com.iceteaviet.englishnow.ui.login.view.PostLoginNavigateActivity;
 import com.iceteaviet.englishnow.R;
+import com.iceteaviet.englishnow.ui.login.view.PostLoginDialog;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -42,8 +42,7 @@ public class SplashActivity extends AppCompatActivity {
             startActivity(intent);
         } else {
             //start navigate activity
-            Intent intent = new Intent(this, PostLoginNavigateActivity.class);
-            startActivity(intent);
+            PostLoginDialog d = PostLoginDialog.showDialog(this);
         }
     }
 }

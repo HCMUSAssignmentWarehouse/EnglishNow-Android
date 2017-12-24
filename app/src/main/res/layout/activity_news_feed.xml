@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.iceteaviet.englishnow.ui.login.view.PostLoginNavigateActivity">
+    tools:context="com.iceteaviet.englishnow.ui.newsfeed.view.NewsFeedActivity">
 
 </android.support.constraint.ConstraintLayout>

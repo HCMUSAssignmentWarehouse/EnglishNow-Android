@@ -68,8 +68,7 @@ public class LoginActivity extends AppCompatActivity {
         dialog.setOnRegisterResultListener(task -> {
             if (task.isSuccessful()) {
                 //If successful, it also user has signed in into the app
-                Intent intent = new Intent(this, PostLoginNavigateActivity.class);
-                startActivity(intent);
+                doPostLogin();
             } else {
                 CommonUtils.showAlertDialog(this, task.getException().getMessage());
             }
@@ -103,8 +102,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         if (user != null) {
                             //Go to post login activity
-                            Intent intent = new Intent(this, PostLoginNavigateActivity.class);
-                            startActivity(intent);
+                            doPostLogin();
                         }
                     } else {
                         // If sign in fails, display a message to the user.
@@ -113,5 +111,9 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     progressBar.setVisibility(View.GONE);
                 });
+    }
+
+    private void doPostLogin() {
+        PostLoginDialog d = PostLoginDialog.showDialog(this);
     }
 }
