@@ -1,6 +1,7 @@
 package com.iceteaviet.englishnow.ui.splash.view;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
@@ -8,18 +9,27 @@ import android.view.WindowManager;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.iceteaviet.englishnow.ui.login.view.LoginActivity;
+import com.iceteaviet.englishnow.EnglishNowApp;
 import com.iceteaviet.englishnow.R;
+import com.iceteaviet.englishnow.ui.login.view.LoginActivity;
 import com.iceteaviet.englishnow.ui.login.view.PostLoginDialog;
+
+import javax.inject.Inject;
 
 public class SplashActivity extends AppCompatActivity {
 
+    @Inject
+    SharedPreferences sharedPreferences;
     private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+        // assign singleton instances to fields
+        // We need to cast to `MyApp` in order to get the right method
+        ((EnglishNowApp) getApplication()).getAppComponent().inject(this);
 
         Window w = getWindow();
         w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);

@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.iceteaviet.englishnow.di.component.AppComponent;
+import com.iceteaviet.englishnow.di.component.DaggerAppComponent;
 import com.iceteaviet.englishnow.di.component.DaggerNetComponent;
 import com.iceteaviet.englishnow.di.component.NetComponent;
 import com.iceteaviet.englishnow.di.module.AppModule;
@@ -36,6 +37,10 @@ public class EnglishNowApp extends Application {
     public void onCreate() {
         super.onCreate();
         //Application build component (which defines dependency graph)
+        appComponent = DaggerAppComponent.builder()
+                .appModule(new AppModule(this)) //TODO: Consider change to @BindsInstance
+                .build();
+
         netComponent = DaggerNetComponent.builder()
                 // list of modules that are part of this component need to be created here too
                 .appModule(new AppModule(this))
@@ -54,6 +59,10 @@ public class EnglishNowApp extends Application {
 
     public NetComponent getNetComponent() {
         return netComponent;
+    }
+
+    public AppComponent getAppComponent() {
+        return appComponent;
     }
 
     public Scheduler subscribeScheduler() {

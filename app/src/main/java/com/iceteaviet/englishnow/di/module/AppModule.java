@@ -1,6 +1,8 @@
 package com.iceteaviet.englishnow.di.module;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
 
 import javax.inject.Singleton;
 
@@ -16,10 +18,11 @@ import dagger.Provides;
 //
 @Module
 public class AppModule {
-    private Application mApplication;
+    private static final String PREFS_NAME = "english_now_android";
+    private Application application;
 
     public AppModule(Application application) {
-        mApplication = application;
+        this.application = application;
     }
 
     //define a method annotated with @Provides that informs Dagger
@@ -27,6 +30,13 @@ public class AppModule {
     @Provides
     @Singleton
     public Application providesApplication() {
-        return mApplication;
+        return application;
+    }
+
+    @Provides
+    @Singleton
+    public SharedPreferences providePreferences() {
+        return application.getSharedPreferences(PREFS_NAME,
+                Context.MODE_PRIVATE);
     }
 }
