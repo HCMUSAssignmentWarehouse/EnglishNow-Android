@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">English Now</string>
+    <string name="app_name" translatable="false">English Now</string>
     <string name="login">Sign In</string>
     <string name="invalid_email">Not a valid email address!</string>
     <string name="invalid_username">Not a valid username!</string>

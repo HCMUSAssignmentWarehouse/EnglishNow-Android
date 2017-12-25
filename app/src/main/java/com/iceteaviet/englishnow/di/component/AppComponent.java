@@ -1,7 +1,5 @@
 package com.iceteaviet.englishnow.di.component;
 
-import android.content.SharedPreferences;
-
 import com.iceteaviet.englishnow.EnglishNowApp;
 import com.iceteaviet.englishnow.di.module.AppModule;
 import com.iceteaviet.englishnow.ui.splash.view.SplashActivity;
@@ -18,14 +16,18 @@ import dagger.Component;
 @Component(modules = {AppModule.class})
 //define what objects should be included as part of the dependency chain by modules
 public interface AppComponent {
-    SharedPreferences getSharedPreferences();
-
     void inject(EnglishNowApp app);
     // Note that the activities, services, or fragments that are allowed to request the dependencies declared by the modules
     // (by means of the @Inject annotation) should be declared in this class with individual inject() methods
     void inject(SplashActivity activity);
     // void inject(MyFragment fragment);
     // void inject(MyService service);
+    //NOTE:
+    // remove injection methods if downstream modules will perform injection
+    // AND in that case:
+    // downstream components need these exposed
+    // the method name does not matter, only the return type
+    // SharedPreferences getSharedPreferences();
 }
 
 //Note that Dagger 2 will generate Component builder for us automatically
