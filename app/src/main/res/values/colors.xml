@@ -9,4 +9,9 @@
     <color name="colorGrey800">#424242</color>
     <color name="colorYellow100">#FFF9C4</color>
     <color name="colorGrey100">#F5F5F5</color>
+    <color name="intro_normal_indicator_color">#E0E0E0</color>
+    <color name="intro_selected_indicator_color">@color/colorAccent</color>
+    <color name="intro_welcome_background_color">#80a5cd</color>
+    <color name="intro_informative_background_color">#fbae17</color>
+    <color name="intro_social_networking_background_color">#21beab</color>
 </resources>

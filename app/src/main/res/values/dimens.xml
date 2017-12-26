@@ -2,4 +2,12 @@
 <resources>
     <dimen name="avatar_size_large">96dp</dimen>
     <dimen name="find_button_width">120dp</dimen>
+
+    <dimen name="intro_normal_indicator_radius">4dp</dimen>
+    <dimen name="intro_selected_indicator_radius">5dp</dimen>
+    <dimen name="intro_indicator_padding">4dp</dimen>
+    <dimen name="intro_indicator_layout_margin">8dp</dimen>
+    <dimen name="intro_button_min_width">192dp</dimen>
+    <dimen name="intro_button_layout_min_height">132dp</dimen>
+    <dimen name="intro_button_margin_bottom">16dp</dimen>
 </resources>

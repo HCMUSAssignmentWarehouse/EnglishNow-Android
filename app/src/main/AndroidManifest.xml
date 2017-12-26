@@ -25,7 +25,12 @@
         <activity
             android:name=".ui.matching.view.ConverstationMatchingActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.newsfeed.view.NewsFeedActivity"></activity>
+        <activity android:name=".ui.newsfeed.view.NewsFeedActivity" />
+        <activity
+            android:name=".ui.intro.view.IntroActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoHeaderBar" />
     </application>
 
 </manifest>

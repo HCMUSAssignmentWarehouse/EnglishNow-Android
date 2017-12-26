@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/intro_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/intro_button_layout_min_height" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="center_horizontal"
+        android:minHeight="@dimen/intro_button_layout_min_height"
+        android:orientation="vertical">
+
+        <com.iceteaviet.englishnow.ui.intro.view.IntroIndicator
+            android:id="@+id/intro_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/intro_indicator_layout_margin" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/next_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="@dimen/intro_button_min_width"
+            android:text="@string/intro_next" />
+
+        <Button
+            android:id="@+id/skip_btn"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="@dimen/intro_button_min_width"
+            android:text="@string/intro_skip"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+</FrameLayout>

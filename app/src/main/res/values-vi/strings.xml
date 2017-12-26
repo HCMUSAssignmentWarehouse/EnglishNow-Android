@@ -16,4 +16,14 @@
     <string name="find">Tìm kiếm</string>
     <string name="find_a_speaker">Hãy tìm một người khác và cùng luyện tập nói Tiếng Anh</string>
     <string name="login">Đăng nhập</string>
+
+    <string name="intro_next">Tiếp theo</string>
+    <string name="intro_get_started">Bắt đầu</string>
+    <string name="intro_skip">Bỏ qua</string>
+    <string name="intro_title_welcome">Chào mừng bạn với English Now</string>
+    <string name="intro_title_informative">Thông tin</string>
+    <string name="intro_title_social_networking">Mạng xã hội</string>
+    <string name="intro_description_welcome">Bạn sẽ làm những điều tuyệt vời với English Now</string>
+    <string name="intro_description_informative">Nhận được những thông tin hữu ích như thông báo, những sự kiện, &#8230;</string>
+    <string name="intro_description_social_networking">Kết nối mọi người với nhau và chia sẻ những điều tuyệt vời</string>
 </resources>

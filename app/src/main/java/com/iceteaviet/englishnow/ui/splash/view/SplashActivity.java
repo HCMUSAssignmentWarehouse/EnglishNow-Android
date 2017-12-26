@@ -11,8 +11,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.iceteaviet.englishnow.EnglishNowApp;
 import com.iceteaviet.englishnow.R;
+import com.iceteaviet.englishnow.ui.intro.view.IntroActivity;
 import com.iceteaviet.englishnow.ui.login.view.LoginActivity;
 import com.iceteaviet.englishnow.ui.login.view.PostLoginDialog;
+import com.iceteaviet.englishnow.utils.AppConstants;
 
 import javax.inject.Inject;
 
@@ -47,9 +49,20 @@ public class SplashActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser currentUser) {
         if (currentUser == null) {
-            //start login activity
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
+            if (sharedPreferences.getBoolean(AppConstants.KEY_APP_LAUNCH_FIRST_TIME, true)) {
+                //Show intro activity
+                Intent intent = new Intent(this, IntroActivity.class);
+                startActivity(intent);
+
+                //Write new value
+                sharedPreferences.edit()
+                        .putBoolean(AppConstants.KEY_APP_LAUNCH_FIRST_TIME, false)
+                        .apply();
+            } else {
+                //start login activity
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+            }
         } else {
             //start navigate activity
             PostLoginDialog d = PostLoginDialog.showDialog(this);
