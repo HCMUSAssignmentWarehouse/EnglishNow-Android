@@ -68,11 +68,15 @@ dependencies {
     //UI
     implementation "com.android.support.constraint:constraint-layout:${rootProject.constraintLayoutVersion}"
     implementation "de.hdodenhof:circleimageview:${rootProject.circleImageViewVersion}"
+    implementation "com.squareup.picasso:picasso:${rootProject.picassoVersion}"
 
     //Dagger 2
     implementation "com.google.dagger:dagger:${rootProject.daggerVersion}"
     implementation "com.google.dagger:dagger-android:${rootProject.daggerVersion}"
     implementation "com.google.dagger:dagger-android-support:${rootProject.daggerVersion}"
+
+    // ViewModel and LiveData
+    implementation "android.arch.lifecycle:extensions:${rootProject.archLifeCycleVersion}"
 
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:${rootProject.retrofitVersion}"
@@ -92,6 +96,8 @@ dependencies {
     //Annotation processor
     annotationProcessor "com.jakewharton:butterknife-compiler:${rootProject.butterKnifeVersion}"
     annotationProcessor "com.google.dagger:dagger-compiler:${rootProject.daggerVersion}"
+    annotationProcessor "com.google.dagger:dagger-android-processor:${rootProject.daggerVersion}"
+    annotationProcessor "android.arch.lifecycle:compiler:${rootProject.archLifeCycleVersion}"
 }
 
 apply plugin: 'com.google.gms.google-services'

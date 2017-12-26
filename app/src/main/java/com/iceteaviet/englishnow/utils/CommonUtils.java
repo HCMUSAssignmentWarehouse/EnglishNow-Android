@@ -2,10 +2,15 @@ package com.iceteaviet.englishnow.utils;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.provider.Settings;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+
+import com.iceteaviet.englishnow.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,6 +33,20 @@ public final class CommonUtils {
         dialog.show();
 
         return dialog;
+    }
+
+    //TODO: Progress dialog deprecated, change to normal dialog
+    public static ProgressDialog showLoadingDialog(Context context) {
+        ProgressDialog progressDialog = new ProgressDialog(context);
+        progressDialog.show();
+        if (progressDialog.getWindow() != null) {
+            progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        }
+        progressDialog.setContentView(R.layout.progress_dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+        return progressDialog;
     }
 
     public static void hideKeyboard(Context context, View view) {

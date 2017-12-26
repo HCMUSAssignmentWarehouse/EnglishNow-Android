@@ -1,16 +1,17 @@
 package com.iceteaviet.englishnow;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 
-import com.iceteaviet.englishnow.di.component.AppComponent;
 import com.iceteaviet.englishnow.di.component.DaggerAppComponent;
-import com.iceteaviet.englishnow.di.component.DaggerNetComponent;
-import com.iceteaviet.englishnow.di.component.NetComponent;
-import com.iceteaviet.englishnow.di.module.AppModule;
-import com.iceteaviet.englishnow.di.module.NetModule;
 import com.iceteaviet.englishnow.utils.AppLogger;
 
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasActivityInjector;
 import io.reactivex.Scheduler;
 import io.reactivex.schedulers.Schedulers;
 
@@ -20,10 +21,10 @@ import io.reactivex.schedulers.Schedulers;
 
 // Dagger 2: We should do Instantiating the component within a specialization of the Application class
 //            since these instances should be declared only once throughout the entire lifespan of the application
-public class EnglishNowApp extends Application {
+public class EnglishNowApp extends Application implements HasActivityInjector {
+    @Inject
+    DispatchingAndroidInjector<Activity> activityDispatchingAndroidInjector;
     private Scheduler scheduler;
-    private AppComponent appComponent;
-    private NetComponent netComponent;
 
     private static EnglishNowApp get(Context context) {
         return (EnglishNowApp) context.getApplicationContext();
@@ -37,15 +38,10 @@ public class EnglishNowApp extends Application {
     public void onCreate() {
         super.onCreate();
         //Application build component (which defines dependency graph)
-        appComponent = DaggerAppComponent.builder()
-                .appModule(new AppModule(this)) //TODO: Consider change to @BindsInstance
-                .build();
-
-        netComponent = DaggerNetComponent.builder()
-                // list of modules that are part of this component need to be created here too
-                .appModule(new AppModule(this))
-                .netModule(new NetModule("https://api.github.com"))
-                .build();
+        DaggerAppComponent.builder()
+                .application(this)
+                .build()
+                .inject(this);
 
         // If a Dagger 2 component does not have any constructor arguments for any of its modules,
         // then we can use .create() as a shortcut instead:
@@ -55,14 +51,6 @@ public class EnglishNowApp extends Application {
 
         //AppLogger
         AppLogger.init();
-    }
-
-    public NetComponent getNetComponent() {
-        return netComponent;
-    }
-
-    public AppComponent getAppComponent() {
-        return appComponent;
     }
 
     public Scheduler subscribeScheduler() {
@@ -75,5 +63,10 @@ public class EnglishNowApp extends Application {
 
     public void setScheduler(Scheduler scheduler) {
         this.scheduler = scheduler;
+    }
+
+    @Override
+    public AndroidInjector<Activity> activityInjector() {
+        return activityDispatchingAndroidInjector;
     }
 }

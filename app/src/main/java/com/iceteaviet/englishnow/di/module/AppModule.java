@@ -4,6 +4,11 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.iceteaviet.englishnow.data.AppDataRepository;
+import com.iceteaviet.englishnow.data.AppDataSource;
+import com.iceteaviet.englishnow.data.remote.AppFirebaseHelper;
+import com.iceteaviet.englishnow.data.remote.FirebaseHelper;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -19,24 +24,30 @@ import dagger.Provides;
 @Module
 public class AppModule {
     private static final String PREFS_NAME = "english_now_android";
-    private Application application;
-
-    public AppModule(Application application) {
-        this.application = application;
-    }
 
     //define a method annotated with @Provides that informs Dagger
     // that this method is in charge of providing the instance of the Application class
     @Provides
     @Singleton
-    public Application providesApplication() {
+    Context provideContext(Application application) {
         return application;
     }
 
     @Provides
     @Singleton
-    public SharedPreferences providePreferences() {
-        return application.getSharedPreferences(PREFS_NAME,
-                Context.MODE_PRIVATE);
+    public SharedPreferences providePreferences(SharedPreferences preferences) {
+        return preferences;
+    }
+
+    @Provides
+    @Singleton
+    AppDataSource provideAppDataSource(AppDataRepository repository) {
+        return repository;
+    }
+
+    @Provides
+    @Singleton
+    FirebaseHelper provideFirebaseHelper(AppFirebaseHelper firebaseHelper) {
+        return firebaseHelper;
     }
 }
