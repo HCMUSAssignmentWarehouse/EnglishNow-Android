@@ -10,7 +10,7 @@ import io.reactivex.Single;
  * Created by Genius Doan on 12/26/2017.
  */
 
-public interface FirebaseHelper {
+public interface FirebaseManager {
     FirebaseAuth getFirebaseAuth();
 
     Single<AuthResult> doServerLoginFirebaseCall(LoginRequest.ServerLoginRequest request);

@@ -4,9 +4,9 @@ import android.content.Context;
 
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.iceteaviet.englishnow.data.local.prefs.PreferencesHelper;
+import com.iceteaviet.englishnow.data.local.prefs.PreferencesManager;
 import com.iceteaviet.englishnow.data.model.api.LoginRequest;
-import com.iceteaviet.englishnow.data.remote.FirebaseHelper;
+import com.iceteaviet.englishnow.data.remote.FirebaseManager;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -20,24 +20,24 @@ import io.reactivex.Single;
 @Singleton
 public class AppDataRepository implements AppDataSource {
     private final Context context;
-    private final FirebaseHelper firebaseHelper;
-    private final PreferencesHelper preferencesHelper;
+    private final FirebaseManager firebaseManager;
+    private final PreferencesManager preferencesManager;
 
     @Inject
-    public AppDataRepository(Context context, FirebaseHelper firebaseHelper, PreferencesHelper preferencesHelper) {
+    public AppDataRepository(Context context, FirebaseManager firebaseManager, PreferencesManager preferencesManager) {
         this.context = context;
-        this.firebaseHelper = firebaseHelper;
-        this.preferencesHelper = preferencesHelper;
+        this.firebaseManager = firebaseManager;
+        this.preferencesManager = preferencesManager;
     }
 
     @Override
     public FirebaseAuth getFirebaseAuth() {
-        return firebaseHelper.getFirebaseAuth();
+        return firebaseManager.getFirebaseAuth();
     }
 
     @Override
     public Single<AuthResult> doServerLoginFirebaseCall(LoginRequest.ServerLoginRequest request) {
-        return firebaseHelper.doServerLoginFirebaseCall(request);
+        return firebaseManager.doServerLoginFirebaseCall(request);
     }
 
     @Override
@@ -47,21 +47,31 @@ public class AppDataRepository implements AppDataSource {
 
     @Override
     public void putString(String key, String value) {
-        preferencesHelper.putString(key, value);
+        preferencesManager.putString(key, value);
     }
 
     @Override
     public String getString(String key, String defaultValue) {
-        return preferencesHelper.getString(key, defaultValue);
+        return preferencesManager.getString(key, defaultValue);
     }
 
     @Override
     public void putBoolean(String key, Boolean value) {
-        preferencesHelper.putBoolean(key, value);
+        preferencesManager.putBoolean(key, value);
     }
 
     @Override
     public Boolean getBoolean(String key, Boolean defaultValue) {
-        return preferencesHelper.getBoolean(key, defaultValue);
+        return preferencesManager.getBoolean(key, defaultValue);
+    }
+
+    @Override
+    public Boolean getAppLaunchFirstTime() {
+        return preferencesManager.getAppLaunchFirstTime();
+    }
+
+    @Override
+    public void setAppLaunchFirstTime(Boolean isFirstTime) {
+        preferencesManager.setAppLaunchFirstTime(isFirstTime);
     }
 }

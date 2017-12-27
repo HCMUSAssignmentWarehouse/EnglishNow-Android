@@ -4,7 +4,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.iceteaviet.englishnow.data.AppDataSource;
 import com.iceteaviet.englishnow.ui.base.BaseViewModel;
 import com.iceteaviet.englishnow.ui.splash.SplashHandler;
-import com.iceteaviet.englishnow.utils.AppConstants;
 import com.iceteaviet.englishnow.utils.rx.SchedulerProvider;
 
 /**
@@ -18,16 +17,16 @@ public class SplashViewModel extends BaseViewModel<SplashHandler> {
     }
 
     public void startDataLoading() {
-        updateUI(auth.getCurrentUser());
+        updateUI(getAppDataSource().getFirebaseAuth().getCurrentUser());
     }
 
     private void updateUI(FirebaseUser currentUser) {
         if (currentUser == null) {
-            if (getAppDataSource().getBoolean(AppConstants.KEY_APP_LAUNCH_FIRST_TIME, true)) {
+            if (getAppDataSource().getAppLaunchFirstTime()) {
                 getHandler().navigateToIntroScreen();
 
                 //Write new value
-                getAppDataSource().putBoolean(AppConstants.KEY_APP_LAUNCH_FIRST_TIME, false);
+                getAppDataSource().setAppLaunchFirstTime(false);
             } else {
                 getHandler().navigateToLoginScreen();
             }

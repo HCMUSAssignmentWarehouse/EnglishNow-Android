@@ -1,7 +1,6 @@
 package com.iceteaviet.englishnow.ui.login.view;
 
 import android.os.Bundle;
-import android.view.View;
 
 import com.iceteaviet.englishnow.BR;
 import com.iceteaviet.englishnow.R;
@@ -30,16 +29,6 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
         loginViewModel.setHandler(this);
 
         ButterKnife.bind(this);
-    }
-
-    @Override
-    public void showLoading() {
-        activityLoginBinding.progressBar.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideLoading() {
-        activityLoginBinding.progressBar.setVisibility(View.GONE);
     }
 
     @Override

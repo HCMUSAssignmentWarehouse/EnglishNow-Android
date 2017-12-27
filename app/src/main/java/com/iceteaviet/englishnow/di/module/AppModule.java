@@ -6,10 +6,10 @@ import android.content.Context;
 import com.google.firebase.auth.FirebaseAuth;
 import com.iceteaviet.englishnow.data.AppDataRepository;
 import com.iceteaviet.englishnow.data.AppDataSource;
-import com.iceteaviet.englishnow.data.local.prefs.AppPreferencesHelper;
-import com.iceteaviet.englishnow.data.local.prefs.PreferencesHelper;
-import com.iceteaviet.englishnow.data.remote.AppFirebaseHelper;
-import com.iceteaviet.englishnow.data.remote.FirebaseHelper;
+import com.iceteaviet.englishnow.data.local.prefs.AppPreferencesManager;
+import com.iceteaviet.englishnow.data.local.prefs.PreferencesManager;
+import com.iceteaviet.englishnow.data.remote.AppFirebaseManager;
+import com.iceteaviet.englishnow.data.remote.FirebaseManager;
 import com.iceteaviet.englishnow.utils.rx.AppSchedulerProvider;
 import com.iceteaviet.englishnow.utils.rx.SchedulerProvider;
 
@@ -37,8 +37,8 @@ public class AppModule {
 
     @Provides
     @Singleton
-    PreferencesHelper providePreferencesHelper(AppPreferencesHelper appPreferencesHelper) {
-        return appPreferencesHelper;
+    PreferencesManager providePreferencesHelper(AppPreferencesManager appPreferencesManager) {
+        return appPreferencesManager;
     }
 
     @Provides
@@ -49,7 +49,7 @@ public class AppModule {
 
     @Provides
     @Singleton
-    FirebaseHelper provideFirebaseHelper(AppFirebaseHelper firebaseHelper) {
+    FirebaseManager provideFirebaseHelper(AppFirebaseManager firebaseHelper) {
         return firebaseHelper;
     }
 

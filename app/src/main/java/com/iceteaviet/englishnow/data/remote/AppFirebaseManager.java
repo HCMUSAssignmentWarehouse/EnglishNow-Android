@@ -14,12 +14,12 @@ import io.reactivex.Single;
  */
 
 @Singleton
-public class AppFirebaseHelper implements FirebaseHelper {
+public class AppFirebaseManager implements FirebaseManager {
 
     private FirebaseAuth mAuth; //Should we inject this?
 
     @Inject
-    public AppFirebaseHelper(FirebaseAuth auth) {
+    public AppFirebaseManager(FirebaseAuth auth) {
         this.mAuth = auth;
     }
 

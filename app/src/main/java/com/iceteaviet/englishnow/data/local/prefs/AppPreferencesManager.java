@@ -9,13 +9,14 @@ import javax.inject.Inject;
  * Created by Genius Doan on 27/12/2017.
  */
 
-public class AppPreferencesHelper implements PreferencesHelper {
+public class AppPreferencesManager implements PreferencesManager {
     private static final String PREFS_NAME = "english_now_android";
+    private static final String KEY_APP_LAUNCH_FIRST_TIME = "app_launch_first_time";
 
     private final SharedPreferences sharedPreferences;
 
     @Inject
-    public AppPreferencesHelper(Context context) {
+    public AppPreferencesManager(Context context) {
         sharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
     }
 
@@ -41,5 +42,17 @@ public class AppPreferencesHelper implements PreferencesHelper {
     @Override
     public Boolean getBoolean(String key, Boolean defaultValue) {
         return sharedPreferences.getBoolean(key, defaultValue);
+    }
+
+    @Override
+    public Boolean getAppLaunchFirstTime() {
+        return sharedPreferences.getBoolean(KEY_APP_LAUNCH_FIRST_TIME, true);
+    }
+
+    @Override
+    public void setAppLaunchFirstTime(Boolean isFirstTime) {
+        sharedPreferences.edit()
+                .putBoolean(KEY_APP_LAUNCH_FIRST_TIME, isFirstTime)
+                .apply();
     }
 }

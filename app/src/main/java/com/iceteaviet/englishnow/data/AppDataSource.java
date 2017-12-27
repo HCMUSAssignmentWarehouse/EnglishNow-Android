@@ -1,12 +1,12 @@
 package com.iceteaviet.englishnow.data;
 
-import com.iceteaviet.englishnow.data.local.prefs.PreferencesHelper;
-import com.iceteaviet.englishnow.data.remote.FirebaseHelper;
+import com.iceteaviet.englishnow.data.local.prefs.PreferencesManager;
+import com.iceteaviet.englishnow.data.remote.FirebaseManager;
 
 /**
  * Created by Genius Doan on 23/12/2017.
  */
 
-public interface AppDataSource extends FirebaseHelper, PreferencesHelper {
+public interface AppDataSource extends FirebaseManager, PreferencesManager {
     void setUserAsLoggedOut();
 }
