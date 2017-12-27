@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.iceteaviet.englishnow.R;
-import com.iceteaviet.englishnow.ui.matching.view.ConverstationMatchingActivity;
+import com.iceteaviet.englishnow.ui.matching.view.ConversationMatchingActivity;
 import com.iceteaviet.englishnow.ui.newsfeed.view.NewsFeedActivity;
 
 import butterknife.BindView;
@@ -39,6 +39,24 @@ public class PostLoginDialog extends DialogFragment {
         return d;
     }
 
+    public static PostLoginDialog showDialog(Activity activity) {
+        // DialogFragment.show() will take care of adding the fragment
+        // in a transaction.  We also want to remove any currently showing
+        // dialog, so make our own transaction and take care of that here.
+        FragmentTransaction ft = activity.getFragmentManager().beginTransaction();
+        Fragment prev = activity.getFragmentManager().findFragmentByTag(TAG);
+        if (prev != null) {
+            ft.remove(prev);
+        }
+        ft.addToBackStack(null);
+
+        // Create and show the dialog.
+        PostLoginDialog dialog = PostLoginDialog.newInstance();
+        dialog.show(ft, TAG);
+
+        return dialog;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,30 +76,12 @@ public class PostLoginDialog extends DialogFragment {
     }
 
     private void onFindNowButtonClicked() {
-        Intent intent = new Intent(getActivity(), ConverstationMatchingActivity.class);
+        Intent intent = new Intent(getActivity(), ConversationMatchingActivity.class);
         startActivity(intent);
     }
 
     private void onSkipButtonClicked() {
         Intent intent = new Intent(getActivity(), NewsFeedActivity.class);
         startActivity(intent);
-    }
-
-    public static PostLoginDialog showDialog(Activity activity) {
-        // DialogFragment.show() will take care of adding the fragment
-        // in a transaction.  We also want to remove any currently showing
-        // dialog, so make our own transaction and take care of that here.
-        FragmentTransaction ft = activity.getFragmentManager().beginTransaction();
-        Fragment prev = activity.getFragmentManager().findFragmentByTag(TAG);
-        if (prev != null) {
-            ft.remove(prev);
-        }
-        ft.addToBackStack(null);
-
-        // Create and show the dialog.
-        PostLoginDialog dialog = PostLoginDialog.newInstance();
-        dialog.show(ft, TAG);
-
-        return dialog;
     }
 }

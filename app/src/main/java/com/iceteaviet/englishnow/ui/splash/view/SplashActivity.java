@@ -21,10 +21,13 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashVi
     @Inject
     SplashViewModel splashViewModel;
 
+    ActivitySplashBinding activitySplashBinding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         splashViewModel.setHandler(this);
+        activitySplashBinding = getViewDataBinding();
 
         Window w = getWindow();
         w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);

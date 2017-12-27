@@ -16,14 +16,14 @@
     <string name="re_password_not_match">Re-entered password does not match!</string>
     <string name="find">Find</string>
     <string name="find_a_speaker">Let find a speaker and practice speaking English</string>
+    <string name="speaking_english_anytime_anywhere">Let\'s speak English anytime anywhere</string>
 
     <string name="intro_next">Next</string>
     <string name="intro_get_started">Get started</string>
     <string name="intro_skip">Skip</string>
     <string name="intro_title_welcome">Welcome to English Now</string>
-    <string name="intro_title_informative">Informative</string>
+    <string name="intro_title_always_learning">Always learning</string>
     <string name="intro_title_social_networking">Social Networking</string>
     <string name="intro_description_welcome">You\'re going to do great things with English Now</string>
-    <string name="intro_description_informative">You\'ll get more useful information such as Notification, Events, etc</string>
     <string name="intro_description_social_networking">Connect to other people and share your interest</string>
 </resources>

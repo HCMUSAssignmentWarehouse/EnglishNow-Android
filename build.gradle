@@ -43,6 +43,6 @@ ext {
     timberVersion = '4.6.0'
     circleImageViewVersion = '2.2.0'
     retrofitVersion = '2.3.0'
-    picassoVersion = '2.5.2'
+    glideVersion = '4.4.0'
     archLifeCycleVersion = '1.0.0-beta2'
 }

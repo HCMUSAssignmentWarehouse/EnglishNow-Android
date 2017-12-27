@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.iceteaviet.englishnow.ui.matching.view.ConversationMatchingActivity">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.iceteaviet.englishnow.ui.matching.viewmodel.ConversationMatchingViewModel" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
+
+        <Button
+            android:id="@+id/btn_find"
+            android:layout_width="@dimen/find_button_width"
+            android:layout_height="@dimen/find_button_width"
+            android:background="@drawable/bg_rounded_button"
+            android:text="@string/find"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/find_a_speaker"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_find" />
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

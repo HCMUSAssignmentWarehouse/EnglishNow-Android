@@ -17,9 +17,9 @@ import dagger.android.AndroidInjection;
  * Created by Genius Doan on 12/26/2017.
  */
 
-public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseViewModel> extends Fragment {
+public abstract class BaseFragment<B extends ViewDataBinding, V extends BaseViewModel> extends Fragment {
     private BaseActivity mActivity;
-    private T mViewDataBinding;
+    private B mViewDataBinding;
     private V mViewModel;
     private View mRootView;
 
@@ -66,7 +66,7 @@ public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseView
         return mActivity;
     }
 
-    public T getViewDataBinding() {
+    public B getViewDataBinding() {
         return mViewDataBinding;
     }
 
