@@ -16,7 +16,7 @@ import io.reactivex.Single;
 @Singleton
 public class AppFirebaseHelper implements FirebaseHelper {
 
-    private FirebaseAuth mAuth;
+    private FirebaseAuth mAuth; //Should we inject this?
 
     @Inject
     public AppFirebaseHelper(FirebaseAuth auth) {

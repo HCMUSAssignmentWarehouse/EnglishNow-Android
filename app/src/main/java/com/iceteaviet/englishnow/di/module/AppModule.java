@@ -4,10 +4,13 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.iceteaviet.englishnow.data.AppDataRepository;
 import com.iceteaviet.englishnow.data.AppDataSource;
 import com.iceteaviet.englishnow.data.remote.AppFirebaseHelper;
 import com.iceteaviet.englishnow.data.remote.FirebaseHelper;
+import com.iceteaviet.englishnow.utils.rx.AppSchedulerProvider;
+import com.iceteaviet.englishnow.utils.rx.SchedulerProvider;
 
 import javax.inject.Singleton;
 
@@ -35,8 +38,8 @@ public class AppModule {
 
     @Provides
     @Singleton
-    public SharedPreferences providePreferences(SharedPreferences preferences) {
-        return preferences;
+    public SharedPreferences providePreferences(Application application) {
+        return application.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
     }
 
     @Provides
@@ -49,5 +52,16 @@ public class AppModule {
     @Singleton
     FirebaseHelper provideFirebaseHelper(AppFirebaseHelper firebaseHelper) {
         return firebaseHelper;
+    }
+
+    @Provides
+    @Singleton
+    FirebaseAuth provideFirebaseAuth() {
+        return FirebaseAuth.getInstance();
+    }
+
+    @Provides
+    SchedulerProvider provideSchedulerProvider() {
+        return new AppSchedulerProvider();
     }
 }
