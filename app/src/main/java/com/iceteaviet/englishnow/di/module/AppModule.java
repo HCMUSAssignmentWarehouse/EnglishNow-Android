@@ -2,11 +2,12 @@ package com.iceteaviet.englishnow.di.module;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.SharedPreferences;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.iceteaviet.englishnow.data.AppDataRepository;
 import com.iceteaviet.englishnow.data.AppDataSource;
+import com.iceteaviet.englishnow.data.local.prefs.AppPreferencesHelper;
+import com.iceteaviet.englishnow.data.local.prefs.PreferencesHelper;
 import com.iceteaviet.englishnow.data.remote.AppFirebaseHelper;
 import com.iceteaviet.englishnow.data.remote.FirebaseHelper;
 import com.iceteaviet.englishnow.utils.rx.AppSchedulerProvider;
@@ -26,8 +27,6 @@ import dagger.Provides;
 //
 @Module
 public class AppModule {
-    private static final String PREFS_NAME = "english_now_android";
-
     //define a method annotated with @Provides that informs Dagger
     // that this method is in charge of providing the instance of the Application class
     @Provides
@@ -38,8 +37,8 @@ public class AppModule {
 
     @Provides
     @Singleton
-    public SharedPreferences providePreferences(Application application) {
-        return application.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+    PreferencesHelper providePreferencesHelper(AppPreferencesHelper appPreferencesHelper) {
+        return appPreferencesHelper;
     }
 
     @Provides

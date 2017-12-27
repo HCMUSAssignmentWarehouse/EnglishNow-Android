@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.iceteaviet.englishnow.data.local.prefs.PreferencesHelper;
 import com.iceteaviet.englishnow.data.model.api.LoginRequest;
 import com.iceteaviet.englishnow.data.remote.FirebaseHelper;
 
@@ -20,11 +21,13 @@ import io.reactivex.Single;
 public class AppDataRepository implements AppDataSource {
     private final Context context;
     private final FirebaseHelper firebaseHelper;
+    private final PreferencesHelper preferencesHelper;
 
     @Inject
-    public AppDataRepository(Context context, FirebaseHelper firebaseHelper) {
+    public AppDataRepository(Context context, FirebaseHelper firebaseHelper, PreferencesHelper preferencesHelper) {
         this.context = context;
         this.firebaseHelper = firebaseHelper;
+        this.preferencesHelper = preferencesHelper;
     }
 
     @Override
@@ -40,5 +43,25 @@ public class AppDataRepository implements AppDataSource {
     @Override
     public void setUserAsLoggedOut() {
         //TODO: Implement me
+    }
+
+    @Override
+    public void putString(String key, String value) {
+        preferencesHelper.putString(key, value);
+    }
+
+    @Override
+    public String getString(String key, String defaultValue) {
+        return preferencesHelper.getString(key, defaultValue);
+    }
+
+    @Override
+    public void putBoolean(String key, Boolean value) {
+        preferencesHelper.putBoolean(key, value);
+    }
+
+    @Override
+    public Boolean getBoolean(String key, Boolean defaultValue) {
+        return preferencesHelper.getBoolean(key, defaultValue);
     }
 }

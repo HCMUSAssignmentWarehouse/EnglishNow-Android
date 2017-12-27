@@ -1,66 +1,74 @@
 package com.iceteaviet.englishnow.ui.splash.view;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.iceteaviet.englishnow.BR;
 import com.iceteaviet.englishnow.R;
+import com.iceteaviet.englishnow.databinding.ActivitySplashBinding;
+import com.iceteaviet.englishnow.ui.base.BaseActivity;
 import com.iceteaviet.englishnow.ui.intro.view.IntroActivity;
 import com.iceteaviet.englishnow.ui.login.view.LoginActivity;
 import com.iceteaviet.englishnow.ui.login.view.PostLoginDialog;
-import com.iceteaviet.englishnow.utils.AppConstants;
+import com.iceteaviet.englishnow.ui.splash.SplashHandler;
+import com.iceteaviet.englishnow.ui.splash.viewmodel.SplashViewModel;
 
 import javax.inject.Inject;
 
-public class SplashActivity extends AppCompatActivity {
-
+public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashViewModel> implements SplashHandler {
     @Inject
-    SharedPreferences sharedPreferences;
-    private FirebaseAuth mAuth;
+    SplashViewModel splashViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+        splashViewModel.setHandler(this);
 
         Window w = getWindow();
         w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
-        mAuth = FirebaseAuth.getInstance();
+        splashViewModel.startDataLoading();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
     }
 
-    private void updateUI(FirebaseUser currentUser) {
-        if (currentUser == null) {
-            if (sharedPreferences.getBoolean(AppConstants.KEY_APP_LAUNCH_FIRST_TIME, true)) {
-                //Show intro activity
-                Intent intent = new Intent(this, IntroActivity.class);
-                startActivity(intent);
+    @Override
+    public SplashViewModel getViewModel() {
+        return splashViewModel;
+    }
 
-                //Write new value
-                sharedPreferences.edit()
-                        .putBoolean(AppConstants.KEY_APP_LAUNCH_FIRST_TIME, false)
-                        .apply();
-            } else {
-                //start login activity
-                Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
-            }
-        } else {
-            //start navigate activity
-            PostLoginDialog d = PostLoginDialog.showDialog(this);
-        }
+    @Override
+    public int getBindingVariable() {
+        return BR.viewModel;
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_splash;
+    }
+
+    @Override
+    public void navigateToIntroScreen() {
+        //Show intro activity
+        Intent intent = new Intent(this, IntroActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void navigateToLoginScreen() {
+        //start login activity
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void navigateToPostLoginScreen() {
+        //start navigate activity
+        PostLoginDialog d = PostLoginDialog.showDialog(this);
     }
 }

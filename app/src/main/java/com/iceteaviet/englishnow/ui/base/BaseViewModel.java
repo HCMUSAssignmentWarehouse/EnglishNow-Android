@@ -3,7 +3,7 @@ package com.iceteaviet.englishnow.ui.base;
 import android.arch.lifecycle.ViewModel;
 import android.databinding.ObservableBoolean;
 
-import com.iceteaviet.englishnow.data.AppDataRepository;
+import com.iceteaviet.englishnow.data.AppDataSource;
 import com.iceteaviet.englishnow.utils.rx.SchedulerProvider;
 
 import io.reactivex.disposables.CompositeDisposable;
@@ -13,16 +13,16 @@ import io.reactivex.disposables.CompositeDisposable;
  */
 
 public abstract class BaseViewModel<H> extends ViewModel {
-    private final AppDataRepository mAppRepository;
-    private final SchedulerProvider mSchedulerProvider;
-    private final ObservableBoolean mIsLoading = new ObservableBoolean(false);
+    private final AppDataSource appDataSource;
+    private final SchedulerProvider schedulerProvider;
+    private final ObservableBoolean isLoading = new ObservableBoolean(false);
     private H mHandler;
     private CompositeDisposable mCompositeDisposable;
 
-    public BaseViewModel(AppDataRepository repo,
+    public BaseViewModel(AppDataSource repo,
                          SchedulerProvider schedulerProvider) {
-        this.mAppRepository = repo;
-        this.mSchedulerProvider = schedulerProvider;
+        this.appDataSource = repo;
+        this.schedulerProvider = schedulerProvider;
         this.mCompositeDisposable = new CompositeDisposable();
     }
 
@@ -34,12 +34,12 @@ public abstract class BaseViewModel<H> extends ViewModel {
         this.mHandler = handler;
     }
 
-    public AppDataRepository getDataRepository() {
-        return mAppRepository;
+    public AppDataSource getAppDataSource() {
+        return appDataSource;
     }
 
     public SchedulerProvider getSchedulerProvider() {
-        return mSchedulerProvider;
+        return schedulerProvider;
     }
 
     public CompositeDisposable getCompositeDisposable() {
@@ -47,11 +47,11 @@ public abstract class BaseViewModel<H> extends ViewModel {
     }
 
     public ObservableBoolean getIsLoading() {
-        return mIsLoading;
+        return isLoading;
     }
 
     public void setIsLoading(boolean isLoading) {
-        mIsLoading.set(isLoading);
+        this.isLoading.set(isLoading);
     }
 
     @Override

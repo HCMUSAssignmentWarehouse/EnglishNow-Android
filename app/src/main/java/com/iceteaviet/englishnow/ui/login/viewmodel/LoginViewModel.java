@@ -2,7 +2,7 @@ package com.iceteaviet.englishnow.ui.login.viewmodel;
 
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
-import com.iceteaviet.englishnow.data.AppDataRepository;
+import com.iceteaviet.englishnow.data.AppDataSource;
 import com.iceteaviet.englishnow.data.model.api.LoginRequest;
 import com.iceteaviet.englishnow.ui.base.BaseViewModel;
 import com.iceteaviet.englishnow.ui.login.LoginHandler;
@@ -16,7 +16,7 @@ import io.reactivex.functions.Consumer;
  */
 
 public class LoginViewModel extends BaseViewModel<LoginHandler> {
-    public LoginViewModel(AppDataRepository repo, SchedulerProvider schedulerProvider) {
+    public LoginViewModel(AppDataSource repo, SchedulerProvider schedulerProvider) {
         super(repo, schedulerProvider);
     }
 
@@ -38,7 +38,7 @@ public class LoginViewModel extends BaseViewModel<LoginHandler> {
 
     public void doLogin(String email, String password) {
         setIsLoading(true);
-        getCompositeDisposable().add(getDataRepository()
+        getCompositeDisposable().add(getAppDataSource()
                 .doServerLoginFirebaseCall(new LoginRequest.ServerLoginRequest(email, password))
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())

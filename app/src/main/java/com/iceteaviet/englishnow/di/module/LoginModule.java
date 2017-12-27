@@ -1,6 +1,6 @@
 package com.iceteaviet.englishnow.di.module;
 
-import com.iceteaviet.englishnow.data.AppDataRepository;
+import com.iceteaviet.englishnow.data.AppDataSource;
 import com.iceteaviet.englishnow.ui.login.viewmodel.LoginViewModel;
 import com.iceteaviet.englishnow.utils.rx.SchedulerProvider;
 
@@ -14,7 +14,7 @@ import dagger.Provides;
 @Module
 public class LoginModule {
     @Provides
-    LoginViewModel provideLoginViewModel(AppDataRepository repository,
+    LoginViewModel provideLoginViewModel(AppDataSource repository,
                                          SchedulerProvider schedulerProvider) {
         return new LoginViewModel(repository, schedulerProvider);
     }
