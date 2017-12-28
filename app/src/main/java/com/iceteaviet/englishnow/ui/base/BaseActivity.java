@@ -13,7 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.iceteaviet.englishnow.ui.login.view.LoginActivity;
+import com.iceteaviet.englishnow.ui.auth.view.LoginActivity;
 import com.iceteaviet.englishnow.utils.CommonUtils;
 import com.iceteaviet.englishnow.utils.NetworkUtils;
 

@@ -6,6 +6,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.iceteaviet.englishnow.data.local.prefs.PreferencesManager;
 import com.iceteaviet.englishnow.data.model.api.LoginRequest;
+import com.iceteaviet.englishnow.data.model.api.RegisterRequest;
 import com.iceteaviet.englishnow.data.remote.FirebaseManager;
 
 import javax.inject.Inject;
@@ -38,6 +39,11 @@ public class AppDataRepository implements AppDataSource {
     @Override
     public Single<AuthResult> doServerLoginFirebaseCall(LoginRequest.ServerLoginRequest request) {
         return firebaseManager.doServerLoginFirebaseCall(request);
+    }
+
+    @Override
+    public Single<AuthResult> doServerRegisterFirebaseCall(RegisterRequest.ServerRegisterRequest request) {
+        return firebaseManager.doServerRegisterFirebaseCall(request);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.iceteaviet.englishnow.di.module;
 
 import com.iceteaviet.englishnow.data.AppDataSource;
-import com.iceteaviet.englishnow.ui.login.viewmodel.LoginViewModel;
+import com.iceteaviet.englishnow.ui.auth.viewmodel.LoginViewModel;
 import com.iceteaviet.englishnow.utils.rx.SchedulerProvider;
 
 import dagger.Module;

@@ -6,7 +6,7 @@
     <string name="invalid_password">Not a valid password!</string>
     <string name="email_password_incorrect">The email or password you entered is incorrect. Please try again.</string>
     <string name="forgot_password">Forgot password?</string>
-    <string name="sign_up">Sign up</string>
+    <string name="sign_up">Register</string>
     <string name="try_anonymous">Try anonymous</string>
     <string name="register">Register</string>
     <string name="input_email">Input email…</string>

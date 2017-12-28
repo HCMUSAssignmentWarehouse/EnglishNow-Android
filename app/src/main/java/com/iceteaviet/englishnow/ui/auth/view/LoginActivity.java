@@ -1,24 +1,31 @@
-package com.iceteaviet.englishnow.ui.login.view;
+package com.iceteaviet.englishnow.ui.auth.view;
 
+import android.app.Fragment;
 import android.os.Bundle;
 
 import com.iceteaviet.englishnow.BR;
 import com.iceteaviet.englishnow.R;
 import com.iceteaviet.englishnow.databinding.ActivityLoginBinding;
 import com.iceteaviet.englishnow.ui.base.BaseActivity;
-import com.iceteaviet.englishnow.ui.login.LoginHandler;
-import com.iceteaviet.englishnow.ui.login.viewmodel.LoginViewModel;
+import com.iceteaviet.englishnow.ui.auth.LoginHandler;
+import com.iceteaviet.englishnow.ui.auth.viewmodel.LoginViewModel;
 import com.iceteaviet.englishnow.utils.CommonUtils;
 
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasFragmentInjector;
 
 //TODO: Add Smart Lock for passwords: https://developers.google.com/identity/smartlock-passwords/android/
 // Disable login button base on input
-public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewModel> implements LoginHandler {
+public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewModel> implements LoginHandler, HasFragmentInjector {
     @Inject
     LoginViewModel loginViewModel;
+
+    @Inject
+    DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
 
     ActivityLoginBinding activityLoginBinding;
 
@@ -76,15 +83,13 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     }
 
     @Override
-    public void signup() {
-        SignUpDialog dialog = SignUpDialog.showDialog(this);
-        dialog.setOnRegisterResultListener(task -> {
-            if (task.isSuccessful()) {
-                //If successful, it also user has signed in into the app
-                navigateToPostLoginScreen();
-            } else {
-                CommonUtils.showAlertDialog(this, task.getException().getMessage());
-            }
-        });
+    public void navigateToSignUpScreen() {
+        RegisterDialog dialog = RegisterDialog.newInstance();
+        dialog.show(getFragmentManager());
+    }
+
+    @Override
+    public AndroidInjector<Fragment> fragmentInjector() {
+        return fragmentDispatchingAndroidInjector;
     }
 }

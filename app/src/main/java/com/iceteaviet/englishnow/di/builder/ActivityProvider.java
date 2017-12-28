@@ -6,7 +6,7 @@ import com.iceteaviet.englishnow.di.module.LoginModule;
 import com.iceteaviet.englishnow.di.module.NewsFeedModule;
 import com.iceteaviet.englishnow.di.module.SplashModule;
 import com.iceteaviet.englishnow.ui.intro.view.IntroActivity;
-import com.iceteaviet.englishnow.ui.login.view.LoginActivity;
+import com.iceteaviet.englishnow.ui.auth.view.LoginActivity;
 import com.iceteaviet.englishnow.ui.matching.view.ConversationMatchingActivity;
 import com.iceteaviet.englishnow.ui.newsfeed.view.NewsFeedActivity;
 import com.iceteaviet.englishnow.ui.splash.view.SplashActivity;
@@ -19,8 +19,8 @@ import dagger.android.ContributesAndroidInjector;
  */
 
 @Module
-public abstract class ActivityBuilder {
-    @ContributesAndroidInjector(modules = LoginModule.class)
+public abstract class ActivityProvider {
+    @ContributesAndroidInjector(modules = {LoginModule.class, RegisterDialogProvider.class})
     abstract LoginActivity bindLoginActivity();
 
     @ContributesAndroidInjector(modules = SplashModule.class)

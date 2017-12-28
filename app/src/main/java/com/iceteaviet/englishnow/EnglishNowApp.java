@@ -24,7 +24,6 @@ import io.reactivex.schedulers.Schedulers;
 public class EnglishNowApp extends Application implements HasActivityInjector {
     @Inject
     DispatchingAndroidInjector<Activity> activityDispatchingAndroidInjector;
-    private Scheduler scheduler;
 
     private static EnglishNowApp get(Context context) {
         return (EnglishNowApp) context.getApplicationContext();
@@ -51,18 +50,6 @@ public class EnglishNowApp extends Application implements HasActivityInjector {
 
         //AppLogger
         AppLogger.init();
-    }
-
-    public Scheduler subscribeScheduler() {
-        if (scheduler == null) {
-            scheduler = Schedulers.io();
-        }
-
-        return scheduler;
-    }
-
-    public void setScheduler(Scheduler scheduler) {
-        this.scheduler = scheduler;
     }
 
     @Override

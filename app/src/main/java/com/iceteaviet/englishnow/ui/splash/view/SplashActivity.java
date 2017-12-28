@@ -10,8 +10,8 @@ import com.iceteaviet.englishnow.R;
 import com.iceteaviet.englishnow.databinding.ActivitySplashBinding;
 import com.iceteaviet.englishnow.ui.base.BaseActivity;
 import com.iceteaviet.englishnow.ui.intro.view.IntroActivity;
-import com.iceteaviet.englishnow.ui.login.view.LoginActivity;
-import com.iceteaviet.englishnow.ui.login.view.PostLoginDialog;
+import com.iceteaviet.englishnow.ui.auth.view.LoginActivity;
+import com.iceteaviet.englishnow.ui.auth.view.PostLoginDialog;
 import com.iceteaviet.englishnow.ui.splash.SplashHandler;
 import com.iceteaviet.englishnow.ui.splash.viewmodel.SplashViewModel;
 

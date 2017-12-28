@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
  * Created by Genius Doan on 12/26/2017.
  */
 
+//TODO: Support convenient setup like baseactivity
 public abstract class BaseDialog extends DialogFragment {
     private BaseActivity mActivity;
 

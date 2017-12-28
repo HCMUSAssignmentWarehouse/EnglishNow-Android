@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.iceteaviet.englishnow.ui.login.view.LoginActivity">
+    tools:context="com.iceteaviet.englishnow.ui.auth.view.LoginActivity">
 
     <data>
 
@@ -10,7 +10,7 @@
 
         <variable
             name="viewModel"
-            type="com.iceteaviet.englishnow.ui.login.viewmodel.LoginViewModel" />
+            type="com.iceteaviet.englishnow.ui.auth.viewmodel.LoginViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout

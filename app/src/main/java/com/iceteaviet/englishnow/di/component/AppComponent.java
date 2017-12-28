@@ -3,7 +3,7 @@ package com.iceteaviet.englishnow.di.component;
 import android.app.Application;
 
 import com.iceteaviet.englishnow.EnglishNowApp;
-import com.iceteaviet.englishnow.di.builder.ActivityBuilder;
+import com.iceteaviet.englishnow.di.builder.ActivityProvider;
 import com.iceteaviet.englishnow.di.module.AppModule;
 
 import javax.inject.Singleton;
@@ -17,7 +17,7 @@ import dagger.android.AndroidInjectionModule;
  */
 
 @Singleton
-@Component(modules = {AndroidInjectionModule.class, AppModule.class, ActivityBuilder.class})
+@Component(modules = {AndroidInjectionModule.class, AppModule.class, ActivityProvider.class})
 //define what objects should be included as part of the dependency chain by modules
 public interface AppComponent {
     void inject(EnglishNowApp app);

@@ -1,13 +1,21 @@
 package com.iceteaviet.englishnow.data.remote;
 
+import android.support.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.iceteaviet.englishnow.data.model.api.LoginRequest;
+import com.iceteaviet.englishnow.data.model.api.RegisterRequest;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.reactivex.Single;
+import io.reactivex.SingleEmitter;
+import io.reactivex.SingleOnSubscribe;
 
 /**
  * Created by Genius Doan on 12/26/2017.
@@ -32,6 +40,16 @@ public class AppFirebaseManager implements FirebaseManager {
     public Single<AuthResult> doServerLoginFirebaseCall(LoginRequest.ServerLoginRequest request) {
         return Single.create(emitter -> mAuth.signInWithEmailAndPassword(request.getEmail(), request.getPassword())
                 .addOnSuccessListener(authResult -> emitter.onSuccess(authResult))
+                .addOnFailureListener(e -> emitter.onError(e)));
+    }
+
+    @Override
+    public Single<AuthResult> doServerRegisterFirebaseCall(RegisterRequest.ServerRegisterRequest request) {
+        return Single.create(emitter -> mAuth.createUserWithEmailAndPassword(request.getEmail(), request.getPassword())
+                .addOnSuccessListener(authResult -> {
+                    //TODO: Write data to firebase
+                    emitter.onSuccess(authResult);
+                })
                 .addOnFailureListener(e -> emitter.onError(e)));
     }
 }

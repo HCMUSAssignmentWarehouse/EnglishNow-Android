@@ -1,4 +1,4 @@
-package com.iceteaviet.englishnow.ui.login.view;
+package com.iceteaviet.englishnow.ui.auth.view;
 
 import android.app.Activity;
 import android.app.DialogFragment;
@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
  */
 
 public class PostLoginDialog extends DialogFragment {
-    public static final String TAG = SignUpDialog.class.getSimpleName();
+    public static final String TAG = RegisterDialog.class.getSimpleName();
 
     @BindView(R.id.btn_find_now) protected Button findNowButton;
     @BindView(R.id.btn_skip) protected Button skipButton;

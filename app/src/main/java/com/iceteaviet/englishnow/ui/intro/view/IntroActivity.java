@@ -17,7 +17,7 @@ import com.iceteaviet.englishnow.ui.base.BaseActivity;
 import com.iceteaviet.englishnow.ui.intro.IntroHandler;
 import com.iceteaviet.englishnow.ui.intro.IntroPagerAdapter;
 import com.iceteaviet.englishnow.ui.intro.viewmodel.IntroViewModel;
-import com.iceteaviet.englishnow.ui.login.view.LoginActivity;
+import com.iceteaviet.englishnow.ui.auth.view.LoginActivity;
 import com.iceteaviet.englishnow.utils.OsUtils;
 
 import javax.inject.Inject;
