@@ -7,7 +7,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.iceteaviet.englishnow.data.local.prefs.PreferencesManager;
 import com.iceteaviet.englishnow.data.model.api.LoginRequest;
 import com.iceteaviet.englishnow.data.model.api.RegisterRequest;
-import com.iceteaviet.englishnow.data.remote.FirebaseManager;
+import com.iceteaviet.englishnow.data.model.api.User;
+import com.iceteaviet.englishnow.data.remote.firebase.FirebaseManager;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -44,6 +45,11 @@ public class AppDataRepository implements AppDataSource {
     @Override
     public Single<AuthResult> doServerRegisterFirebaseCall(RegisterRequest.ServerRegisterRequest request) {
         return firebaseManager.doServerRegisterFirebaseCall(request);
+    }
+
+    @Override
+    public void doPushUserToFirebase(String userUid, User user) {
+        firebaseManager.doPushUserToFirebase(userUid, user);
     }
 
     @Override

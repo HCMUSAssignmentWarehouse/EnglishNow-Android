@@ -58,6 +58,7 @@ dependencies {
     //Firebase
     implementation "com.google.firebase:firebase-core:${rootProject.googlePlayServiceVersion}"
     implementation "com.google.firebase:firebase-auth:${rootProject.googlePlayServiceVersion}"
+    implementation "com.google.firebase:firebase-database:${rootProject.googlePlayServiceVersion}"
     implementation "com.facebook.android:facebook-login:${rootProject.facebookVersion}"
     implementation "com.google.android.gms:play-services-auth:${rootProject.googlePlayServiceVersion}"
 

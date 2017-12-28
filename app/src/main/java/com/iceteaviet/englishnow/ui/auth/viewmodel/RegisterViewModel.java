@@ -4,6 +4,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
 import com.iceteaviet.englishnow.data.AppDataSource;
 import com.iceteaviet.englishnow.data.model.api.RegisterRequest;
+import com.iceteaviet.englishnow.data.model.api.User;
 import com.iceteaviet.englishnow.ui.auth.RegisterHandler;
 import com.iceteaviet.englishnow.ui.base.BaseViewModel;
 import com.iceteaviet.englishnow.utils.InputUtils;
@@ -44,9 +45,16 @@ public class RegisterViewModel extends BaseViewModel<RegisterHandler> {
                     @Override
                     public void accept(AuthResult authResult) throws Exception {
                         // Sign in success, update UI with the signed-in user's information
-                        FirebaseUser user = authResult.getUser();
+                        FirebaseUser firebaseUser = authResult.getUser();
 
-                        if (user != null) {
+                        if (firebaseUser != null) {
+                            //push new user to firebase
+                            User user = new User(firebaseUser.getEmail(),
+                                    firebaseUser.getDisplayName(),
+                                    firebaseUser.getPhotoUrl() == null ? "" : firebaseUser.getPhotoUrl().toString()
+                            );
+                            getAppDataSource().doPushUserToFirebase(firebaseUser.getUid(), user);
+
                             //Go to post login activity
                             getHandler().navigateToPostLoginScreen();
                         }

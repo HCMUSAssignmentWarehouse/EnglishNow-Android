@@ -1,4 +1,4 @@
-package com.iceteaviet.englishnow.data.remote;
+package com.iceteaviet.englishnow.data.remote.api;
 
 import com.iceteaviet.englishnow.data.model.api.LoginRequest;
 import com.iceteaviet.englishnow.data.model.api.LoginResponse;
