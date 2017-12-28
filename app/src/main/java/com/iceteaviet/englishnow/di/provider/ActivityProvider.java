@@ -1,4 +1,4 @@
-package com.iceteaviet.englishnow.di.builder;
+package com.iceteaviet.englishnow.di.provider;
 
 import com.iceteaviet.englishnow.di.module.ConversationMatchingModule;
 import com.iceteaviet.englishnow.di.module.IntroModule;

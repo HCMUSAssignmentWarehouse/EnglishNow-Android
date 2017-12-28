@@ -1,4 +1,4 @@
-package com.iceteaviet.englishnow.di.builder;
+package com.iceteaviet.englishnow.di.provider;
 
 import com.iceteaviet.englishnow.di.module.RegisterModule;
 import com.iceteaviet.englishnow.ui.auth.view.RegisterDialog;
