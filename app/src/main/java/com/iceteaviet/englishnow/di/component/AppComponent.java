@@ -3,8 +3,8 @@ package com.iceteaviet.englishnow.di.component;
 import android.app.Application;
 
 import com.iceteaviet.englishnow.EnglishNowApp;
-import com.iceteaviet.englishnow.di.provider.ActivityProvider;
 import com.iceteaviet.englishnow.di.module.AppModule;
+import com.iceteaviet.englishnow.di.provider.ActivityProvider;
 
 import javax.inject.Singleton;
 

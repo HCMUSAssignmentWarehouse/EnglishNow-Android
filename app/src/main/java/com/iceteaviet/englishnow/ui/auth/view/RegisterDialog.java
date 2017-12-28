@@ -11,8 +11,9 @@ import android.view.ViewGroup;
 import com.iceteaviet.englishnow.R;
 import com.iceteaviet.englishnow.databinding.DialogSignUpBinding;
 import com.iceteaviet.englishnow.ui.auth.RegisterHandler;
-import com.iceteaviet.englishnow.ui.base.BaseDialog;
 import com.iceteaviet.englishnow.ui.auth.viewmodel.RegisterViewModel;
+import com.iceteaviet.englishnow.ui.base.BaseDialog;
+import com.iceteaviet.englishnow.ui.others.view.PostLoginDialog;
 import com.iceteaviet.englishnow.utils.CommonUtils;
 
 import javax.inject.Inject;
@@ -105,6 +106,7 @@ public class RegisterDialog extends BaseDialog implements RegisterHandler {
     @Override
     public void navigateToPostLoginScreen() {
         this.dismiss();
-        PostLoginDialog d = PostLoginDialog.showDialog(getActivity());
+        PostLoginDialog d = PostLoginDialog.newInstance();
+        d.show(getFragmentManager());
     }
 }

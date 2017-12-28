@@ -12,10 +12,10 @@ import dagger.Provides;
  */
 
 @Module
-public class RegisterModule {
+public class AuthDialogModule {
     @Provides
-    RegisterViewModel provideSignUpViewModel(AppDataSource dataManager,
-                                             SchedulerProvider schedulerProvider) {
+    RegisterViewModel provideRegisterViewModel(AppDataSource dataManager,
+                                               SchedulerProvider schedulerProvider) {
         return new RegisterViewModel(dataManager, schedulerProvider);
     }
 }

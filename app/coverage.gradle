@@ -52,7 +52,7 @@ task jacocoTestReport(type: JacocoReport, dependsOn: "testProdDebugUnitTest") {
     reports {
         xml.enabled = true
         html.enabled = true
-        xml.destination  file("${buildDir}/reports/jacoco/test/jacocoTestReport.xml")
-        html.destination  file("${buildDir}/reports/jacoco/test/html")
+        xml.destination file("${buildDir}/reports/jacoco/test/jacocoTestReport.xml")
+        html.destination file("${buildDir}/reports/jacoco/test/html")
     }
 }

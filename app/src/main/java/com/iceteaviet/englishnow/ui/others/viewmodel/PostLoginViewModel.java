@@ -1,8 +1,8 @@
-package com.iceteaviet.englishnow.ui.auth.viewmodel;
+package com.iceteaviet.englishnow.ui.others.viewmodel;
 
 import com.iceteaviet.englishnow.data.AppDataSource;
-import com.iceteaviet.englishnow.ui.postlogin.PostLoginHandler;
 import com.iceteaviet.englishnow.ui.base.BaseViewModel;
+import com.iceteaviet.englishnow.ui.others.PostLoginHandler;
 import com.iceteaviet.englishnow.utils.rx.SchedulerProvider;
 
 /**

@@ -1,6 +1,6 @@
 package com.iceteaviet.englishnow.di.provider;
 
-import com.iceteaviet.englishnow.di.module.RegisterModule;
+import com.iceteaviet.englishnow.di.module.AuthDialogModule;
 import com.iceteaviet.englishnow.ui.auth.view.RegisterDialog;
 
 import dagger.Module;
@@ -11,7 +11,7 @@ import dagger.android.ContributesAndroidInjector;
  */
 
 @Module
-public abstract class RegisterDialogProvider {
-    @ContributesAndroidInjector(modules = RegisterModule.class)
+public abstract class AuthDialogProvider {
+    @ContributesAndroidInjector(modules = AuthDialogModule.class)
     abstract RegisterDialog provideRegisterDialogFactory();
 }

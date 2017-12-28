@@ -6,9 +6,10 @@ import android.os.Bundle;
 import com.iceteaviet.englishnow.BR;
 import com.iceteaviet.englishnow.R;
 import com.iceteaviet.englishnow.databinding.ActivityLoginBinding;
-import com.iceteaviet.englishnow.ui.base.BaseActivity;
 import com.iceteaviet.englishnow.ui.auth.LoginHandler;
 import com.iceteaviet.englishnow.ui.auth.viewmodel.LoginViewModel;
+import com.iceteaviet.englishnow.ui.base.BaseActivity;
+import com.iceteaviet.englishnow.ui.others.view.PostLoginDialog;
 import com.iceteaviet.englishnow.utils.CommonUtils;
 
 import javax.inject.Inject;
@@ -55,7 +56,8 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     @Override
     public void navigateToPostLoginScreen() {
-        PostLoginDialog d = PostLoginDialog.showDialog(this);
+        PostLoginDialog d = PostLoginDialog.newInstance();
+        d.show(getFragmentManager());
     }
 
     @Override

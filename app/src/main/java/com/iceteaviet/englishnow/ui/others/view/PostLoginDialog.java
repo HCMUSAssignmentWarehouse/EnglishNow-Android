@@ -1,4 +1,4 @@
-package com.iceteaviet.englishnow.ui.postlogin.view;
+package com.iceteaviet.englishnow.ui.others.view;
 
 import android.app.FragmentManager;
 import android.content.Intent;
@@ -11,12 +11,12 @@ import android.view.ViewGroup;
 
 import com.iceteaviet.englishnow.R;
 import com.iceteaviet.englishnow.databinding.DialogPostSignInBinding;
-import com.iceteaviet.englishnow.ui.postlogin.PostLoginHandler;
 import com.iceteaviet.englishnow.ui.auth.view.RegisterDialog;
-import com.iceteaviet.englishnow.ui.auth.viewmodel.PostLoginViewModel;
 import com.iceteaviet.englishnow.ui.base.BaseDialog;
 import com.iceteaviet.englishnow.ui.matching.view.ConversationMatchingActivity;
 import com.iceteaviet.englishnow.ui.newsfeed.view.NewsFeedActivity;
+import com.iceteaviet.englishnow.ui.others.PostLoginHandler;
+import com.iceteaviet.englishnow.ui.others.viewmodel.PostLoginViewModel;
 
 import javax.inject.Inject;
 

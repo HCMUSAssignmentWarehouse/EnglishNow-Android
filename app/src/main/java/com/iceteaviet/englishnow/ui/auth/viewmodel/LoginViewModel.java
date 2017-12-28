@@ -4,8 +4,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
 import com.iceteaviet.englishnow.data.AppDataSource;
 import com.iceteaviet.englishnow.data.model.api.LoginRequest;
-import com.iceteaviet.englishnow.ui.base.BaseViewModel;
 import com.iceteaviet.englishnow.ui.auth.LoginHandler;
+import com.iceteaviet.englishnow.ui.base.BaseViewModel;
 import com.iceteaviet.englishnow.utils.InputUtils;
 import com.iceteaviet.englishnow.utils.rx.SchedulerProvider;
 

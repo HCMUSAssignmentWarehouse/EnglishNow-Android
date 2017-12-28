@@ -1,9 +1,10 @@
 <layout>
 
     <data>
+
         <variable
             name="viewModel"
-            type="com.iceteaviet.englishnow.ui.auth.viewmodel.RegisterViewModel"/>
+            type="com.iceteaviet.englishnow.ui.auth.viewmodel.RegisterViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -35,9 +36,9 @@
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/edt_email"
-                android:textColor="@android:color/white"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:textColor="@android:color/white" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -49,9 +50,9 @@
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/edt_username"
-                android:textColor="@android:color/white"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -63,9 +64,9 @@
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/edt_password"
-                android:textColor="@android:color/white"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -77,18 +78,18 @@
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/edt_re_password"
-                android:textColor="@android:color/white"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white" />
         </android.support.design.widget.TextInputLayout>
 
         <Button
             android:id="@+id/btn_sign_up"
             android:layout_width="match_parent"
-            android:onClick="@{() -> viewModel.onSignUpButtonClicked()}"
             android:layout_height="match_parent"
             android:layout_marginTop="16dp"
             android:background="@color/colorAccent"
+            android:onClick="@{() -> viewModel.onSignUpButtonClicked()}"
             android:text="@string/register"
             android:textColor="@android:color/white" />
     </LinearLayout>

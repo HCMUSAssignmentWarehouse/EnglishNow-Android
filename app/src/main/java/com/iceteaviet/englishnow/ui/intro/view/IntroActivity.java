@@ -13,11 +13,11 @@ import android.view.View;
 import com.iceteaviet.englishnow.BR;
 import com.iceteaviet.englishnow.R;
 import com.iceteaviet.englishnow.databinding.ActivityIntroBinding;
+import com.iceteaviet.englishnow.ui.auth.view.LoginActivity;
 import com.iceteaviet.englishnow.ui.base.BaseActivity;
 import com.iceteaviet.englishnow.ui.intro.IntroHandler;
 import com.iceteaviet.englishnow.ui.intro.IntroPagerAdapter;
 import com.iceteaviet.englishnow.ui.intro.viewmodel.IntroViewModel;
-import com.iceteaviet.englishnow.ui.auth.view.LoginActivity;
 import com.iceteaviet.englishnow.utils.OsUtils;
 
 import javax.inject.Inject;

@@ -12,8 +12,6 @@ import javax.inject.Inject;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
-import io.reactivex.Scheduler;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Genius Doan on 12/24/2017.
