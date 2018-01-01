@@ -48,6 +48,26 @@ public class AppDataRepository implements AppDataSource {
     }
 
     @Override
+    public void doFirebaseLogoutCall() {
+        firebaseManager.doFirebaseLogoutCall();
+    }
+
+    @Override
+    public String getCurrentUserDisplayName() {
+        return firebaseManager.getCurrentUserDisplayName();
+    }
+
+    @Override
+    public String getCurrentUserEmail() {
+        return firebaseManager.getCurrentUserEmail();
+    }
+
+    @Override
+    public String getCurrentUserPhotoUrl() {
+        return firebaseManager.getCurrentUserPhotoUrl();
+    }
+
+    @Override
     public void doPushUserToFirebase(String userUid, User user) {
         firebaseManager.doPushUserToFirebase(userUid, user);
     }

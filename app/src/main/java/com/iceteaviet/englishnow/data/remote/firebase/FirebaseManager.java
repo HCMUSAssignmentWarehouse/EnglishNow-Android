@@ -19,5 +19,13 @@ public interface FirebaseManager {
 
     Single<AuthResult> doServerRegisterFirebaseCall(RegisterRequest.ServerRegisterRequest request);
 
+    void doFirebaseLogoutCall();
+
+    String getCurrentUserDisplayName();
+
+    String getCurrentUserEmail();
+
+    String getCurrentUserPhotoUrl();
+
     void doPushUserToFirebase(String userUid, User user);
 }

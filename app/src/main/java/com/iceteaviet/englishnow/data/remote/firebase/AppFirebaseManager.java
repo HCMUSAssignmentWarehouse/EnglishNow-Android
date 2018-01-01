@@ -54,4 +54,29 @@ public class AppFirebaseManager implements FirebaseManager {
     public void doPushUserToFirebase(String userUid, User user) {
         database.getReference(USER_PROFILE).child(userUid).setValue(user);
     }
+
+    @Override
+    public void doFirebaseLogoutCall() {
+        mAuth.signOut();
+    }
+
+    @Override
+    public String getCurrentUserDisplayName() {
+        return mAuth.getCurrentUser().getDisplayName();
+    }
+
+    @Override
+    public String getCurrentUserEmail() {
+        return mAuth.getCurrentUser().getEmail();
+    }
+
+    @Override
+    public String getCurrentUserPhotoUrl() {
+        try {
+            return mAuth.getCurrentUser().getPhotoUrl().getPath();
+        } catch (NullPointerException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
 }

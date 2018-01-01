@@ -7,6 +7,8 @@
     <color name="colorGrey500">#9E9E9E</color>
     <color name="colorGrey900">#212121</color>
     <color name="colorGrey800">#424242</color>
+    <color name="colorGrey700">#FF616161</color>
+    <color name="colorGrey300">#FFE0E0E0</color>
     <color name="colorYellow100">#FFF9C4</color>
     <color name="colorGrey100">#F5F5F5</color>
     <color name="intro_normal_indicator_color">#E0E0E0</color>
@@ -14,4 +16,11 @@
     <color name="intro_welcome_background_color">#80a5cd</color>
     <color name="intro_informative_background_color">#fbae17</color>
     <color name="intro_social_networking_background_color">#21beab</color>
+    <color name="colorCyan100">#B2EBF2</color>
+    <color name="colorBlueGrey900">#263238</color>
+    <color name="colorBlueGrey800">#37474F</color>
+    <color name="colorTeal200">#80CBC4</color>
+    <color name="colorTeal100">#B2DFDB</color>
+    <color name="colorDeepOrange700">#E64A19</color>
+    <color name="colorDeepOrange500">#FF5722</color>
 </resources>

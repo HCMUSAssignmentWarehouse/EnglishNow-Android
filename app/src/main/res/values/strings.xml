@@ -26,4 +26,12 @@
     <string name="intro_title_social_networking">Social Networking</string>
     <string name="intro_description_welcome">You\'re going to do great things with English Now</string>
     <string name="intro_description_social_networking">Connect to other people and share your interest</string>
+    <string name="profile">Profile</string>
+    <string name="about">About</string>
+    <string name="logout">Log out</string>
+
+    <!--Drawer-->
+    <string name="open_drawer">Drawer Open</string>
+    <string name="close_drawer">Drawer Close</string>
+    <string name="version">version</string>
 </resources>

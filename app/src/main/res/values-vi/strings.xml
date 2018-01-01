@@ -26,4 +26,13 @@
     <string name="intro_title_social_networking">Mạng xã hội</string>
     <string name="intro_description_welcome">Bạn sẽ làm những điều tuyệt vời với English Now</string>
     <string name="intro_description_social_networking">Kết nối mọi người với nhau và chia sẻ những điều tuyệt vời</string>
+
+    <string name="profile">Trang cá nhân</string>
+    <string name="about">Về chúng tôi</string>
+    <string name="logout">Đăng xuất</string>
+
+    <!--Drawer-->
+    <string name="open_drawer">Drawer Open</string>
+    <string name="close_drawer">Drawer Close</string>
+    <string name="version">Phiên bản</string>
 </resources>

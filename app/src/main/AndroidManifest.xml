@@ -31,7 +31,12 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoHeaderBar" />
-        <activity android:name=".ui.postlogin.view.PostLoginActivity"></activity>
+        <activity
+            android:name=".ui.main.view.MainActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.profile.view.ProfileActivity" />
+        <activity android:name=".ui.about.view.AboutActivity"></activity>
     </application>
 
 </manifest>

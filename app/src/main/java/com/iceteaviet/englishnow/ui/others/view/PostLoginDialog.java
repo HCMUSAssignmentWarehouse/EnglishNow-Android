@@ -13,8 +13,8 @@ import com.iceteaviet.englishnow.R;
 import com.iceteaviet.englishnow.databinding.DialogPostSignInBinding;
 import com.iceteaviet.englishnow.ui.auth.view.RegisterDialog;
 import com.iceteaviet.englishnow.ui.base.BaseDialog;
+import com.iceteaviet.englishnow.ui.main.view.MainActivity;
 import com.iceteaviet.englishnow.ui.matching.view.ConversationMatchingActivity;
-import com.iceteaviet.englishnow.ui.newsfeed.view.NewsFeedActivity;
 import com.iceteaviet.englishnow.ui.others.PostLoginHandler;
 import com.iceteaviet.englishnow.ui.others.viewmodel.PostLoginViewModel;
 
@@ -76,7 +76,7 @@ public class PostLoginDialog extends BaseDialog implements PostLoginHandler {
 
     @Override
     public void navigateToNewsFeedScreen() {
-        Intent intent = new Intent(getActivity(), NewsFeedActivity.class);
+        Intent intent = new Intent(getActivity(), MainActivity.class);
         startActivity(intent);
     }
 

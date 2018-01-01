@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
                 android:onClick="@{() -> viewModel.onSkipButtonClicked()}"
-                android:text="Find now"
+                android:text="Skip"
                 android:textColor="@android:color/white" />
 
         </LinearLayout>
