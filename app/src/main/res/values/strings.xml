@@ -34,4 +34,9 @@
     <string name="open_drawer">Drawer Open</string>
     <string name="close_drawer">Drawer Close</string>
     <string name="version">version</string>
+    <string name="project_info">English Now is an awesome Android app using OpenTok client sdk and NodeJS server, it allows a users to practice speaking, writing, chatting in English</string>
+    <string name="link_blog">http://iceteaviet.com/</string>
+    <string name="link_repo">https://github.com/USAssignmentWarehouse/EnglishNow-Android-MVVM</string>
+    <string name="share">Share</string>
+    <string name="matching">Matching</string>
 </resources>

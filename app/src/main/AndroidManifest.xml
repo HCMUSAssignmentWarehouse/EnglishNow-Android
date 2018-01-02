@@ -35,8 +35,6 @@
             android:name=".ui.main.view.MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.profile.view.ProfileActivity" />
-        <activity android:name=".ui.about.view.AboutActivity"></activity>
     </application>
 
 </manifest>

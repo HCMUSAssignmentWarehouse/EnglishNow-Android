@@ -64,4 +64,10 @@
         <item name="android:textColor">@color/colorGrey700</item>
         <item name="android:textSize">22sp</item>
     </style>
+
+    <style name="Button.ImageButton" parent="Widget.AppCompat.ImageButton">
+        <item name="android:padding">5dp</item>
+        <item name="android:scaleType">centerInside</item>
+        <item name="android:background">@null</item>
+    </style>
 </resources>

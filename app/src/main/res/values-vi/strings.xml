@@ -35,4 +35,6 @@
     <string name="open_drawer">Drawer Open</string>
     <string name="close_drawer">Drawer Close</string>
     <string name="version">Phiên bản</string>
+    <string name="share">Share</string>
+    <string name="matching">Matching</string>
 </resources>

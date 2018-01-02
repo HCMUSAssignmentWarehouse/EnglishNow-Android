@@ -1,7 +1,6 @@
 # EnglishNow-Android
 
-[![Build Status](https://travis-ci.org/USAssignmentWarehouse/EnglishNow-Android.svg?branch=master)](https://travis-ci.org/USAssignmentWarehouse/EnglishNow-Android)
- [![Coverage Status](https://coveralls.io/repos/github/USAssignmentWarehouse/EnglishNow-Android/badge.svg?branch=master)](https://coveralls.io/github/USAssignmentWarehouse/EnglishNow-Android?branch=master)
+[![Build Status](https://travis-ci.org/USAssignmentWarehouse/EnglishNow-Android-MVVM.svg?branch=master)](https://travis-ci.org/USAssignmentWarehouse/EnglishNow-Android-MVVM) [![Coverage Status](https://coveralls.io/repos/github/USAssignmentWarehouse/EnglishNow-Android/badge.svg?branch=master)](https://coveralls.io/github/USAssignmentWarehouse/EnglishNow-Android-MVVM?branch=master)
 
 English Now is an awesome Android app based on MVVM architecture with Android Data Binding using Dagger 2, RxJava2, new Android Arch Components, OpenTok client sdk, Firebase and NodeJS server.
 
