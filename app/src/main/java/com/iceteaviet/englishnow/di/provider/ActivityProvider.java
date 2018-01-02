@@ -37,6 +37,6 @@ public abstract class ActivityProvider {
     @ContributesAndroidInjector(modules = NewsFeedModule.class)
     abstract NewsFeedActivity bindNewsFeedActivity();
 
-    @ContributesAndroidInjector(modules = {MainModule.class})
+    @ContributesAndroidInjector(modules = {MainModule.class, AboutFragmentProvider.class, ProfileFragmentProvider.class})
     abstract MainActivity bindMainActivity();
 }

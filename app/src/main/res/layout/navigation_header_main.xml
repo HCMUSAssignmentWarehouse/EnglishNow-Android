@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.mindorks.framework.mvvm.ui.main.MainActivity">
 
@@ -31,14 +32,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@{viewModel.userName}" />
+            android:text="@{viewModel.userName}"
+            app:isVisible="@{viewModel.userName.length() > 0}" />
 
         <TextView
             android:id="@+id/tv_email"
             style="@style/TextStyle.Title.Sub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.userEmail}" />
+            android:text="@{viewModel.userEmail}"
+            app:isVisible="@{viewModel.userEmail.length() > 0}" />
 
     </LinearLayout>
 

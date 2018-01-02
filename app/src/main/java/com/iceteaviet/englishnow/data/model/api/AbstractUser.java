@@ -1,9 +1,12 @@
 package com.iceteaviet.englishnow.data.model.api;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
 /**
  * Created by Genius Doan on 28/12/2017.
  */
 
+@IgnoreExtraProperties
 public abstract class AbstractUser {
     protected String email;
     protected String username;

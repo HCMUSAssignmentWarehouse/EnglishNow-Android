@@ -3,6 +3,7 @@ package com.iceteaviet.englishnow.data.model.api;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
  * Created by Genius Doan on 28/12/2017.
  */
 
+@IgnoreExtraProperties
 public class User extends AbstractUser implements Parcelable {
     public static final Creator<User> CREATOR = new Creator<User>() {
         @Override

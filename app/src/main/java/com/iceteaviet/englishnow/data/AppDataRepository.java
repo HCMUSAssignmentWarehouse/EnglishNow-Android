@@ -7,13 +7,21 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.iceteaviet.englishnow.data.local.prefs.PreferencesManager;
 import com.iceteaviet.englishnow.data.model.api.LoginRequest;
 import com.iceteaviet.englishnow.data.model.api.RegisterRequest;
+import com.iceteaviet.englishnow.data.model.api.Status;
 import com.iceteaviet.englishnow.data.model.api.User;
+import com.iceteaviet.englishnow.data.model.others.StatusItemData;
 import com.iceteaviet.englishnow.data.remote.firebase.FirebaseManager;
+
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.Single;
+import io.reactivex.functions.BiFunction;
+import io.reactivex.functions.Function;
 
 /**
  * Created by Genius Doan on 23/12/2017.
@@ -105,5 +113,41 @@ public class AppDataRepository implements AppDataSource {
     @Override
     public void setAppLaunchFirstTime(Boolean isFirstTime) {
         preferencesManager.setAppLaunchFirstTime(isFirstTime);
+    }
+
+    @Override
+    public Single<List<Status>> getAllStatuses() {
+        return firebaseManager.getAllStatuses();
+    }
+
+    @Override
+    public Single<String> getUserPhotoUrl(String userUid) {
+        return firebaseManager.getUserPhotoUrl(userUid);
+    }
+
+    @Override
+    public Observable<List<StatusItemData>> getAllStatusItems() {
+        return firebaseManager.getAllStatuses()
+                .toObservable()
+                .flatMap(new Function<List<Status>, ObservableSource<Status>>() {
+                    @Override
+                    public ObservableSource<Status> apply(List<Status> statuses) throws Exception {
+                        return Observable.fromIterable(statuses);
+                    }
+                })
+                .flatMap(new Function<Status, ObservableSource<StatusItemData>>() {
+                    @Override
+                    public ObservableSource<StatusItemData> apply(Status status) throws Exception {
+                        return Observable.zip(firebaseManager.getUserPhotoUrl(status.getOwnerUid()).toObservable(), Observable.just(status),
+                                new BiFunction<String, Status, StatusItemData>() {
+                                    @Override
+                                    public StatusItemData apply(String avatarUrl, Status status) throws Exception {
+                                        return new StatusItemData(status, avatarUrl);
+                                    }
+                                });
+                    }
+                })
+                .toList()
+                .toObservable();
     }
 }
