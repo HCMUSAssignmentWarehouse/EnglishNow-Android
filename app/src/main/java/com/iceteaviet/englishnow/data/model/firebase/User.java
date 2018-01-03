@@ -26,7 +26,7 @@ public class User extends AbstractUser implements Parcelable {
         }
     };
     @PropertyName("skill")
-    List<Skill> skillList;
+    private List<Skill> skillList;
 
     @PropertyName("conversations")
     private int conversations;

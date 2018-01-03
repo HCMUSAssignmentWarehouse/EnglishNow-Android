@@ -39,4 +39,6 @@
     <string name="link_repo">https://github.com/USAssignmentWarehouse/EnglishNow-Android-MVVM</string>
     <string name="share">Share</string>
     <string name="matching">Matching</string>
+    <string name="username_placeholder">hieutam22</string>
+    <string name="your_ratings">Your ratings</string>
 </resources>

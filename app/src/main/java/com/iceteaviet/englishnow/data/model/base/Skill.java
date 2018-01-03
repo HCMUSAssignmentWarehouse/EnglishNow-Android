@@ -7,6 +7,9 @@ import com.google.firebase.database.PropertyName;
  */
 
 public abstract class Skill {
+    @PropertyName("name")
+    String skillName;
+
     @PropertyName("rate_value")
     int rateValue;
 }

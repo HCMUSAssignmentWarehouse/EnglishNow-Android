@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="hieutam22"
+                android:text="@string/username_placeholder"
                 android:textAlignment="center"
                 android:textColor="@color/colorGrey800"
                 android:textSize="16sp"
