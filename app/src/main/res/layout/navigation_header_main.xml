@@ -44,5 +44,4 @@
             app:isVisible="@{viewModel.userEmail.length() > 0}" />
 
     </LinearLayout>
-
 </layout>

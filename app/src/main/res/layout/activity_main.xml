@@ -20,61 +20,50 @@
         android:layout_height="match_parent">
 
         <android.support.v4.widget.DrawerLayout
-
             android:id="@+id/drawerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true">
+            android:layout_height="match_parent">
 
-            <android.support.design.widget.CoordinatorLayout
-                android:id="@+id/clRootView"
+            <RelativeLayout
+                android:id="@+id/rl_root_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipChildren="false">
+                android:layout_height="match_parent">
 
-                <LinearLayout
-                    android:id="@+id/activityMain"
+                <android.support.design.widget.AppBarLayout
+                    android:id="@+id/appbar"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content"
+                    android:fitsSystemWindows="true"
+                    app:elevation="8dp">
 
-                    <android.support.design.widget.AppBarLayout
+                    <android.support.v7.widget.Toolbar
+                        android:id="@+id/toolbar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:elevation="5dp">
+                        android:background="@color/colorPrimary"
+                        android:fitsSystemWindows="true"
+                        android:minHeight="?attr/actionBarSize"
+                        app:titleTextAppearance="@style/Toolbar.TitleText"
+                        app:titleTextColor="@android:color/white"
+                        tools:title="@string/app_name" />
 
-                        <android.support.v7.widget.Toolbar
-                            android:id="@+id/toolbar"
-                            style="@style/Toolbar"
-                            app:subtitleTextColor="@android:color/white"
-                            app:title="@string/app_name"
-                            app:titleTextAppearance="@style/Toolbar.TitleText"
-                            app:titleTextColor="@android:color/white" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/colorGrey300" />
-
-                    </android.support.design.widget.AppBarLayout>
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/rv_status_container"
+                    <View
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:items="@{viewModel.statusItems}" />
-                    <!--
-                       <com.mindorks.placeholderview.SwipePlaceHolderView
-                           android:id="@+id/cardsContainer"
-                           android:layout_width="match_parent"
-                           android:layout_height="match_parent"
-                           app:adapter="@{viewModel.questionDataList}"
-                           app:action="@{viewModel.action}"/>
-                       -->
+                        android:layout_height="1dp"
+                        android:background="@color/colorGrey300" />
 
-                </LinearLayout>
-            </android.support.design.widget.CoordinatorLayout>
+                </android.support.design.widget.AppBarLayout>
 
+                <!-- The main content view -->
+                <FrameLayout
+                    android:id="@+id/content_frame"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/appbar"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            </RelativeLayout>
+
+            <!-- The navigation drawer -->
             <android.support.design.widget.NavigationView
                 android:id="@+id/navigationView"
                 style="@style/Widget.Design.NavigationView"
@@ -96,7 +85,6 @@
                     android:padding="5dp"
                     android:text="@{viewModel.appVersion}" />
             </android.support.design.widget.NavigationView>
-
         </android.support.v4.widget.DrawerLayout>
 
         <android.support.v4.widget.ContentLoadingProgressBar
@@ -106,7 +94,5 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             app:isVisible="@{viewModel.isLoading}" />
-
     </FrameLayout>
-
 </layout>

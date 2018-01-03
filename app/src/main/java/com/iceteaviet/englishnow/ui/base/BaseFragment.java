@@ -18,32 +18,36 @@ import dagger.android.AndroidInjection;
  */
 
 public abstract class BaseFragment<B extends ViewDataBinding, V extends BaseViewModel> extends Fragment {
-    private BaseActivity mActivity;
-    private B mViewDataBinding;
-    private V mViewModel;
+    private BaseActivity baseActivity;
+    private B viewDataBinding;
+    private V viewModel;
     private View mRootView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         performDependencyInjection();
         super.onCreate(savedInstanceState);
-        mViewModel = getViewModel();
+        viewModel = getViewModel();
         setHasOptionsMenu(false);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mViewDataBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
-        mRootView = mViewDataBinding.getRoot();
+        if (getActivity() instanceof BaseActivity) {
+            baseActivity = (BaseActivity) getActivity();
+        }
+
+        viewDataBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
+        mRootView = viewDataBinding.getRoot();
         return mRootView;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mViewDataBinding.setVariable(getBindingVariable(), mViewModel);
-        mViewDataBinding.executePendingBindings();
+        viewDataBinding.setVariable(getBindingVariable(), viewModel);
+        viewDataBinding.executePendingBindings();
     }
 
     @Override
@@ -51,38 +55,38 @@ public abstract class BaseFragment<B extends ViewDataBinding, V extends BaseView
         super.onAttach(context);
         if (context instanceof BaseActivity) {
             BaseActivity activity = (BaseActivity) context;
-            this.mActivity = activity;
+            this.baseActivity = activity;
             activity.onFragmentAttached();
         }
     }
 
     @Override
     public void onDetach() {
-        mActivity = null;
+        baseActivity = null;
         super.onDetach();
     }
 
     public BaseActivity getBaseActivity() {
-        return mActivity;
+        return baseActivity;
     }
 
     public B getViewDataBinding() {
-        return mViewDataBinding;
+        return viewDataBinding;
     }
 
     public boolean isNetworkConnected() {
-        return mActivity != null && mActivity.isNetworkConnected();
+        return baseActivity != null && baseActivity.isNetworkConnected();
     }
 
     public void hideKeyboard() {
-        if (mActivity != null) {
-            mActivity.hideKeyboard();
+        if (baseActivity != null) {
+            baseActivity.hideKeyboard();
         }
     }
 
     public void openActivityOnTokenExpire() {
-        if (mActivity != null) {
-            mActivity.openActivityOnTokenExpire();
+        if (baseActivity != null) {
+            baseActivity.openActivityOnTokenExpire();
         }
     }
 

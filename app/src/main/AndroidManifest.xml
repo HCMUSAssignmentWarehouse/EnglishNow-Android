@@ -21,7 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.auth.view.LoginActivity" />
+        <activity
+            android:name=".ui.auth.view.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.matching.view.ConversationMatchingActivity"
             android:theme="@style/AppTheme.NoActionBar" />

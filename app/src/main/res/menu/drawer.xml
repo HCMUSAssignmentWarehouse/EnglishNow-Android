@@ -7,6 +7,11 @@
             android:icon="@drawable/ic_profile_24dp"
             android:title="@string/profile" />
         <item
+            android:id="@+id/nav_item_newsfeed"
+            android:checked="true"
+            android:icon="@drawable/news"
+            android:title="@string/newsfeed" />
+        <item
             android:id="@+id/nav_item_matching"
             android:checked="true"
             android:icon="@drawable/ic_group_people"

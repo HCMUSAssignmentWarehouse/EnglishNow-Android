@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="avatar_size_large">96dp</dimen>
+    <dimen name="avatar_size_large">104dp</dimen>
     <dimen name="find_button_width">120dp</dimen>
 
     <dimen name="intro_normal_indicator_radius">4dp</dimen>
@@ -10,4 +10,6 @@
     <dimen name="intro_button_min_width">192dp</dimen>
     <dimen name="intro_button_layout_min_height">132dp</dimen>
     <dimen name="intro_button_margin_bottom">16dp</dimen>
+    <dimen name="default_status_bar_height">24dp</dimen>
+    <dimen name="dialog_margin_left_right">16dp</dimen>
 </resources>

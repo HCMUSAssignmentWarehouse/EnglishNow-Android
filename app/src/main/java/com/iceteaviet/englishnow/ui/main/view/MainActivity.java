@@ -2,21 +2,18 @@ package com.iceteaviet.englishnow.ui.main.view;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,19 +22,16 @@ import android.view.View;
 import com.iceteaviet.englishnow.BR;
 import com.iceteaviet.englishnow.BuildConfig;
 import com.iceteaviet.englishnow.R;
-import com.iceteaviet.englishnow.data.model.others.StatusItemData;
 import com.iceteaviet.englishnow.databinding.ActivityMainBinding;
 import com.iceteaviet.englishnow.databinding.NavigationHeaderMainBinding;
 import com.iceteaviet.englishnow.ui.about.view.AboutFragment;
 import com.iceteaviet.englishnow.ui.auth.view.LoginActivity;
 import com.iceteaviet.englishnow.ui.base.BaseActivity;
 import com.iceteaviet.englishnow.ui.main.MainNavigator;
-import com.iceteaviet.englishnow.ui.main.NewsFeedAdapter;
 import com.iceteaviet.englishnow.ui.main.viewmodel.MainViewModel;
 import com.iceteaviet.englishnow.ui.matching.view.ConversationMatchingActivity;
+import com.iceteaviet.englishnow.ui.newsfeed.view.NewsFeedFragment;
 import com.iceteaviet.englishnow.ui.profile.view.ProfileFragment;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -52,13 +46,16 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
     @Inject
     DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
+
     ActivityMainBinding activityMainBinding;
     private MainViewModel mainViewModel;
+
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
     private NavigationView navigationView;
-    private RecyclerView recyclerView;
-    private NewsFeedAdapter adapter;
+    private ActionBarDrawerToggle drawerToggle;
+
+    private int currentMenuItemId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +69,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     @Override
     protected void onResume() {
         super.onResume();
-        if (drawerLayout != null)
-            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+        //unlockDrawer();
     }
 
     @Override
@@ -90,8 +86,13 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
             ((Animatable) drawable).start();
         }
         switch (item.getItemId()) {
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+
             case R.id.action_share:
                 return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -140,13 +141,39 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         return R.layout.activity_main;
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        // Pass any configuration change to the drawer toggles
+        drawerToggle.onConfigurationChanged(newConfig);
+    }
+
     private void setup() {
         drawerLayout = activityMainBinding.drawerView;
         toolbar = activityMainBinding.toolbar;
         navigationView = activityMainBinding.navigationView;
 
         setSupportActionBar(toolbar);
-        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this,
+
+        setupDrawerLayout();
+        setupNavigationHeader();
+
+        //Inflate default
+        currentMenuItemId = R.id.nav_item_newsfeed;
+        navigationView.getMenu().getItem(1).setChecked(true);
+        navigationView.setCheckedItem(R.id.nav_item_newsfeed);
+        selectFragment(NewsFeedFragment.newInstance(), NewsFeedFragment.TAG);
+
+        String version = getString(R.string.version) + " " + BuildConfig.VERSION_NAME;
+        mainViewModel.updateAppVersion(version);
+        mainViewModel.onNavigationViewCreated();
+    }
+
+    private void setupDrawerLayout() {
+        // NOTE: Make sure you pass in a valid toolbar reference.  ActionBarDrawToggle() does not require it
+        // and will not render the hamburger icon without it.
+        drawerToggle = new ActionBarDrawerToggle(this,
                 drawerLayout,
                 toolbar,
                 R.string.open_drawer,
@@ -158,61 +185,63 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
             }
         };
 
+        // Tie DrawerLayout events to the ActionBarToggle
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
-
-        setupNavigationHeader();
-
-        String version = getString(R.string.version) + " " + BuildConfig.VERSION_NAME;
-        mainViewModel.updateAppVersion(version);
-        mainViewModel.onNavigationViewCreated();
-        setupNewsFeedItemsRecyclerView();
-        subscribeToLiveData();
-    }
-
-    private void setupNewsFeedItemsRecyclerView() {
-        recyclerView = activityMainBinding.rvStatusContainer;
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new NewsFeedAdapter(this);
-        recyclerView.setAdapter(adapter);
     }
 
 
     private void setupNavigationHeader() {
         NavigationHeaderMainBinding navigationHeaderMainBinding = DataBindingUtil.inflate(getLayoutInflater(),
-                R.layout.navigation_header_main, activityMainBinding.navigationView, false);
-        activityMainBinding.navigationView.addHeaderView(navigationHeaderMainBinding.getRoot());
+                R.layout.navigation_header_main, navigationView, false);
+
+        navigationView.addHeaderView(navigationHeaderMainBinding.getRoot());
+
         navigationHeaderMainBinding.setViewModel(mainViewModel);
 
         navigationView.setNavigationItemSelectedListener(
-                item -> {
-                    drawerLayout.closeDrawer(GravityCompat.START);
-                    switch (item.getItemId()) {
-                        case R.id.nav_item_profile:
-                            showProfileFragment();
-                            return true;
-                        case R.id.nav_item_matching:
-                            showConversationMatchingActivity();
-                            return true;
-                        case R.id.nav_item_about:
-                            showAboutFragment();
-                            return true;
-                        case R.id.nav_item_logout:
-                            mainViewModel.logout();
-                            return true;
-                        default:
-                            return false;
-                    }
-                });
+                menuItem -> MainActivity.this.onNavigationItemSelected(menuItem));
     }
 
-    private void subscribeToLiveData() {
-        mainViewModel.getStatusItemsLiveData().observe(this, new Observer<List<StatusItemData>>() {
-            @Override
-            public void onChanged(@Nullable List<StatusItemData> statusItemData) {
-                mainViewModel.setNewsFeedItems(statusItemData);
-            }
-        });
+    private boolean onNavigationItemSelected(MenuItem menuItem) {
+        //Close
+        drawerLayout.closeDrawer(GravityCompat.START);
+
+        //Only show if the selected fragment is not current fragment
+        if (menuItem.getItemId() == currentMenuItemId)
+            return false;
+
+        if (menuItem.getItemId() != R.id.nav_item_about) {
+            // Highlight the selected item has been done by NavigationView
+            menuItem.setChecked(true);
+            // Set action bar title
+            setTitle(menuItem.getTitle());
+            currentMenuItemId = menuItem.getItemId();
+        }
+
+        switch (menuItem.getItemId()) {
+            case R.id.nav_item_profile:
+                showProfileFragment();
+                return true;
+            case R.id.nav_item_newsfeed:
+                showNewsFeedFragment();
+                return true;
+            case R.id.nav_item_matching:
+                showConversationMatchingActivity();
+                return true;
+            case R.id.nav_item_about:
+                showAboutFragment();
+                return true;
+            case R.id.nav_item_logout:
+                mainViewModel.logout();
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    private void showNewsFeedFragment() {
+        selectFragment(NewsFeedFragment.newInstance(), NewsFeedFragment.TAG);
     }
 
     private void showConversationMatchingActivity() {
@@ -221,23 +250,12 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
 
     private void showProfileFragment() {
-        lockDrawer();
-        getFragmentManager()
-                .beginTransaction()
-                .disallowAddToBackStack()
-                .setCustomAnimations(R.animator.slide_left, R.animator.slide_right)
-                .add(R.id.clRootView, ProfileFragment.newInstance(), ProfileFragment.TAG)
-                .commit();
+        selectFragment(ProfileFragment.newInstance(), ProfileFragment.TAG);
     }
 
     private void showAboutFragment() {
         lockDrawer();
-        getFragmentManager()
-                .beginTransaction()
-                .disallowAddToBackStack()
-                .setCustomAnimations(R.animator.slide_left, R.animator.slide_right)
-                .add(R.id.clRootView, AboutFragment.newInstance(), AboutFragment.TAG)
-                .commit();
+        addFragment(AboutFragment.newInstance(), AboutFragment.TAG);
     }
 
     @Override
@@ -264,5 +282,26 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     private void unlockDrawer() {
         if (drawerLayout != null)
             drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+    }
+
+    /**
+     * Swaps fragments in the main content view
+     */
+    private void selectFragment(Fragment fragment, String tag) {
+        // Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .setCustomAnimations(R.animator.slide_left, R.animator.slide_right)
+                .replace(R.id.content_frame, fragment, tag)
+                .commit();
+    }
+
+    private void addFragment(Fragment fragment, String tag) {
+        getFragmentManager()
+                .beginTransaction()
+                .disallowAddToBackStack()
+                .setCustomAnimations(R.animator.slide_left, R.animator.slide_right)
+                .add(R.id.rl_root_view, fragment, tag)
+                .commit();
     }
 }

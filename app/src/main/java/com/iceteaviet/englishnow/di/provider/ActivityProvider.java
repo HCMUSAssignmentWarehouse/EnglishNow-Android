@@ -32,6 +32,6 @@ public abstract class ActivityProvider {
     @ContributesAndroidInjector(modules = ConversationMatchingModule.class)
     abstract ConversationMatchingActivity bindConversationMatchingActivity();
 
-    @ContributesAndroidInjector(modules = {MainModule.class, AboutFragmentProvider.class, ProfileFragmentProvider.class})
+    @ContributesAndroidInjector(modules = {MainModule.class, MainFragmentProvider.class})
     abstract MainActivity bindMainActivity();
 }

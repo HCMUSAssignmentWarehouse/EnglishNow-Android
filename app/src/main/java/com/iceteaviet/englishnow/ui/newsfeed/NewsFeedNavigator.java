@@ -5,4 +5,5 @@ package com.iceteaviet.englishnow.ui.newsfeed;
  */
 
 public interface NewsFeedNavigator {
+    void goBack();
 }
