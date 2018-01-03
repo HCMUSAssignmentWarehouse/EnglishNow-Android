@@ -1,7 +1,7 @@
 package com.iceteaviet.englishnow.ui.about.viewmodel;
 
-import com.iceteaviet.englishnow.data.AppDataSource;
-import com.iceteaviet.englishnow.ui.about.AboutHandler;
+import com.iceteaviet.englishnow.data.DataManager;
+import com.iceteaviet.englishnow.ui.about.AboutNavigator;
 import com.iceteaviet.englishnow.ui.base.BaseViewModel;
 import com.iceteaviet.englishnow.utils.rx.SchedulerProvider;
 
@@ -9,14 +9,14 @@ import com.iceteaviet.englishnow.utils.rx.SchedulerProvider;
  * Created by Genius Doan on 02/01/2018.
  */
 
-public class AboutViewModel extends BaseViewModel<AboutHandler> {
+public class AboutViewModel extends BaseViewModel<AboutNavigator> {
 
-    public AboutViewModel(AppDataSource appDataSource,
+    public AboutViewModel(DataManager dataManager,
                           SchedulerProvider schedulerProvider) {
-        super(appDataSource, schedulerProvider);
+        super(dataManager, schedulerProvider);
     }
 
     public void onNavBackClick() {
-        getHandler().goBack();
+        getNavigator().goBack();
     }
 }

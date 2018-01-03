@@ -25,7 +25,6 @@
         <activity
             android:name=".ui.matching.view.ConversationMatchingActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.newsfeed.view.NewsFeedActivity" />
         <activity
             android:name=".ui.intro.view.IntroActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"

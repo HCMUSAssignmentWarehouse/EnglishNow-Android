@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.iceteaviet.englishnow.R;
 import com.iceteaviet.englishnow.databinding.DialogSignUpBinding;
-import com.iceteaviet.englishnow.ui.auth.RegisterHandler;
+import com.iceteaviet.englishnow.ui.auth.RegisterNavigator;
 import com.iceteaviet.englishnow.ui.auth.viewmodel.RegisterViewModel;
 import com.iceteaviet.englishnow.ui.base.BaseDialog;
 import com.iceteaviet.englishnow.ui.others.view.PostLoginDialog;
@@ -24,7 +24,7 @@ import dagger.android.AndroidInjection;
  * Created by Genius Doan on 12/23/2017.
  */
 
-public class RegisterDialog extends BaseDialog implements RegisterHandler {
+public class RegisterDialog extends BaseDialog implements RegisterNavigator {
     public static final String TAG = RegisterDialog.class.getSimpleName();
 
     @Inject
@@ -65,7 +65,7 @@ public class RegisterDialog extends BaseDialog implements RegisterHandler {
         AndroidInjection.inject(this);
 
         signUpBinding.setViewModel(registerViewModel);
-        registerViewModel.setHandler(this);
+        registerViewModel.setNavigator(this);
 
         return convertView;
     }

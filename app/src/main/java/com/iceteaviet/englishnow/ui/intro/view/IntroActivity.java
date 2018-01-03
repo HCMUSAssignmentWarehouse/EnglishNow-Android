@@ -15,14 +15,14 @@ import com.iceteaviet.englishnow.R;
 import com.iceteaviet.englishnow.databinding.ActivityIntroBinding;
 import com.iceteaviet.englishnow.ui.auth.view.LoginActivity;
 import com.iceteaviet.englishnow.ui.base.BaseActivity;
-import com.iceteaviet.englishnow.ui.intro.IntroHandler;
+import com.iceteaviet.englishnow.ui.intro.IntroNavigator;
 import com.iceteaviet.englishnow.ui.intro.IntroPagerAdapter;
 import com.iceteaviet.englishnow.ui.intro.viewmodel.IntroViewModel;
 import com.iceteaviet.englishnow.utils.OsUtils;
 
 import javax.inject.Inject;
 
-public class IntroActivity extends BaseActivity<ActivityIntroBinding, IntroViewModel> implements IntroHandler {
+public class IntroActivity extends BaseActivity<ActivityIntroBinding, IntroViewModel> implements IntroNavigator {
     private final int[] mIntroBgColorIds = new int[]{
             R.color.intro_welcome_background_color,
             R.color.intro_informative_background_color,
@@ -40,7 +40,7 @@ public class IntroActivity extends BaseActivity<ActivityIntroBinding, IntroViewM
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        introViewModel.setHandler(this);
+        introViewModel.setNavigator(this);
         activityIntroBinding = getViewDataBinding();
         mArgbEvaluator = new ArgbEvaluator();
 

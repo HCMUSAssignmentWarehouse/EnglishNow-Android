@@ -2,10 +2,10 @@ package com.iceteaviet.englishnow.ui.auth.viewmodel;
 
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
-import com.iceteaviet.englishnow.data.AppDataSource;
-import com.iceteaviet.englishnow.data.model.api.RegisterRequest;
-import com.iceteaviet.englishnow.data.model.api.User;
-import com.iceteaviet.englishnow.ui.auth.RegisterHandler;
+import com.iceteaviet.englishnow.data.DataManager;
+import com.iceteaviet.englishnow.data.model.firebase.RegisterRequest;
+import com.iceteaviet.englishnow.data.model.firebase.User;
+import com.iceteaviet.englishnow.ui.auth.RegisterNavigator;
 import com.iceteaviet.englishnow.ui.base.BaseViewModel;
 import com.iceteaviet.englishnow.utils.InputUtils;
 import com.iceteaviet.englishnow.utils.rx.SchedulerProvider;
@@ -16,9 +16,9 @@ import io.reactivex.functions.Consumer;
  * Created by Genius Doan on 28/12/2017.
  */
 
-public class RegisterViewModel extends BaseViewModel<RegisterHandler> {
-    public RegisterViewModel(AppDataSource repo, SchedulerProvider schedulerProvider) {
-        super(repo, schedulerProvider);
+public class RegisterViewModel extends BaseViewModel<RegisterNavigator> {
+    public RegisterViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
+        super(dataManager, schedulerProvider);
     }
 
     public boolean isEmailValid(String email) {
@@ -34,12 +34,12 @@ public class RegisterViewModel extends BaseViewModel<RegisterHandler> {
     }
 
     public void onSignUpButtonClicked() {
-        getHandler().register();
+        getNavigator().register();
     }
 
     public void doRegister(String email, String username, String password) {
         setIsLoading(true);
-        getCompositeDisposable().add(getAppDataSource()
+        getCompositeDisposable().add(getDataManager()
                 .doServerRegisterFirebaseCall(new RegisterRequest.ServerRegisterRequest(email, username, password))
                 .subscribe(new Consumer<AuthResult>() {
                     @Override
@@ -53,10 +53,10 @@ public class RegisterViewModel extends BaseViewModel<RegisterHandler> {
                                     firebaseUser.getDisplayName(),
                                     firebaseUser.getPhotoUrl() == null ? "" : firebaseUser.getPhotoUrl().toString()
                             );
-                            getAppDataSource().doPushUserToFirebase(firebaseUser.getUid(), user);
+                            getDataManager().doPushUserToFirebase(firebaseUser.getUid(), user);
 
                             //Go to post login activity
-                            getHandler().navigateToPostLoginScreen();
+                            getNavigator().navigateToPostLoginScreen();
                         }
                         setIsLoading(false);
                     }
@@ -64,7 +64,7 @@ public class RegisterViewModel extends BaseViewModel<RegisterHandler> {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         // If register fails, display a message to the user.
-                        getHandler().handleError(throwable);
+                        getNavigator().handleError(throwable);
                         setIsLoading(false);
                     }
                 }));

@@ -1,6 +1,6 @@
 package com.iceteaviet.englishnow.data.model.others;
 
-import com.iceteaviet.englishnow.data.model.api.Status;
+import com.iceteaviet.englishnow.data.model.firebase.Status;
 
 /**
  * Created by Genius Doan on 02/01/2018.

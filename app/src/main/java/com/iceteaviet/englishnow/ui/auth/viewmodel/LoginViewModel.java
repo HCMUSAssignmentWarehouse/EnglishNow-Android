@@ -2,9 +2,9 @@ package com.iceteaviet.englishnow.ui.auth.viewmodel;
 
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
-import com.iceteaviet.englishnow.data.AppDataSource;
-import com.iceteaviet.englishnow.data.model.api.LoginRequest;
-import com.iceteaviet.englishnow.ui.auth.LoginHandler;
+import com.iceteaviet.englishnow.data.DataManager;
+import com.iceteaviet.englishnow.data.model.firebase.LoginRequest;
+import com.iceteaviet.englishnow.ui.auth.LoginNavigator;
 import com.iceteaviet.englishnow.ui.base.BaseViewModel;
 import com.iceteaviet.englishnow.utils.InputUtils;
 import com.iceteaviet.englishnow.utils.rx.SchedulerProvider;
@@ -15,9 +15,9 @@ import io.reactivex.functions.Consumer;
  * Created by Genius Doan on 12/26/2017.
  */
 
-public class LoginViewModel extends BaseViewModel<LoginHandler> {
-    public LoginViewModel(AppDataSource repo, SchedulerProvider schedulerProvider) {
-        super(repo, schedulerProvider);
+public class LoginViewModel extends BaseViewModel<LoginNavigator> {
+    public LoginViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
+        super(dataManager, schedulerProvider);
     }
 
     public boolean isEmailValid(String email) {
@@ -29,16 +29,16 @@ public class LoginViewModel extends BaseViewModel<LoginHandler> {
     }
 
     public void onServerLoginClicked() {
-        getHandler().login();
+        getNavigator().login();
     }
 
     public void onSignUpButtonClicked() {
-        getHandler().navigateToSignUpScreen();
+        getNavigator().navigateToSignUpScreen();
     }
 
     public void doLogin(String email, String password) {
         setIsLoading(true);
-        getCompositeDisposable().add(getAppDataSource()
+        getCompositeDisposable().add(getDataManager()
                 .doServerLoginFirebaseCall(new LoginRequest.ServerLoginRequest(email, password))
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
@@ -50,7 +50,7 @@ public class LoginViewModel extends BaseViewModel<LoginHandler> {
 
                         if (user != null) {
                             //Go to post login activity
-                            getHandler().navigateToPostLoginScreen();
+                            getNavigator().navigateToPostLoginScreen();
                         }
                         setIsLoading(false);
                     }
@@ -58,7 +58,7 @@ public class LoginViewModel extends BaseViewModel<LoginHandler> {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         // If sign in fails, display a message to the user.
-                        getHandler().handleError(throwable);
+                        getNavigator().handleError(throwable);
                         setIsLoading(false);
                     }
                 }));

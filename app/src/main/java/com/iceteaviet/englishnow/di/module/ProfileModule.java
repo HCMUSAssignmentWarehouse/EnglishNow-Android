@@ -1,6 +1,6 @@
 package com.iceteaviet.englishnow.di.module;
 
-import com.iceteaviet.englishnow.data.AppDataSource;
+import com.iceteaviet.englishnow.data.DataManager;
 import com.iceteaviet.englishnow.ui.profile.viewmodel.ProfileViewModel;
 import com.iceteaviet.englishnow.utils.rx.SchedulerProvider;
 
@@ -15,9 +15,9 @@ import dagger.Provides;
 public class ProfileModule {
 
     @Provides
-    ProfileViewModel provideAboutViewModel(AppDataSource appDataSource,
+    ProfileViewModel provideAboutViewModel(DataManager dataManager,
                                            SchedulerProvider schedulerProvider) {
-        return new ProfileViewModel(appDataSource, schedulerProvider);
+        return new ProfileViewModel(dataManager, schedulerProvider);
     }
 
 }

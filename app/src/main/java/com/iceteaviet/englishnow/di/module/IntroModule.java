@@ -1,6 +1,6 @@
 package com.iceteaviet.englishnow.di.module;
 
-import com.iceteaviet.englishnow.data.AppDataSource;
+import com.iceteaviet.englishnow.data.DataManager;
 import com.iceteaviet.englishnow.ui.intro.viewmodel.IntroViewModel;
 import com.iceteaviet.englishnow.utils.rx.SchedulerProvider;
 
@@ -14,7 +14,7 @@ import dagger.Provides;
 @Module
 public class IntroModule {
     @Provides
-    public IntroViewModel provideIntroViewModel(AppDataSource appDataSource, SchedulerProvider schedulerProvider) {
-        return new IntroViewModel(appDataSource, schedulerProvider);
+    public IntroViewModel provideIntroViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
+        return new IntroViewModel(dataManager, schedulerProvider);
     }
 }

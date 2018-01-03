@@ -6,7 +6,7 @@ import android.os.Bundle;
 import com.iceteaviet.englishnow.BR;
 import com.iceteaviet.englishnow.R;
 import com.iceteaviet.englishnow.databinding.ActivityLoginBinding;
-import com.iceteaviet.englishnow.ui.auth.LoginHandler;
+import com.iceteaviet.englishnow.ui.auth.LoginNavigator;
 import com.iceteaviet.englishnow.ui.auth.viewmodel.LoginViewModel;
 import com.iceteaviet.englishnow.ui.base.BaseActivity;
 import com.iceteaviet.englishnow.ui.others.view.PostLoginDialog;
@@ -21,7 +21,7 @@ import dagger.android.HasFragmentInjector;
 
 //TODO: Add Smart Lock for passwords: https://developers.google.com/identity/smartlock-passwords/android/
 // Disable login button base on input
-public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewModel> implements LoginHandler, HasFragmentInjector {
+public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewModel> implements LoginNavigator, HasFragmentInjector {
     @Inject
     LoginViewModel loginViewModel;
 
@@ -34,7 +34,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityLoginBinding = getViewDataBinding();
-        loginViewModel.setHandler(this);
+        loginViewModel.setNavigator(this);
 
         ButterKnife.bind(this);
     }

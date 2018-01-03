@@ -1,6 +1,6 @@
 package com.iceteaviet.englishnow.di.module;
 
-import com.iceteaviet.englishnow.data.AppDataSource;
+import com.iceteaviet.englishnow.data.DataManager;
 import com.iceteaviet.englishnow.ui.matching.viewmodel.ConversationMatchingViewModel;
 import com.iceteaviet.englishnow.utils.rx.SchedulerProvider;
 
@@ -14,8 +14,8 @@ import dagger.Provides;
 @Module
 public class ConversationMatchingModule {
     @Provides
-    ConversationMatchingViewModel provideLoginViewModel(AppDataSource repository,
+    ConversationMatchingViewModel provideLoginViewModel(DataManager dataManager,
                                                         SchedulerProvider schedulerProvider) {
-        return new ConversationMatchingViewModel(repository, schedulerProvider);
+        return new ConversationMatchingViewModel(dataManager, schedulerProvider);
     }
 }

@@ -4,13 +4,11 @@ import com.iceteaviet.englishnow.di.module.ConversationMatchingModule;
 import com.iceteaviet.englishnow.di.module.IntroModule;
 import com.iceteaviet.englishnow.di.module.LoginModule;
 import com.iceteaviet.englishnow.di.module.MainModule;
-import com.iceteaviet.englishnow.di.module.NewsFeedModule;
 import com.iceteaviet.englishnow.di.module.SplashModule;
 import com.iceteaviet.englishnow.ui.auth.view.LoginActivity;
 import com.iceteaviet.englishnow.ui.intro.view.IntroActivity;
 import com.iceteaviet.englishnow.ui.main.view.MainActivity;
 import com.iceteaviet.englishnow.ui.matching.view.ConversationMatchingActivity;
-import com.iceteaviet.englishnow.ui.newsfeed.view.NewsFeedActivity;
 import com.iceteaviet.englishnow.ui.splash.view.SplashActivity;
 
 import dagger.Module;
@@ -33,9 +31,6 @@ public abstract class ActivityProvider {
 
     @ContributesAndroidInjector(modules = ConversationMatchingModule.class)
     abstract ConversationMatchingActivity bindConversationMatchingActivity();
-
-    @ContributesAndroidInjector(modules = NewsFeedModule.class)
-    abstract NewsFeedActivity bindNewsFeedActivity();
 
     @ContributesAndroidInjector(modules = {MainModule.class, AboutFragmentProvider.class, ProfileFragmentProvider.class})
     abstract MainActivity bindMainActivity();

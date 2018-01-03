@@ -1,6 +1,6 @@
 package com.iceteaviet.englishnow.di.module;
 
-import com.iceteaviet.englishnow.data.AppDataSource;
+import com.iceteaviet.englishnow.data.DataManager;
 import com.iceteaviet.englishnow.ui.others.viewmodel.PostLoginViewModel;
 import com.iceteaviet.englishnow.utils.rx.SchedulerProvider;
 
@@ -14,7 +14,7 @@ import dagger.Provides;
 @Module
 public class PostLoginModule {
     @Provides
-    PostLoginViewModel providePostLoginViewModel(AppDataSource dataManager,
+    PostLoginViewModel providePostLoginViewModel(DataManager dataManager,
                                                  SchedulerProvider schedulerProvider) {
         return new PostLoginViewModel(dataManager, schedulerProvider);
     }

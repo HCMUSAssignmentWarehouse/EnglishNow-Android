@@ -6,12 +6,12 @@ import com.iceteaviet.englishnow.BR;
 import com.iceteaviet.englishnow.R;
 import com.iceteaviet.englishnow.databinding.ActivityConversationMatchingBinding;
 import com.iceteaviet.englishnow.ui.base.BaseActivity;
-import com.iceteaviet.englishnow.ui.matching.ConversationMatchingHandler;
+import com.iceteaviet.englishnow.ui.matching.ConversationMatchingNavigator;
 import com.iceteaviet.englishnow.ui.matching.viewmodel.ConversationMatchingViewModel;
 
 import javax.inject.Inject;
 
-public class ConversationMatchingActivity extends BaseActivity<ActivityConversationMatchingBinding, ConversationMatchingViewModel> implements ConversationMatchingHandler {
+public class ConversationMatchingActivity extends BaseActivity<ActivityConversationMatchingBinding, ConversationMatchingViewModel> implements ConversationMatchingNavigator {
 
     @Inject
     ConversationMatchingViewModel conversationMatchingViewModel;
@@ -21,7 +21,7 @@ public class ConversationMatchingActivity extends BaseActivity<ActivityConversat
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        conversationMatchingViewModel.setHandler(this);
+        conversationMatchingViewModel.setNavigator(this);
         conversationMatchingBinding = getViewDataBinding();
     }
 

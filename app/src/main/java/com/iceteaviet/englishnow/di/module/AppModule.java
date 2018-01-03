@@ -5,12 +5,12 @@ import android.content.Context;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
-import com.iceteaviet.englishnow.data.AppDataRepository;
-import com.iceteaviet.englishnow.data.AppDataSource;
-import com.iceteaviet.englishnow.data.local.prefs.AppPreferencesManager;
-import com.iceteaviet.englishnow.data.local.prefs.PreferencesManager;
-import com.iceteaviet.englishnow.data.remote.firebase.AppFirebaseManager;
-import com.iceteaviet.englishnow.data.remote.firebase.FirebaseManager;
+import com.iceteaviet.englishnow.data.AppDataManager;
+import com.iceteaviet.englishnow.data.DataManager;
+import com.iceteaviet.englishnow.data.local.prefs.AppPreferencesHelper;
+import com.iceteaviet.englishnow.data.local.prefs.PreferencesHelper;
+import com.iceteaviet.englishnow.data.remote.firebase.FirebaseDataSource;
+import com.iceteaviet.englishnow.data.remote.firebase.FirebaseRepository;
 import com.iceteaviet.englishnow.utils.rx.AppSchedulerProvider;
 import com.iceteaviet.englishnow.utils.rx.SchedulerProvider;
 
@@ -38,19 +38,19 @@ public class AppModule {
 
     @Provides
     @Singleton
-    PreferencesManager providePreferencesHelper(AppPreferencesManager appPreferencesManager) {
-        return appPreferencesManager;
+    PreferencesHelper providePreferencesHelper(AppPreferencesHelper appPreferencesHelper) {
+        return appPreferencesHelper;
     }
 
     @Provides
     @Singleton
-    AppDataSource provideAppDataSource(AppDataRepository repository) {
+    DataManager provideAppDataSource(AppDataManager repository) {
         return repository;
     }
 
     @Provides
     @Singleton
-    FirebaseManager provideFirebaseHelper(AppFirebaseManager firebaseHelper) {
+    FirebaseDataSource provideFirebaseHelper(FirebaseRepository firebaseHelper) {
         return firebaseHelper;
     }
 

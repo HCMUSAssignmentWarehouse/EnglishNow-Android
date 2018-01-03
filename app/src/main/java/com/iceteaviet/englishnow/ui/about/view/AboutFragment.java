@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import com.iceteaviet.englishnow.BR;
 import com.iceteaviet.englishnow.R;
 import com.iceteaviet.englishnow.databinding.FragmentAboutBinding;
-import com.iceteaviet.englishnow.ui.about.AboutHandler;
+import com.iceteaviet.englishnow.ui.about.AboutNavigator;
 import com.iceteaviet.englishnow.ui.about.viewmodel.AboutViewModel;
 import com.iceteaviet.englishnow.ui.base.BaseFragment;
 
@@ -16,7 +16,7 @@ import javax.inject.Inject;
  * Created by Genius Doan on 02/01/2018.
  */
 
-public class AboutFragment extends BaseFragment<FragmentAboutBinding, AboutViewModel> implements AboutHandler {
+public class AboutFragment extends BaseFragment<FragmentAboutBinding, AboutViewModel> implements AboutNavigator {
 
     public static final String TAG = "AboutFragment";
 
@@ -33,7 +33,7 @@ public class AboutFragment extends BaseFragment<FragmentAboutBinding, AboutViewM
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mAboutViewModel.setHandler(this);
+        mAboutViewModel.setNavigator(this);
     }
 
     @Override

@@ -15,7 +15,7 @@ import com.iceteaviet.englishnow.ui.auth.view.RegisterDialog;
 import com.iceteaviet.englishnow.ui.base.BaseDialog;
 import com.iceteaviet.englishnow.ui.main.view.MainActivity;
 import com.iceteaviet.englishnow.ui.matching.view.ConversationMatchingActivity;
-import com.iceteaviet.englishnow.ui.others.PostLoginHandler;
+import com.iceteaviet.englishnow.ui.others.PostLoginNavigator;
 import com.iceteaviet.englishnow.ui.others.viewmodel.PostLoginViewModel;
 
 import javax.inject.Inject;
@@ -26,7 +26,7 @@ import dagger.android.AndroidInjection;
  * Created by Genius Doan on 12/24/2017.
  */
 
-public class PostLoginDialog extends BaseDialog implements PostLoginHandler {
+public class PostLoginDialog extends BaseDialog implements PostLoginNavigator {
     public static final String TAG = RegisterDialog.class.getSimpleName();
 
     @Inject
@@ -63,7 +63,7 @@ public class PostLoginDialog extends BaseDialog implements PostLoginHandler {
         AndroidInjection.inject(this);
 
         dialogPostSignInBinding.setViewModel(postLoginViewModel);
-        postLoginViewModel.setHandler(this);
+        postLoginViewModel.setNavigator(this);
 
         return convertView;
     }

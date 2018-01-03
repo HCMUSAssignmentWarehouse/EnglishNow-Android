@@ -1,6 +1,6 @@
 package com.iceteaviet.englishnow.di.module;
 
-import com.iceteaviet.englishnow.data.AppDataSource;
+import com.iceteaviet.englishnow.data.DataManager;
 import com.iceteaviet.englishnow.ui.auth.viewmodel.RegisterViewModel;
 import com.iceteaviet.englishnow.utils.rx.SchedulerProvider;
 
@@ -14,7 +14,7 @@ import dagger.Provides;
 @Module
 public class AuthDialogModule {
     @Provides
-    RegisterViewModel provideRegisterViewModel(AppDataSource dataManager,
+    RegisterViewModel provideRegisterViewModel(DataManager dataManager,
                                                SchedulerProvider schedulerProvider) {
         return new RegisterViewModel(dataManager, schedulerProvider);
     }

@@ -31,7 +31,7 @@ import com.iceteaviet.englishnow.databinding.NavigationHeaderMainBinding;
 import com.iceteaviet.englishnow.ui.about.view.AboutFragment;
 import com.iceteaviet.englishnow.ui.auth.view.LoginActivity;
 import com.iceteaviet.englishnow.ui.base.BaseActivity;
-import com.iceteaviet.englishnow.ui.main.MainHandler;
+import com.iceteaviet.englishnow.ui.main.MainNavigator;
 import com.iceteaviet.englishnow.ui.main.NewsFeedAdapter;
 import com.iceteaviet.englishnow.ui.main.viewmodel.MainViewModel;
 import com.iceteaviet.englishnow.ui.matching.view.ConversationMatchingActivity;
@@ -45,7 +45,7 @@ import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasFragmentInjector;
 
-public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel> implements MainHandler, HasFragmentInjector {
+public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel> implements MainNavigator, HasFragmentInjector {
 
     @Inject
     ViewModelProvider.Factory viewModelFactory;
@@ -65,7 +65,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         super.onCreate(savedInstanceState);
 
         activityMainBinding = getViewDataBinding();
-        mainViewModel.setHandler(this);
+        mainViewModel.setNavigator(this);
         setup();
     }
 

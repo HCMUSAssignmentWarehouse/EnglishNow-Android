@@ -13,7 +13,7 @@ import com.iceteaviet.englishnow.ui.auth.view.LoginActivity;
 import com.iceteaviet.englishnow.ui.base.BaseActivity;
 import com.iceteaviet.englishnow.ui.intro.view.IntroActivity;
 import com.iceteaviet.englishnow.ui.others.view.PostLoginDialog;
-import com.iceteaviet.englishnow.ui.splash.SplashHandler;
+import com.iceteaviet.englishnow.ui.splash.SplashNavigator;
 import com.iceteaviet.englishnow.ui.splash.viewmodel.SplashViewModel;
 
 import javax.inject.Inject;
@@ -22,7 +22,7 @@ import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasFragmentInjector;
 
-public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashViewModel> implements SplashHandler, HasFragmentInjector {
+public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashViewModel> implements SplashNavigator, HasFragmentInjector {
     @Inject
     SplashViewModel splashViewModel;
 
@@ -34,7 +34,7 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashVi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        splashViewModel.setHandler(this);
+        splashViewModel.setNavigator(this);
         activitySplashBinding = getViewDataBinding();
 
         Window w = getWindow();

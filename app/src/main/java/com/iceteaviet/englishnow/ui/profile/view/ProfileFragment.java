@@ -7,7 +7,7 @@ import com.iceteaviet.englishnow.BR;
 import com.iceteaviet.englishnow.R;
 import com.iceteaviet.englishnow.databinding.FragmentProfileBinding;
 import com.iceteaviet.englishnow.ui.base.BaseFragment;
-import com.iceteaviet.englishnow.ui.profile.ProfileHandler;
+import com.iceteaviet.englishnow.ui.profile.ProfileNavigator;
 import com.iceteaviet.englishnow.ui.profile.viewmodel.ProfileViewModel;
 
 import javax.inject.Inject;
@@ -16,7 +16,7 @@ import javax.inject.Inject;
  * Created by Genius Doan on 02/01/2018.
  */
 
-public class ProfileFragment extends BaseFragment<FragmentProfileBinding, ProfileViewModel> implements ProfileHandler {
+public class ProfileFragment extends BaseFragment<FragmentProfileBinding, ProfileViewModel> implements ProfileNavigator {
 
     public static final String TAG = "ProfileFragment";
 
@@ -33,7 +33,7 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding, Profil
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        profileViewModel.setHandler(this);
+        profileViewModel.setNavigator(this);
     }
 
     @Override
