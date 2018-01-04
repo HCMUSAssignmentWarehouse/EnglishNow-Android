@@ -45,4 +45,5 @@ ext {
     retrofitVersion = '2.3.0'
     glideVersion = '4.4.0'
     archLifeCycleVersion = '1.0.0-beta2'
+    eventBusVersion = '3.1.1'
 }

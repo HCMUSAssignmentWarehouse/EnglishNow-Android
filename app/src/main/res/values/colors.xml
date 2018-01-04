@@ -23,4 +23,5 @@
     <color name="colorTeal100">#B2DFDB</color>
     <color name="colorDeepOrange700">#E64A19</color>
     <color name="colorDeepOrange500">#FF5722</color>
+    <color name="colorRed500">#F44336</color>
 </resources>

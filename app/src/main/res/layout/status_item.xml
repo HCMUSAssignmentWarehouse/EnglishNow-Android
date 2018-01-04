@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="statusItemData"
-            type="com.iceteaviet.englishnow.data.model.others.StatusItemData" />
+            name="viewModel"
+            type="com.iceteaviet.englishnow.ui.newsfeed.viewmodel.StatusItemViewModel" />
     </data>
 
     <android.support.v7.widget.CardView
@@ -18,49 +18,58 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="8dp">
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_avatar"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@{statusItemData.avatarUrl.isEmpty() ? @drawable/avatar_placeholder : statusItemData.avatarUrl}" />
+                android:layout_marginLeft="8dp"
+                app:imageUrl="@{viewModel.avatarUrl.isEmpty() ? @drawable/avatar_placeholder : viewModel.avatarUrl}"
+                app:layout_constraintLeft_toLeftOf="parent" />
 
             <TextView
                 android:id="@+id/tv_username"
+                style="@style/Status.UserName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:text="@{statusItemData.status.ownerUsername}"
+                android:text="@{viewModel.status.ownerUsername}"
                 app:layout_constraintLeft_toRightOf="@id/iv_avatar" />
 
             <TextView
                 android:id="@+id/tv_time"
+                style="@style/Status.TimeStamp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
-                android:text="@{String.valueOf(statusItemData.status.timestamp)}"
+                android:text="@{String.valueOf(viewModel.status.timestamp)}"
                 app:layout_constraintLeft_toRightOf="@id/iv_avatar"
                 app:layout_constraintTop_toBottomOf="@id/tv_username" />
 
             <TextView
                 android:id="@+id/tv_content"
+                style="@style/Status.Content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
-                android:text="@{statusItemData.status.content}"
+                android:text="@{viewModel.status.content}"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/iv_avatar" />
 
             <ImageView
                 android:id="@+id/iv_photo"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
+                android:layout_height="200dp"
                 android:layout_marginTop="8dp"
-                android:scaleType="fitXY"
-                app:isVisible="@{!statusItemData.status.photoUrl.isEmpty()}"
-                app:layout_constraintTop_toBottomOf="@id/tv_content"
-                app:src="@{statusItemData.status.photoUrl}" />
+                android:scaleType="centerCrop"
+                app:imageUrl="@{viewModel.status.photoUrl}"
+                app:isVisible="@{viewModel.isShowPhoto}"
+                app:layout_constraintTop_toBottomOf="@id/tv_content" />
 
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>

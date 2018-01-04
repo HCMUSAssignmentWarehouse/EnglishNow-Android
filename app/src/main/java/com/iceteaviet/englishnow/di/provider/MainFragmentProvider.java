@@ -1,9 +1,11 @@
 package com.iceteaviet.englishnow.di.provider;
 
 import com.iceteaviet.englishnow.di.module.AboutModule;
+import com.iceteaviet.englishnow.di.module.ComposerModule;
 import com.iceteaviet.englishnow.di.module.NewsFeedModule;
 import com.iceteaviet.englishnow.di.module.ProfileModule;
 import com.iceteaviet.englishnow.ui.about.view.AboutFragment;
+import com.iceteaviet.englishnow.ui.main.view.StatusComposerDialog;
 import com.iceteaviet.englishnow.ui.newsfeed.view.NewsFeedFragment;
 import com.iceteaviet.englishnow.ui.profile.view.ProfileFragment;
 
@@ -24,4 +26,7 @@ public abstract class MainFragmentProvider {
 
     @ContributesAndroidInjector(modules = ProfileModule.class)
     abstract ProfileFragment provideProfileFragmentFactory();
+
+    @ContributesAndroidInjector(modules = ComposerModule.class)
+    abstract StatusComposerDialog provideComposerDialogFragmentFactory();
 }

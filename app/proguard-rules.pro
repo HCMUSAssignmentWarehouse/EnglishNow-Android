@@ -20,20 +20,33 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
+
 -keepattributes Signature
 -keepattributes *Annotation*
 -keepattributes EnclosingMethod
 -keepattributes InnerClasses
 -keepattributes Exceptions
 
+
 -keep class dagger.* { *; }
 -keep class javax.inject.* { *; }
 -keep class * extends dagger.internal.Binding
 -keep class * extends dagger.internal.ModuleAdapter
 -keep class * extends dagger.internal.StaticInjection
+-keep enum org.greenrobot.eventbus.ThreadMode { *; }
+
 
 -keepclassmembers class com.iceteaviet.englishnow.data.model.** {
   *;
+}
+
+-keepclassmembers class ** {
+    @org.greenrobot.eventbus.Subscribe <methods>;
+}
+
+# Only required if you use AsyncExecutor
+-keepclassmembers class * extends org.greenrobot.eventbus.util.ThrowableFailureEvent {
+    <init>(java.lang.Throwable);
 }
 
 -keepclassmembers,allowobfuscation class * {
@@ -42,10 +55,12 @@
     <init>();
 }
 
+
 -dontwarn okio.**
 -dontwarn javax.annotation.**
 -dontwarn retrofit2.Platform$Java8
 -dontwarn dagger.internal.codegen.**
 -dontwarn com.google.errorprone.annotations.*
+
 
 -dontnote retrofit2.Platform

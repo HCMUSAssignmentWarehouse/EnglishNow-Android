@@ -9,12 +9,13 @@ import android.view.View;
 
 import com.iceteaviet.englishnow.BR;
 import com.iceteaviet.englishnow.R;
-import com.iceteaviet.englishnow.data.model.others.StatusItemData;
 import com.iceteaviet.englishnow.databinding.FragmentNewsfeedBinding;
 import com.iceteaviet.englishnow.ui.base.BaseFragment;
-import com.iceteaviet.englishnow.ui.main.NewsFeedAdapter;
+import com.iceteaviet.englishnow.ui.main.StatusAdapter;
+import com.iceteaviet.englishnow.ui.main.view.StatusComposerDialog;
 import com.iceteaviet.englishnow.ui.newsfeed.NewsFeedNavigator;
-import com.iceteaviet.englishnow.ui.newsfeed.viewmodel.NewsFeedViewModel;
+import com.iceteaviet.englishnow.ui.newsfeed.viewmodel.StatusItemViewModel;
+import com.iceteaviet.englishnow.ui.newsfeed.viewmodel.StatusViewModel;
 
 import java.util.List;
 
@@ -24,18 +25,18 @@ import javax.inject.Inject;
  * Created by Genius Doan on 03/01/2018.
  */
 
-public class NewsFeedFragment extends BaseFragment<FragmentNewsfeedBinding, NewsFeedViewModel> implements NewsFeedNavigator {
+public class NewsFeedFragment extends BaseFragment<FragmentNewsfeedBinding, StatusViewModel> implements NewsFeedNavigator {
 
     public static final String TAG = "NewsFeedFragment";
 
     @Inject
-    NewsFeedViewModel newsFeedViewModel;
+    StatusViewModel statusViewModel;
 
     private FragmentNewsfeedBinding viewBinding;
 
 
     private RecyclerView recyclerView;
-    private NewsFeedAdapter adapter;
+    private StatusAdapter adapter;
 
     public static NewsFeedFragment newInstance() {
         Bundle args = new Bundle();
@@ -47,7 +48,7 @@ public class NewsFeedFragment extends BaseFragment<FragmentNewsfeedBinding, News
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        newsFeedViewModel.setNavigator(this);
+        statusViewModel.setNavigator(this);
     }
 
     @Override
@@ -58,8 +59,8 @@ public class NewsFeedFragment extends BaseFragment<FragmentNewsfeedBinding, News
     }
 
     @Override
-    public NewsFeedViewModel getViewModel() {
-        return newsFeedViewModel;
+    public StatusViewModel getViewModel() {
+        return statusViewModel;
     }
 
     @Override
@@ -83,6 +84,21 @@ public class NewsFeedFragment extends BaseFragment<FragmentNewsfeedBinding, News
     }
 
     private void setup() {
+        viewBinding.fabCompose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                StatusComposerDialog dialog = StatusComposerDialog.newInstance();
+                dialog.setOnPostedListener(new StatusComposerDialog.StatusComposerDialogListener() {
+                    @Override
+                    public void onPosted(String body) {
+                        //Trigger refresh
+                    }
+                });
+
+                dialog.show(getFragmentManager());
+            }
+        });
+
         setupNewsFeedItemsRecyclerView();
         subscribeToLiveData();
     }
@@ -90,15 +106,15 @@ public class NewsFeedFragment extends BaseFragment<FragmentNewsfeedBinding, News
     private void setupNewsFeedItemsRecyclerView() {
         recyclerView = viewBinding.rvStatusContainer;
         recyclerView.setLayoutManager(new LinearLayoutManager(getBaseActivity()));
-        adapter = new NewsFeedAdapter(getBaseActivity());
+        adapter = new StatusAdapter(getBaseActivity());
         recyclerView.setAdapter(adapter);
     }
 
     private void subscribeToLiveData() {
-        newsFeedViewModel.getStatusItemsLiveData().observe(getBaseActivity(), new Observer<List<StatusItemData>>() {
+        statusViewModel.getStatusItemsLiveData().observe(getBaseActivity(), new Observer<List<StatusItemViewModel>>() {
             @Override
-            public void onChanged(@Nullable List<StatusItemData> statusItemData) {
-                newsFeedViewModel.setNewsFeedItems(statusItemData);
+            public void onChanged(@Nullable List<StatusItemViewModel> statusItemViewModels) {
+                statusViewModel.setStatusItems(statusItemViewModels);
             }
         });
     }

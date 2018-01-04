@@ -1,6 +1,7 @@
 package com.iceteaviet.englishnow.utils;
 
 import android.databinding.BindingAdapter;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -10,8 +11,6 @@ import com.bumptech.glide.Glide;
 import com.iceteaviet.englishnow.ui.base.BaseRecyclerViewAdapter;
 
 import java.util.List;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Genius Doan on 23/12/2017.
@@ -31,21 +30,26 @@ public final class BindingUtils {
         }
     }
 
-    @BindingAdapter({"src"})
+
+    @BindingAdapter({"imageUrl"})
     public static void setImageViewSrc(ImageView view, String src) {
         Glide.with(view.getContext())
                 .load(src)
                 .into(view);
     }
 
-    @BindingAdapter({"src"})
-    public static void setImageViewResource(ImageView imageView, @DrawableRes int resource) {
-        imageView.setImageResource(resource);
+    @BindingAdapter({"imageUrl"})
+    public static void setImageViewDrawable(ImageView view, Drawable drawable) {
+        Glide.with(view.getContext())
+                .load(drawable)
+                .into(view);
     }
 
-    @BindingAdapter({"android:src"})
-    public static void setCircleImageViewResource(CircleImageView imageView, @DrawableRes int resource) {
-        imageView.setImageResource(resource);
+    @BindingAdapter({"imageUrl"})
+    public static void setImageViewResource(ImageView view, @DrawableRes int resource) {
+        Glide.with(view.getContext())
+                .load(resource)
+                .into(view);
     }
 
     @BindingAdapter("items")

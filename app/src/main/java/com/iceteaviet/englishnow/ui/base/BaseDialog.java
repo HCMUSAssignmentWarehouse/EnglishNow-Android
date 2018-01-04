@@ -1,11 +1,11 @@
 package com.iceteaviet.englishnow.ui.base;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -25,10 +25,10 @@ public abstract class BaseDialog extends DialogFragment {
     private BaseActivity mActivity;
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof BaseActivity) {
-            BaseActivity mActivity = (BaseActivity) context;
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof BaseActivity) {
+            BaseActivity mActivity = (BaseActivity) activity;
             this.mActivity = mActivity;
             mActivity.onFragmentAttached();
         }

@@ -20,7 +20,7 @@ import dagger.android.ContributesAndroidInjector;
 
 @Module
 public abstract class ActivityProvider {
-    @ContributesAndroidInjector(modules = {LoginModule.class, AuthDialogProvider.class, PostLoginProvider.class})
+    @ContributesAndroidInjector(modules = {LoginModule.class, AuthFragmentProvider.class, PostLoginProvider.class})
     abstract LoginActivity bindLoginActivity();
 
     @ContributesAndroidInjector(modules = {SplashModule.class, PostLoginProvider.class})

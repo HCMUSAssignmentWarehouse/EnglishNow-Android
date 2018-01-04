@@ -13,8 +13,10 @@ public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<Re
     protected List<T> mItems = new ArrayList<>();
 
     public void setItems(List<T> items) {
+        /*
         if (this.mItems == items)
             return;
+            */
 
         mItems = items;
         notifyDataSetChanged();

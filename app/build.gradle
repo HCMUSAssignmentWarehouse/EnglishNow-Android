@@ -59,6 +59,7 @@ dependencies {
     implementation "com.google.firebase:firebase-core:${rootProject.googlePlayServiceVersion}"
     implementation "com.google.firebase:firebase-auth:${rootProject.googlePlayServiceVersion}"
     implementation "com.google.firebase:firebase-database:${rootProject.googlePlayServiceVersion}"
+    implementation "com.google.firebase:firebase-storage:${rootProject.googlePlayServiceVersion}"
     implementation "com.facebook.android:facebook-login:${rootProject.facebookVersion}"
     implementation "com.google.android.gms:play-services-auth:${rootProject.googlePlayServiceVersion}"
 
@@ -70,6 +71,7 @@ dependencies {
     implementation "com.android.support.constraint:constraint-layout:${rootProject.constraintLayoutVersion}"
     implementation "de.hdodenhof:circleimageview:${rootProject.circleImageViewVersion}"
     implementation "com.github.bumptech.glide:glide:${rootProject.glideVersion}"
+    implementation "com.android.support:exifinterface:${rootProject.supportLibraryVersion}"
 
     //Dagger 2
     implementation "com.google.dagger:dagger:${rootProject.daggerVersion}"
@@ -83,6 +85,9 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:${rootProject.retrofitVersion}"
     implementation "com.squareup.retrofit2:converter-gson:${rootProject.retrofitVersion}"
     implementation "com.squareup.retrofit2:adapter-rxjava2:${rootProject.retrofitVersion}"
+
+    //EventBus
+    implementation "org.greenrobot:eventbus:${rootProject.eventBusVersion}"
 
     //Others
     implementation "com.jakewharton:butterknife:${rootProject.butterKnifeVersion}"

@@ -1,13 +1,15 @@
 package com.iceteaviet.englishnow.data;
 
 import android.content.Context;
+import android.net.Uri;
 
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.iceteaviet.englishnow.data.local.prefs.PreferencesHelper;
 import com.iceteaviet.englishnow.data.model.firebase.LoginRequest;
 import com.iceteaviet.englishnow.data.model.firebase.RegisterRequest;
 import com.iceteaviet.englishnow.data.model.firebase.Status;
+import com.iceteaviet.englishnow.data.model.firebase.UploadTaskMessage;
 import com.iceteaviet.englishnow.data.model.firebase.User;
 import com.iceteaviet.englishnow.data.model.others.StatusItemData;
 import com.iceteaviet.englishnow.data.remote.firebase.FirebaseDataSource;
@@ -41,8 +43,8 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public FirebaseAuth getFirebaseAuth() {
-        return firebaseDataSource.getFirebaseAuth();
+    public boolean isLoggedIn() {
+        return firebaseDataSource.isLoggedIn();
     }
 
     @Override
@@ -56,6 +58,16 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public Single<String> updateUserDisplayName(FirebaseUser user, String displayName) {
+        return firebaseDataSource.updateUserDisplayName(user, displayName);
+    }
+
+    @Override
+    public Observable<User> getCurrentUser() {
+        return firebaseDataSource.getCurrentUser();
+    }
+
+    @Override
     public void doFirebaseLogoutCall() {
         firebaseDataSource.doFirebaseLogoutCall();
     }
@@ -63,6 +75,11 @@ public class AppDataManager implements DataManager {
     @Override
     public String getCurrentUserDisplayName() {
         return firebaseDataSource.getCurrentUserDisplayName();
+    }
+
+    @Override
+    public String getCurrentUserUid() {
+        return firebaseDataSource.getCurrentUserUid();
     }
 
     @Override
@@ -116,8 +133,13 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Single<List<Status>> getAllStatuses() {
+    public Observable<List<Status>> getAllStatuses() {
         return firebaseDataSource.getAllStatuses();
+    }
+
+    @Override
+    public Single<List<Status>> getAllStatusesOnce() {
+        return firebaseDataSource.getAllStatusesOnce();
     }
 
     @Override
@@ -126,8 +148,13 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public Observable<UploadTaskMessage> uploadPhoto(Uri data) {
+        return firebaseDataSource.uploadPhoto(data);
+    }
+
+    @Override
     public Observable<List<StatusItemData>> getAllStatusItems() {
-        return firebaseDataSource.getAllStatuses()
+        return firebaseDataSource.getAllStatusesOnce()
                 .toObservable()
                 .flatMap(new Function<List<Status>, ObservableSource<Status>>() {
                     @Override
@@ -149,5 +176,10 @@ public class AppDataManager implements DataManager {
                 })
                 .toList()
                 .toObservable();
+    }
+
+    @Override
+    public void pushStatusToFirebase(Status status) {
+        firebaseDataSource.pushStatusToFirebase(status);
     }
 }

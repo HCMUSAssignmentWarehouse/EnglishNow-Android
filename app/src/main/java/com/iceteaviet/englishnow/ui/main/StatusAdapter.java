@@ -7,18 +7,18 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.iceteaviet.englishnow.R;
-import com.iceteaviet.englishnow.data.model.others.StatusItemData;
 import com.iceteaviet.englishnow.databinding.StatusItemBinding;
 import com.iceteaviet.englishnow.ui.base.BaseRecyclerViewAdapter;
+import com.iceteaviet.englishnow.ui.newsfeed.viewmodel.StatusItemViewModel;
 
 /**
  * Created by Genius Doan on 02/01/2018.
  */
 
-public class NewsFeedAdapter extends BaseRecyclerViewAdapter<StatusItemData> {
+public class StatusAdapter extends BaseRecyclerViewAdapter<StatusItemViewModel> {
     protected Context mContext;
 
-    public NewsFeedAdapter(Context context) {
+    public StatusAdapter(Context context) {
         super();
         mContext = context;
     }
@@ -36,7 +36,7 @@ public class NewsFeedAdapter extends BaseRecyclerViewAdapter<StatusItemData> {
 
     private void bindStatusItemView(RecyclerView.ViewHolder holder, int position) {
         StatusItemViewHolder viewHolder = (StatusItemViewHolder) holder;
-        viewHolder.bind((StatusItemData) mItems.get(position));
+        viewHolder.bind((StatusItemViewModel) mItems.get(position));
     }
 
     public class StatusItemViewHolder extends RecyclerView.ViewHolder {
@@ -47,8 +47,8 @@ public class NewsFeedAdapter extends BaseRecyclerViewAdapter<StatusItemData> {
             statusItemBinding = binding;
         }
 
-        public void bind(StatusItemData status) {
-            statusItemBinding.setStatusItemData(status);
+        public void bind(StatusItemViewModel status) {
+            statusItemBinding.setViewModel(status);
         }
     }
 }

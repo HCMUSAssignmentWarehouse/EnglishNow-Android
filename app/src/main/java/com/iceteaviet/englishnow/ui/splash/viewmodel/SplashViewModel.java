@@ -1,6 +1,5 @@
 package com.iceteaviet.englishnow.ui.splash.viewmodel;
 
-import com.google.firebase.auth.FirebaseUser;
 import com.iceteaviet.englishnow.data.DataManager;
 import com.iceteaviet.englishnow.ui.base.BaseViewModel;
 import com.iceteaviet.englishnow.ui.splash.SplashNavigator;
@@ -17,11 +16,11 @@ public class SplashViewModel extends BaseViewModel<SplashNavigator> {
     }
 
     public void startDataLoading() {
-        updateUI(getDataManager().getFirebaseAuth().getCurrentUser());
+        updateUI(getDataManager().isLoggedIn());
     }
 
-    private void updateUI(FirebaseUser currentUser) {
-        if (currentUser == null) {
+    private void updateUI(boolean isLoggedIn) {
+        if (!isLoggedIn) {
             if (getDataManager().getAppLaunchFirstTime()) {
                 getNavigator().navigateToIntroScreen();
 

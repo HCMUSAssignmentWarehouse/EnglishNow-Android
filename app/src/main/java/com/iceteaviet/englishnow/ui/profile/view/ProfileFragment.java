@@ -1,10 +1,13 @@
 package com.iceteaviet.englishnow.ui.profile.view;
 
+import android.arch.lifecycle.Observer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 
 import com.iceteaviet.englishnow.BR;
 import com.iceteaviet.englishnow.R;
+import com.iceteaviet.englishnow.data.model.firebase.User;
 import com.iceteaviet.englishnow.databinding.FragmentProfileBinding;
 import com.iceteaviet.englishnow.ui.base.BaseFragment;
 import com.iceteaviet.englishnow.ui.profile.ProfileNavigator;
@@ -34,6 +37,13 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding, Profil
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         profileViewModel.setNavigator(this);
+        profileViewModel.startLoadingData();
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setup();
     }
 
     @Override
@@ -61,4 +71,20 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding, Profil
         super.onDestroyView();
     }
 
+    private void setup() {
+        setupNewsFeedItemsRecyclerView();
+        subscribeToLiveData();
+    }
+
+    private void setupNewsFeedItemsRecyclerView() {
+    }
+
+    private void subscribeToLiveData() {
+        profileViewModel.getUserLiveData().observe(getBaseActivity(), new Observer<User>() {
+            @Override
+            public void onChanged(@Nullable User user) {
+                profileViewModel.setUser(user);
+            }
+        });
+    }
 }

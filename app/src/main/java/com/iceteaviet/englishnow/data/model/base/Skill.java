@@ -6,10 +6,26 @@ import com.google.firebase.database.PropertyName;
  * Created by Genius Doan on 28/12/2017.
  */
 
-public abstract class Skill {
+public class Skill {
     @PropertyName("name")
-    String skillName;
+    protected String skillName;
 
     @PropertyName("rate_value")
-    int rateValue;
+    protected int rateValue;
+
+    public String getSkillName() {
+        return skillName;
+    }
+
+    public void setSkillName(String skillName) {
+        this.skillName = skillName;
+    }
+
+    public int getRateValue() {
+        return rateValue;
+    }
+
+    public void setRateValue(int rateValue) {
+        this.rateValue = rateValue;
+    }
 }

@@ -13,5 +13,5 @@ import dagger.android.ContributesAndroidInjector;
 @Module
 public abstract class PostLoginProvider {
     @ContributesAndroidInjector(modules = PostLoginModule.class)
-    abstract PostLoginDialog providePostLoginDialogFactory();
+    abstract PostLoginDialog providePostLoginDialogFragment();
 }

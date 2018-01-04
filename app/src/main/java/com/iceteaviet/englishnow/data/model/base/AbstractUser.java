@@ -1,11 +1,13 @@
 package com.iceteaviet.englishnow.data.model.base;
 
+import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.PropertyName;
 
 /**
  * Created by Genius Doan on 28/12/2017.
  */
 
+@IgnoreExtraProperties
 public abstract class AbstractUser {
     @PropertyName("email")
     protected String email;
@@ -13,6 +15,7 @@ public abstract class AbstractUser {
     @PropertyName("username")
     protected String username;
 
+    //TODO: Fix redundant value push to firebase
     @PropertyName("profile_pic")
     protected String profilePic;
 

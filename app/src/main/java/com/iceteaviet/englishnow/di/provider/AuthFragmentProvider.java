@@ -11,7 +11,7 @@ import dagger.android.ContributesAndroidInjector;
  */
 
 @Module
-public abstract class AuthDialogProvider {
+public abstract class AuthFragmentProvider {
     @ContributesAndroidInjector(modules = AuthDialogModule.class)
     abstract RegisterDialog provideRegisterDialogFactory();
 }

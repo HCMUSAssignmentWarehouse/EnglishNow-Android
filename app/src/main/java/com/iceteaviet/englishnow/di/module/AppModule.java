@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 import com.iceteaviet.englishnow.data.AppDataManager;
 import com.iceteaviet.englishnow.data.DataManager;
 import com.iceteaviet.englishnow.data.local.prefs.AppPreferencesHelper;
@@ -64,6 +65,12 @@ public class AppModule {
     @Singleton
     FirebaseDatabase provideFirebaseDatabase() {
         return FirebaseDatabase.getInstance();
+    }
+
+    @Provides
+    @Singleton
+    FirebaseStorage provideFirebaseStorage() {
+        return FirebaseStorage.getInstance();
     }
 
     @Provides

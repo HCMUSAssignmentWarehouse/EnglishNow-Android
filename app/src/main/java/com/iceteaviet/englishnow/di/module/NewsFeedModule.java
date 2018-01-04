@@ -1,7 +1,7 @@
 package com.iceteaviet.englishnow.di.module;
 
 import com.iceteaviet.englishnow.data.DataManager;
-import com.iceteaviet.englishnow.ui.newsfeed.viewmodel.NewsFeedViewModel;
+import com.iceteaviet.englishnow.ui.newsfeed.viewmodel.StatusViewModel;
 import com.iceteaviet.englishnow.utils.rx.SchedulerProvider;
 
 import dagger.Module;
@@ -14,7 +14,7 @@ import dagger.Provides;
 @Module
 public class NewsFeedModule {
     @Provides
-    public NewsFeedViewModel provideNewsfeedViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
-        return new NewsFeedViewModel(dataManager, schedulerProvider);
+    public StatusViewModel provideNewsfeedViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
+        return new StatusViewModel(dataManager, schedulerProvider);
     }
 }

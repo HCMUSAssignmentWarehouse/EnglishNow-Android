@@ -49,10 +49,8 @@ public class RegisterViewModel extends BaseViewModel<RegisterNavigator> {
 
                         if (firebaseUser != null) {
                             //push new user to firebase
-                            User user = new User(firebaseUser.getEmail(),
-                                    firebaseUser.getDisplayName(),
-                                    firebaseUser.getPhotoUrl() == null ? "" : firebaseUser.getPhotoUrl().toString()
-                            );
+                            User user = new User(email, username,
+                                    firebaseUser.getPhotoUrl() == null ? "" : firebaseUser.getPhotoUrl().toString());
                             getDataManager().doPushUserToFirebase(firebaseUser.getUid(), user);
 
                             //Go to post login activity

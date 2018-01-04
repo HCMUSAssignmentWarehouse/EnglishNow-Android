@@ -15,6 +15,7 @@ import com.iceteaviet.englishnow.R;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Random;
 
 /**
  * Created by Genius Doan on 23/12/2017.
@@ -61,5 +62,15 @@ public final class CommonUtils {
 
     public static String getTimeStamp() {
         return new SimpleDateFormat(AppConstants.TIMESTAMP_FORMAT, Locale.US).format(new Date());
+    }
+
+    public static String randomAlphanumericString(int count) {
+        char[] chars = new char[count];
+        Random random = new Random();
+        final String POSSIBLE_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        for (int i = 0; i < count; i++) {
+            chars[i] = POSSIBLE_CHARS.charAt(random.nextInt(POSSIBLE_CHARS.length()));
+        }
+        return new String(chars);
     }
 }

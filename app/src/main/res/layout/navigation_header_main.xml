@@ -24,7 +24,7 @@
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_marginTop="40dp"
-            android:src="@drawable/avatar_placeholder" />
+            app:imageUrl="@{viewModel.userProfilePicUrl.isEmpty() ? @drawable/avatar_placeholder : viewModel.userProfilePicUrl}" />
 
         <TextView
             android:id="@+id/tv_name"
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@{viewModel.userName}"
-            app:isVisible="@{viewModel.userName.length() > 0}" />
+            app:isVisible="@{viewModel.isShowNavUsername}" />
 
         <TextView
             android:id="@+id/tv_email"
@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{viewModel.userEmail}"
-            app:isVisible="@{viewModel.userEmail.length() > 0}" />
+            app:isVisible="@{viewModel.isShowNavEmail}" />
 
     </LinearLayout>
 </layout>

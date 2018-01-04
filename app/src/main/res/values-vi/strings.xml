@@ -39,4 +39,6 @@
     <string name="matching">Matching</string>
     <string name="your_ratings">Đánh giá của bạn</string>
     <string name="newsfeed">Newsfeed</string>
+    <string name="user_auth_not_found">User authentication not found!</string>
+    <string name="whats_happen">Bạn đang nghĩ gì?</string>
 </resources>

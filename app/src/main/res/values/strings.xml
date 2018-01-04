@@ -42,4 +42,18 @@
     <string name="username_placeholder">hieutam22</string>
     <string name="your_ratings">Your ratings</string>
     <string name="newsfeed">Newsfeed</string>
+
+    <string name="action_photo_pick">Add media</string>
+    <string name="action_photo_take">Take photo</string>
+    <string name="action_delete">Delete</string>
+    <string name="error_media_upload_opening">That file could not be opened.</string>
+    <string name="error_media_upload_size">The file must be less than 4MB.</string>
+    <string name="error_media_upload_type">That type of file cannot be uploaded.</string>
+    <string name="error_media_upload_permission">Permission to read media is required.</string>
+    <string name="error_media_download_permission">Permission to store media is required.</string>
+    <string name="error_media_upload_image_or_video">Images and videos cannot both be attached to the same status.</string>
+    <string name="error_media_upload_sending">The upload failed.</string>
+    <string name="error_report_too_few_statuses">At least one status must be reported.</string>
+    <string name="user_auth_not_found">User authentication not found!</string>
+    <string name="whats_happen">What\'s happened?</string>
 </resources>
