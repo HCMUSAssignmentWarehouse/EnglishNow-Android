@@ -1,7 +1,10 @@
 package com.iceteaviet.englishnow.data.remote.firebase;
 
 import android.net.Uri;
+import android.support.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -18,6 +21,7 @@ import com.iceteaviet.englishnow.data.model.firebase.RegisterRequest;
 import com.iceteaviet.englishnow.data.model.firebase.Status;
 import com.iceteaviet.englishnow.data.model.firebase.UploadTaskMessage;
 import com.iceteaviet.englishnow.data.model.firebase.User;
+import com.iceteaviet.englishnow.utils.AppLogger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +39,7 @@ import io.reactivex.Single;
 @Singleton
 public class FirebaseRepository implements FirebaseDataSource {
 
+    private static final String TAG = FirebaseRepository.class.getSimpleName();
     private static final String USER_PROFILE = "user_profile";
     private static final String STATUS = "status";
     private static final String STATUS_IMAGES = "status_images";
@@ -223,6 +228,26 @@ public class FirebaseRepository implements FirebaseDataSource {
                 e.onComplete();
             });
         });
+    }
+
+    @Override
+    public void deletePhoto(String fileName) {
+        storage.getReference(STATUS_IMAGES)
+                .child(fileName)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        AppLogger.e(TAG, e.getMessage());
+                        e.printStackTrace();
+                    }
+                });
     }
 
     @Override

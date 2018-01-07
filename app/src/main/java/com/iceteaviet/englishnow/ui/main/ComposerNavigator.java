@@ -26,4 +26,8 @@ public interface ComposerNavigator {
     void appendToEditor(SpannableStringBuilder builder);
 
     void cancelFinishingUploadDialog();
+
+    void updateFileUploadingProgress(int percent);
+
+    void setDeletePhotoButtonEnabled(boolean enabled);
 }

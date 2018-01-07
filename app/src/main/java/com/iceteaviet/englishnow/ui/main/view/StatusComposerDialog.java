@@ -37,6 +37,7 @@ import com.iceteaviet.englishnow.R;
 import com.iceteaviet.englishnow.data.model.others.QueuedMedia;
 import com.iceteaviet.englishnow.databinding.DialogComposeStatusBinding;
 import com.iceteaviet.englishnow.ui.base.BaseDialog;
+import com.iceteaviet.englishnow.ui.custom.ProgressImageView;
 import com.iceteaviet.englishnow.ui.main.ComposerNavigator;
 import com.iceteaviet.englishnow.ui.main.viewmodel.ComposerViewModel;
 import com.iceteaviet.englishnow.utils.CountUpDownLatch;
@@ -69,6 +70,8 @@ public class StatusComposerDialog extends BaseDialog implements ComposerNavigato
     TextView charCountTextView;
     ImageButton pickButton;
     ImageButton saveDraftButton;
+    ProgressImageView progressImageView;
+    Button deletePhotoButton;
 
     private Uri photoUploadUri;
 
@@ -147,8 +150,12 @@ public class StatusComposerDialog extends BaseDialog implements ComposerNavigato
         textEditor = composerBinding.editor;
         pickButton = composerBinding.composePhotoPick;
         saveDraftButton = composerBinding.composeSaveDraft;
+        progressImageView = composerBinding.ivPhoto;
+        deletePhotoButton = composerBinding.btnDeletePhoto;
 
         setCharsCounter(textEditor);
+        progressImageView.setSmoothProgressEnabled(true);
+
         //
         textEditor.requestFocus();
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
@@ -216,6 +223,11 @@ public class StatusComposerDialog extends BaseDialog implements ComposerNavigato
                 .setItems(choices, listener)
                 .create();
         dialog.show();
+    }
+
+    @Override
+    public void updateFileUploadingProgress(int percent) {
+        progressImageView.setProgress(percent);
     }
 
     private boolean saveDraft() {
@@ -296,18 +308,21 @@ public class StatusComposerDialog extends BaseDialog implements ComposerNavigato
 
     @Override
     public void addMediaPreview(QueuedMedia item, Bitmap preview) {
-        item.setPreview(composerBinding.ivPhoto);
-        ImageView view = composerBinding.ivPhoto;
+        item.setPreview(progressImageView);
+        ImageView view = progressImageView;
         Resources resources = getResources();
         int side = resources.getDimensionPixelSize(R.dimen.compose_media_preview_side);
         int margin = resources.getDimensionPixelSize(R.dimen.compose_media_preview_margin);
         int marginBottom = resources.getDimensionPixelSize(
                 R.dimen.compose_media_preview_margin_bottom);
-        view.setVisibility(View.VISIBLE);
+
         view.setScaleType(ImageView.ScaleType.CENTER_CROP);
         view.setImageBitmap(preview);
-        view.setOnClickListener(v -> composerViewModel.removeMediaFromQueue(item));
         view.setContentDescription(getString(R.string.action_delete));
+
+        composerBinding.photoContainer.setVisibility(View.VISIBLE);
+        deletePhotoButton.setEnabled(false);
+        deletePhotoButton.setOnClickListener(v -> composerViewModel.removeMediaFromQueue(item));
 
         disableMediaButtons();
     }
@@ -331,9 +346,14 @@ public class StatusComposerDialog extends BaseDialog implements ComposerNavigato
 
     @Override
     public void removeMediaPreview(QueuedMedia item) {
-        composerBinding.ivPhoto.setVisibility(View.GONE);
+        composerBinding.photoContainer.setVisibility(View.GONE);
         removeUrlFromEditable(textEditor.getEditableText(), item.getUploadUrl());
         enableMediaButtons();
+    }
+
+    @Override
+    public void setDeletePhotoButtonEnabled(boolean enabled) {
+        deletePhotoButton.setEnabled(enabled);
     }
 
     private void enableMediaButtons() {

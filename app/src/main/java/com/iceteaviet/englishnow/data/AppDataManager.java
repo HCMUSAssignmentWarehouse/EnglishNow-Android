@@ -153,6 +153,11 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public void deletePhoto(String fileName) {
+        firebaseDataSource.deletePhoto(fileName);
+    }
+
+    @Override
     public Observable<List<StatusItemData>> getAllStatusItems() {
         return firebaseDataSource.getAllStatusesOnce()
                 .toObservable()

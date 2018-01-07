@@ -23,6 +23,7 @@ import com.iceteaviet.englishnow.utils.CommonUtils;
 import com.iceteaviet.englishnow.utils.CountUpDownLatch;
 import com.iceteaviet.englishnow.utils.DownsizeImageTask;
 import com.iceteaviet.englishnow.utils.FileUtils;
+import com.iceteaviet.englishnow.utils.StringUtils;
 import com.iceteaviet.englishnow.utils.rx.SchedulerProvider;
 
 import java.io.File;
@@ -91,7 +92,7 @@ public class ComposerViewModel extends BaseViewModel<ComposerNavigator> {
     public File createNewImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date());
-        String imageFileName = "Tusky_" + timeStamp + "_";
+        String imageFileName = "EnglishNow_" + timeStamp + "_";
         File storageDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         return File.createTempFile(
                 imageFileName,  /* prefix */
@@ -217,8 +218,6 @@ public class ComposerViewModel extends BaseViewModel<ComposerNavigator> {
             }
         }
 
-        item.getPreview().setProgress(0); //TODO: Move to View
-
         item.setUploadRequest(getDataManager().uploadPhoto(item.getLocalUri()));
         getCompositeDisposable().add(
                 item.getUploadRequest()
@@ -266,6 +265,10 @@ public class ComposerViewModel extends BaseViewModel<ComposerNavigator> {
             /* The presence of an upload id is used to detect if it finished uploading or not, to
              * prevent counting down twice on the same media item. */
             CountUpDownLatch.getInstance().countDown();
+        } else {
+            String decodedUrl = StringUtils.decodeUrl(item.getUploadUrl().getURL());
+            String fileName = StringUtils.getFileNameFromPath(decodedUrl);
+            getDataManager().deletePhoto(fileName);
         }
     }
 
@@ -289,6 +292,8 @@ public class ComposerViewModel extends BaseViewModel<ComposerNavigator> {
 
         getNavigator().appendToEditor(builder);
         */
+
+        getNavigator().setDeletePhotoButtonEnabled(true);
 
         CountUpDownLatch.getInstance().countDown();
     }

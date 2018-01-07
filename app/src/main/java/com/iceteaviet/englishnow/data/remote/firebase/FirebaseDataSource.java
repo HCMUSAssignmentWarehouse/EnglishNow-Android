@@ -51,4 +51,6 @@ public interface FirebaseDataSource {
     Single<String> getUserPhotoUrl(String userUid);
 
     Observable<UploadTaskMessage> uploadPhoto(Uri data);
+
+    void deletePhoto(String fileName);
 }
