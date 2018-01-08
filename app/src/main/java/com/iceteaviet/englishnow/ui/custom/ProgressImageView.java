@@ -14,7 +14,7 @@ import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
 import com.iceteaviet.englishnow.R;
-import com.iceteaviet.englishnow.utils.UiUtils;
+import com.iceteaviet.englishnow.utils.ui.UiUtils;
 
 /**
  * Created by Genius Doan on 05/01/2018.

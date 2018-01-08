@@ -1,7 +1,6 @@
 package com.iceteaviet.englishnow.data;
 
 import android.content.Context;
-import android.net.Uri;
 
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
@@ -9,10 +8,12 @@ import com.iceteaviet.englishnow.data.local.prefs.PreferencesHelper;
 import com.iceteaviet.englishnow.data.model.firebase.LoginRequest;
 import com.iceteaviet.englishnow.data.model.firebase.RegisterRequest;
 import com.iceteaviet.englishnow.data.model.firebase.Status;
-import com.iceteaviet.englishnow.data.model.firebase.UploadTaskMessage;
 import com.iceteaviet.englishnow.data.model.firebase.User;
 import com.iceteaviet.englishnow.data.model.others.StatusItemData;
-import com.iceteaviet.englishnow.data.remote.firebase.FirebaseDataSource;
+import com.iceteaviet.englishnow.data.remote.firebase.FirebaseHelper;
+import com.iceteaviet.englishnow.data.remote.firebase.MediaDataSource;
+import com.iceteaviet.englishnow.data.remote.firebase.NewsFeedItemDataSource;
+import com.iceteaviet.englishnow.data.remote.firebase.UserDataSource;
 
 import java.util.List;
 
@@ -32,75 +33,83 @@ import io.reactivex.functions.Function;
 @Singleton
 public class AppDataManager implements DataManager {
     private final Context context;
-    private final FirebaseDataSource firebaseDataSource;
+    private final FirebaseHelper firebaseHelper;
     private final PreferencesHelper preferencesHelper;
+    private final UserDataSource userRepository;
+    private final NewsFeedItemDataSource newsFeedItemRepository;
+    private final MediaDataSource mediaRepository;
 
     @Inject
-    public AppDataManager(Context context, FirebaseDataSource firebaseDataSource, PreferencesHelper preferencesHelper) {
+    public AppDataManager(Context context, FirebaseHelper firebaseHelper, PreferencesHelper preferencesHelper,
+                          UserDataSource userRepository, NewsFeedItemDataSource newsFeedItemRepository, MediaDataSource mediaRepository) {
         this.context = context;
-        this.firebaseDataSource = firebaseDataSource;
+        this.firebaseHelper = firebaseHelper;
         this.preferencesHelper = preferencesHelper;
+        this.userRepository = userRepository;
+        this.newsFeedItemRepository = newsFeedItemRepository;
+        this.mediaRepository = mediaRepository;
+    }
+
+    @Override
+    public NewsFeedItemDataSource getNewsFeedItemRepository() {
+        return newsFeedItemRepository;
+    }
+
+    @Override
+    public UserDataSource getUserRepository() {
+        return userRepository;
+    }
+
+    @Override
+    public MediaDataSource getMediaRepository() {
+        return mediaRepository;
     }
 
     @Override
     public boolean isLoggedIn() {
-        return firebaseDataSource.isLoggedIn();
+        return firebaseHelper.isLoggedIn();
     }
 
     @Override
-    public Single<AuthResult> doServerLoginFirebaseCall(LoginRequest.ServerLoginRequest request) {
-        return firebaseDataSource.doServerLoginFirebaseCall(request);
+    public Single<AuthResult> loginFirebaseWithEmail(LoginRequest.ServerLoginRequest request) {
+        return firebaseHelper.loginFirebaseWithEmail(request);
     }
 
     @Override
-    public Single<AuthResult> doServerRegisterFirebaseCall(RegisterRequest.ServerRegisterRequest request) {
-        return firebaseDataSource.doServerRegisterFirebaseCall(request);
+    public Single<AuthResult> registerFirebaseWithEmail(RegisterRequest.ServerRegisterRequest request) {
+        return firebaseHelper.registerFirebaseWithEmail(request);
     }
 
     @Override
     public Single<String> updateUserDisplayName(FirebaseUser user, String displayName) {
-        return firebaseDataSource.updateUserDisplayName(user, displayName);
+        return firebaseHelper.updateUserDisplayName(user, displayName);
     }
 
     @Override
-    public Observable<User> getCurrentUser() {
-        return firebaseDataSource.getCurrentUser();
-    }
-
-    @Override
-    public void doFirebaseLogoutCall() {
-        firebaseDataSource.doFirebaseLogoutCall();
+    public void logoutFirebase() {
+        firebaseHelper.logoutFirebase();
     }
 
     @Override
     public String getCurrentUserDisplayName() {
-        return firebaseDataSource.getCurrentUserDisplayName();
+        return firebaseHelper.getCurrentUserDisplayName();
     }
 
     @Override
     public String getCurrentUserUid() {
-        return firebaseDataSource.getCurrentUserUid();
+        return firebaseHelper.getCurrentUserUid();
     }
 
     @Override
     public String getCurrentUserEmail() {
-        return firebaseDataSource.getCurrentUserEmail();
+        return firebaseHelper.getCurrentUserEmail();
     }
 
     @Override
     public String getCurrentUserPhotoUrl() {
-        return firebaseDataSource.getCurrentUserPhotoUrl();
+        return firebaseHelper.getCurrentUserPhotoUrl();
     }
 
-    @Override
-    public void doPushUserToFirebase(String userUid, User user) {
-        firebaseDataSource.doPushUserToFirebase(userUid, user);
-    }
-
-    @Override
-    public void setUserAsLoggedOut() {
-        //TODO: Implement me
-    }
 
     @Override
     public void putString(String key, String value) {
@@ -133,33 +142,8 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Observable<List<Status>> getAllStatuses() {
-        return firebaseDataSource.getAllStatuses();
-    }
-
-    @Override
-    public Single<List<Status>> getAllStatusesOnce() {
-        return firebaseDataSource.getAllStatusesOnce();
-    }
-
-    @Override
-    public Single<String> getUserPhotoUrl(String userUid) {
-        return firebaseDataSource.getUserPhotoUrl(userUid);
-    }
-
-    @Override
-    public Observable<UploadTaskMessage> uploadPhoto(Uri data) {
-        return firebaseDataSource.uploadPhoto(data);
-    }
-
-    @Override
-    public void deletePhoto(String fileName) {
-        firebaseDataSource.deletePhoto(fileName);
-    }
-
-    @Override
-    public Observable<List<StatusItemData>> getAllStatusItems() {
-        return firebaseDataSource.getAllStatusesOnce()
+    public Observable<List<StatusItemData>> fetchAllStatusItemData() {
+        return newsFeedItemRepository.fetchAllOnce()
                 .toObservable()
                 .flatMap(new Function<List<Status>, ObservableSource<Status>>() {
                     @Override
@@ -170,21 +154,16 @@ public class AppDataManager implements DataManager {
                 .flatMap(new Function<Status, ObservableSource<StatusItemData>>() {
                     @Override
                     public ObservableSource<StatusItemData> apply(Status status) throws Exception {
-                        return Observable.zip(firebaseDataSource.getUserPhotoUrl(status.getOwnerUid()).toObservable(), Observable.just(status),
-                                new BiFunction<String, Status, StatusItemData>() {
+                        return Observable.zip(userRepository.fetchOnce(status.getOwnerUid()).toObservable(), Observable.just(status),
+                                new BiFunction<User, Status, StatusItemData>() {
                                     @Override
-                                    public StatusItemData apply(String avatarUrl, Status status) throws Exception {
-                                        return new StatusItemData(status, avatarUrl);
+                                    public StatusItemData apply(User user, Status status) throws Exception {
+                                        return new StatusItemData(status, user.getProfilePic());
                                     }
                                 });
                     }
                 })
                 .toList()
                 .toObservable();
-    }
-
-    @Override
-    public void pushStatusToFirebase(Status status) {
-        firebaseDataSource.pushStatusToFirebase(status);
     }
 }

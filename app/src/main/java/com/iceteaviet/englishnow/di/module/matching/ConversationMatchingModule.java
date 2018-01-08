@@ -1,4 +1,4 @@
-package com.iceteaviet.englishnow.di.module;
+package com.iceteaviet.englishnow.di.module.matching;
 
 import com.iceteaviet.englishnow.data.DataManager;
 import com.iceteaviet.englishnow.ui.matching.viewmodel.ConversationMatchingViewModel;

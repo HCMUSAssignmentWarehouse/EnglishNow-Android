@@ -1,4 +1,4 @@
-package com.iceteaviet.englishnow.di.module;
+package com.iceteaviet.englishnow.di.module.auth;
 
 import com.iceteaviet.englishnow.data.DataManager;
 import com.iceteaviet.englishnow.ui.auth.viewmodel.RegisterViewModel;

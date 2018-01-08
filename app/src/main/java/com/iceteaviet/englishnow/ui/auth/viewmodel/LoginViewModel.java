@@ -39,7 +39,7 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
     public void doLogin(String email, String password) {
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
-                .doServerLoginFirebaseCall(new LoginRequest.ServerLoginRequest(email, password))
+                .loginFirebaseWithEmail(new LoginRequest.ServerLoginRequest(email, password))
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(new Consumer<AuthResult>() {

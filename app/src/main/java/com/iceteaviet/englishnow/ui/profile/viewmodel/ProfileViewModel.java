@@ -28,7 +28,8 @@ public class ProfileViewModel extends BaseViewModel<ProfileNavigator> {
 
     public void startLoadingData() {
         getCompositeDisposable().add(getDataManager()
-                .getCurrentUser()
+                .getUserRepository()
+                .fetch()
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(new Consumer<User>() {

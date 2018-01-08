@@ -56,8 +56,7 @@ public class MainViewModel extends BaseViewModel<MainNavigator> {
 
     public void logout() {
         setIsLoading(true);
-        getDataManager().doFirebaseLogoutCall();
-        getDataManager().setUserAsLoggedOut();
+        getDataManager().logoutFirebase();
         setIsLoading(false);
         getNavigator().navigateToLoginScreen();
     }

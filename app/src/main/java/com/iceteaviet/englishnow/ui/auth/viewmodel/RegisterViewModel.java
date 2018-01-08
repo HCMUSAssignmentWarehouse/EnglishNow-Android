@@ -40,7 +40,7 @@ public class RegisterViewModel extends BaseViewModel<RegisterNavigator> {
     public void doRegister(String email, String username, String password) {
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
-                .doServerRegisterFirebaseCall(new RegisterRequest.ServerRegisterRequest(email, username, password))
+                .registerFirebaseWithEmail(new RegisterRequest.ServerRegisterRequest(email, username, password))
                 .subscribe(new Consumer<AuthResult>() {
                     @Override
                     public void accept(AuthResult authResult) throws Exception {
@@ -51,7 +51,7 @@ public class RegisterViewModel extends BaseViewModel<RegisterNavigator> {
                             //push new user to firebase
                             User user = new User(email, username,
                                     firebaseUser.getPhotoUrl() == null ? "" : firebaseUser.getPhotoUrl().toString());
-                            getDataManager().doPushUserToFirebase(firebaseUser.getUid(), user);
+                            getDataManager().getUserRepository().createOrUpdate(firebaseUser.getUid(), user);
 
                             //Go to post login activity
                             getNavigator().navigateToPostLoginScreen();

@@ -1,4 +1,4 @@
-package com.iceteaviet.englishnow.di.module;
+package com.iceteaviet.englishnow.di.module.about;
 
 import com.iceteaviet.englishnow.data.DataManager;
 import com.iceteaviet.englishnow.ui.about.viewmodel.AboutViewModel;

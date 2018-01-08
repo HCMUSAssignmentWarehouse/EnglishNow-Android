@@ -1,10 +1,10 @@
 package com.iceteaviet.englishnow.di.provider;
 
-import com.iceteaviet.englishnow.di.module.ConversationMatchingModule;
-import com.iceteaviet.englishnow.di.module.IntroModule;
-import com.iceteaviet.englishnow.di.module.LoginModule;
-import com.iceteaviet.englishnow.di.module.MainModule;
-import com.iceteaviet.englishnow.di.module.SplashModule;
+import com.iceteaviet.englishnow.di.module.auth.LoginModule;
+import com.iceteaviet.englishnow.di.module.intro.IntroModule;
+import com.iceteaviet.englishnow.di.module.main.MainModule;
+import com.iceteaviet.englishnow.di.module.matching.ConversationMatchingModule;
+import com.iceteaviet.englishnow.di.module.splash.SplashModule;
 import com.iceteaviet.englishnow.ui.auth.view.LoginActivity;
 import com.iceteaviet.englishnow.ui.intro.view.IntroActivity;
 import com.iceteaviet.englishnow.ui.main.view.MainActivity;

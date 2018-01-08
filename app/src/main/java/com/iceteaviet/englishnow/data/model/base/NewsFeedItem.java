@@ -11,7 +11,6 @@ import java.util.Set;
  * Created by Genius Doan on 02/01/2018.
  */
 
-//TODO: Support like and comments
 @IgnoreExtraProperties
 public abstract class NewsFeedItem {
     @PropertyName("like_number")

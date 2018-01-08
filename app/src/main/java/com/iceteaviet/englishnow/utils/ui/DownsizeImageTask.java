@@ -1,4 +1,4 @@
-package com.iceteaviet.englishnow.utils;
+package com.iceteaviet.englishnow.utils.ui;
 
 /**
  * Created by Genius Doan on 05/01/2018.
@@ -13,6 +13,9 @@ import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 import android.support.media.ExifInterface;
 import android.util.Log;
+
+import com.iceteaviet.englishnow.utils.AssertDebug;
+import com.iceteaviet.englishnow.utils.FileUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;

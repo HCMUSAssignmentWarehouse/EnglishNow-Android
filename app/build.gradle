@@ -54,6 +54,7 @@ dependencies {
     implementation "com.android.support:recyclerview-v7:${rootProject.supportLibraryVersion}"
     implementation "com.android.support:cardview-v7:${rootProject.supportLibraryVersion}"
     implementation "com.android.support:support-v13:${rootProject.supportLibraryVersion}"
+    implementation "com.android.support.test.espresso:espresso-idling-resource:$rootProject.espressoVersion"
 
     //Firebase
     implementation "com.google.firebase:firebase-core:${rootProject.googlePlayServiceVersion}"

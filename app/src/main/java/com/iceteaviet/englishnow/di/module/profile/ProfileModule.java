@@ -1,4 +1,4 @@
-package com.iceteaviet.englishnow.di.module;
+package com.iceteaviet.englishnow.di.module.profile;
 
 import com.iceteaviet.englishnow.data.DataManager;
 import com.iceteaviet.englishnow.ui.profile.viewmodel.ProfileViewModel;

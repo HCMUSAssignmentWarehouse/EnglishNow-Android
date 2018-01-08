@@ -21,10 +21,10 @@ import com.iceteaviet.englishnow.ui.main.ComposerNavigator;
 import com.iceteaviet.englishnow.utils.AppLogger;
 import com.iceteaviet.englishnow.utils.CommonUtils;
 import com.iceteaviet.englishnow.utils.CountUpDownLatch;
-import com.iceteaviet.englishnow.utils.DownsizeImageTask;
 import com.iceteaviet.englishnow.utils.FileUtils;
 import com.iceteaviet.englishnow.utils.StringUtils;
 import com.iceteaviet.englishnow.utils.rx.SchedulerProvider;
+import com.iceteaviet.englishnow.utils.ui.DownsizeImageTask;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -218,7 +218,7 @@ public class ComposerViewModel extends BaseViewModel<ComposerNavigator> {
             }
         }
 
-        item.setUploadRequest(getDataManager().uploadPhoto(item.getLocalUri()));
+        item.setUploadRequest(getDataManager().getMediaRepository().putPhoto(item.getLocalUri()));
         getCompositeDisposable().add(
                 item.getUploadRequest()
                         .subscribeOn(getSchedulerProvider().io())
@@ -268,7 +268,7 @@ public class ComposerViewModel extends BaseViewModel<ComposerNavigator> {
         } else {
             String decodedUrl = StringUtils.decodeUrl(item.getUploadUrl().getURL());
             String fileName = StringUtils.getFileNameFromPath(decodedUrl);
-            getDataManager().deletePhoto(fileName);
+            getDataManager().getMediaRepository().deletePhoto(fileName);
         }
     }
 
@@ -337,6 +337,6 @@ public class ComposerViewModel extends BaseViewModel<ComposerNavigator> {
         }
 
         Status status = builder.build();
-        getDataManager().pushStatusToFirebase(status);
+        getDataManager().getNewsFeedItemRepository().createOrUpdate(status);
     }
 }

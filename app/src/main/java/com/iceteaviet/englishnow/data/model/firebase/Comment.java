@@ -12,7 +12,7 @@ public class Comment implements Serializable {
     @PropertyName("content")
     private String content;
 
-    @PropertyName("time")
+    @PropertyName("timestamp")
     private long timestamp;
 
     @PropertyName("userId")

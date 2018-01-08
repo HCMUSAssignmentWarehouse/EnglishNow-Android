@@ -5,6 +5,7 @@ import android.databinding.ObservableArrayList;
 
 import com.iceteaviet.englishnow.data.DataManager;
 import com.iceteaviet.englishnow.data.model.firebase.Status;
+import com.iceteaviet.englishnow.data.model.firebase.User;
 import com.iceteaviet.englishnow.ui.base.BaseViewModel;
 import com.iceteaviet.englishnow.ui.newsfeed.NewsFeedNavigator;
 import com.iceteaviet.englishnow.utils.rx.SchedulerProvider;
@@ -30,7 +31,8 @@ public class StatusViewModel extends BaseViewModel<NewsFeedNavigator> {
 
     private void loadNewsFeedItems() {
         getCompositeDisposable().add(getDataManager()
-                .getAllStatuses()
+                .getNewsFeedItemRepository()
+                .fetchAll()
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(new Consumer<List<Status>>() {
@@ -73,13 +75,14 @@ public class StatusViewModel extends BaseViewModel<NewsFeedNavigator> {
             Status status = statusList.get(i);
             StatusItemViewModel itemViewModel = new StatusItemViewModel(status);
             getCompositeDisposable().add(getDataManager()
-                    .getUserPhotoUrl(status.getOwnerUid())
+                    .getUserRepository()
+                    .fetchOnce(status.getOwnerUid())
                     .subscribeOn(getSchedulerProvider().io())
                     .observeOn(getSchedulerProvider().ui())
-                    .subscribe(new Consumer<String>() {
+                    .subscribe(new Consumer<User>() {
                         @Override
-                        public void accept(String s) throws Exception {
-                            itemViewModel.setAvatarUrl(s);
+                        public void accept(User s) throws Exception {
+                            itemViewModel.setAvatarUrl(s.getProfilePic());
                         }
                     }, new Consumer<Throwable>() {
                         @Override

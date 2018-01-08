@@ -1,4 +1,4 @@
-package com.iceteaviet.englishnow.di.module;
+package com.iceteaviet.englishnow.di.module.main;
 
 import android.arch.lifecycle.ViewModelProvider;
 

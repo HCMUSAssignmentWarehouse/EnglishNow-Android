@@ -1,9 +1,13 @@
-package com.iceteaviet.englishnow.utils;
+package com.iceteaviet.englishnow.utils.ui;
 
 import android.app.Activity;
 import android.content.Context;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.LinearInterpolator;
+
+import com.iceteaviet.englishnow.ui.base.AnimationAdapter;
 
 /**
  * Created by Genius Doan on 23/12/2017.
@@ -52,5 +56,20 @@ public final class UiUtils {
         } else {
             activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
+    }
+
+    /**
+     * Animate the alpha of view
+     *
+     * @param view       : view to animate
+     * @param alphaValue : the final alpha value
+     * @param duration   : the duration of animation
+     */
+    public static void animateAlpha(View view, float alphaValue, int duration) {
+        view.animate().alpha(alphaValue)
+                .setInterpolator(new LinearInterpolator())
+                .setListener(new AnimationAdapter())
+                .setDuration(duration)
+                .start();
     }
 }

@@ -10,8 +10,14 @@ import com.iceteaviet.englishnow.data.AppDataManager;
 import com.iceteaviet.englishnow.data.DataManager;
 import com.iceteaviet.englishnow.data.local.prefs.AppPreferencesHelper;
 import com.iceteaviet.englishnow.data.local.prefs.PreferencesHelper;
-import com.iceteaviet.englishnow.data.remote.firebase.FirebaseDataSource;
-import com.iceteaviet.englishnow.data.remote.firebase.FirebaseRepository;
+import com.iceteaviet.englishnow.data.remote.firebase.AppFirebaseHelper;
+import com.iceteaviet.englishnow.data.remote.firebase.FirebaseHelper;
+import com.iceteaviet.englishnow.data.remote.firebase.MediaDataSource;
+import com.iceteaviet.englishnow.data.remote.firebase.MediaRepository;
+import com.iceteaviet.englishnow.data.remote.firebase.NewsFeedItemDataSource;
+import com.iceteaviet.englishnow.data.remote.firebase.NewsFeedItemRepository;
+import com.iceteaviet.englishnow.data.remote.firebase.UserDataSource;
+import com.iceteaviet.englishnow.data.remote.firebase.UserRepository;
 import com.iceteaviet.englishnow.utils.rx.AppSchedulerProvider;
 import com.iceteaviet.englishnow.utils.rx.SchedulerProvider;
 
@@ -51,8 +57,26 @@ public class AppModule {
 
     @Provides
     @Singleton
-    FirebaseDataSource provideFirebaseHelper(FirebaseRepository firebaseHelper) {
+    FirebaseHelper provideFirebaseHelper(AppFirebaseHelper firebaseHelper) {
         return firebaseHelper;
+    }
+
+    @Provides
+    @Singleton
+    UserDataSource provideUserDataSource(UserRepository userRepository) {
+        return userRepository;
+    }
+
+    @Provides
+    @Singleton
+    NewsFeedItemDataSource provideNewsFeedItemDataSource(NewsFeedItemRepository newsFeedItemRepository) {
+        return newsFeedItemRepository;
+    }
+
+    @Provides
+    @Singleton
+    MediaDataSource provideMediaDataSource(MediaRepository mediaRepository) {
+        return mediaRepository;
     }
 
     @Provides
