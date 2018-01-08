@@ -2,7 +2,7 @@ package com.iceteaviet.englishnow.data.model.firebase;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.PropertyName;
-import com.iceteaviet.englishnow.data.model.base.NewsFeedItem;
+import com.iceteaviet.englishnow.data.model.firebase.base.NewsFeedItem;
 
 import java.util.List;
 import java.util.Set;
@@ -43,6 +43,7 @@ public class Status extends NewsFeedItem {
         this.content = content;
     }
 
+    @PropertyName("photo")
     public String getPhotoUrl() {
         return photoUrl;
     }

@@ -1,4 +1,4 @@
-package com.iceteaviet.englishnow.data.model.base;
+package com.iceteaviet.englishnow.data.model.firebase.base;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.PropertyName;

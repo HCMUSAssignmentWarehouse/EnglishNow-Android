@@ -7,8 +7,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.iceteaviet.englishnow.data.local.prefs.PreferencesHelper;
 import com.iceteaviet.englishnow.data.model.firebase.LoginRequest;
 import com.iceteaviet.englishnow.data.model.firebase.RegisterRequest;
-import com.iceteaviet.englishnow.data.model.firebase.Status;
-import com.iceteaviet.englishnow.data.model.firebase.User;
 import com.iceteaviet.englishnow.data.model.others.StatusItemData;
 import com.iceteaviet.englishnow.data.remote.firebase.FirebaseHelper;
 import com.iceteaviet.englishnow.data.remote.firebase.MediaDataSource;
@@ -21,10 +19,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.Single;
-import io.reactivex.functions.BiFunction;
-import io.reactivex.functions.Function;
 
 /**
  * Created by Genius Doan on 23/12/2017.
@@ -145,24 +140,9 @@ public class AppDataManager implements DataManager {
     public Observable<List<StatusItemData>> fetchAllStatusItemData() {
         return newsFeedItemRepository.fetchAllOnce()
                 .toObservable()
-                .flatMap(new Function<List<Status>, ObservableSource<Status>>() {
-                    @Override
-                    public ObservableSource<Status> apply(List<Status> statuses) throws Exception {
-                        return Observable.fromIterable(statuses);
-                    }
-                })
-                .flatMap(new Function<Status, ObservableSource<StatusItemData>>() {
-                    @Override
-                    public ObservableSource<StatusItemData> apply(Status status) throws Exception {
-                        return Observable.zip(userRepository.fetchOnce(status.getOwnerUid()).toObservable(), Observable.just(status),
-                                new BiFunction<User, Status, StatusItemData>() {
-                                    @Override
-                                    public StatusItemData apply(User user, Status status) throws Exception {
-                                        return new StatusItemData(status, user.getProfilePic());
-                                    }
-                                });
-                    }
-                })
+                .flatMap(statuses -> Observable.fromIterable(statuses))
+                .flatMap(status -> Observable.zip(userRepository.fetchOnce(status.getOwnerUid()).toObservable(), Observable.just(status),
+                        (user, status1) -> new StatusItemData(status1, user.getProfilePic())))
                 .toList()
                 .toObservable();
     }

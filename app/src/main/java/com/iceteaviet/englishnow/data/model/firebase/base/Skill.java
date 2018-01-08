@@ -1,4 +1,4 @@
-package com.iceteaviet.englishnow.data.model.base;
+package com.iceteaviet.englishnow.data.model.firebase.base;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.PropertyName;
@@ -15,6 +15,7 @@ public class Skill {
     @PropertyName("rate_value")
     protected int rateValue;
 
+    @PropertyName("name")
     public String getSkillName() {
         return skillName;
     }
@@ -23,6 +24,7 @@ public class Skill {
         this.skillName = skillName;
     }
 
+    @PropertyName("rate_value")
     public int getRateValue() {
         return rateValue;
     }

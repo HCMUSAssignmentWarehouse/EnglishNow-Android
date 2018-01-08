@@ -1,6 +1,6 @@
 package com.iceteaviet.englishnow.data.model.firebase;
 
-import com.iceteaviet.englishnow.data.model.base.Skill;
+import com.iceteaviet.englishnow.data.model.firebase.base.Skill;
 
 import java.io.Serializable;
 

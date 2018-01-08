@@ -2,9 +2,9 @@ package com.iceteaviet.englishnow.data.model.firebase;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.PropertyName;
-import com.iceteaviet.englishnow.data.model.base.AbstractUser;
-import com.iceteaviet.englishnow.data.model.base.NewsFeedItem;
-import com.iceteaviet.englishnow.data.model.base.Skill;
+import com.iceteaviet.englishnow.data.model.firebase.base.AbstractUser;
+import com.iceteaviet.englishnow.data.model.firebase.base.NewsFeedItem;
+import com.iceteaviet.englishnow.data.model.firebase.base.Skill;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -36,12 +36,14 @@ public class User extends AbstractUser implements Serializable {
     }
 
     public User(String email, String username, String profilePic) {
-        this.email = email;
-        this.username = username;
-        this.profilePic = profilePic;
-        this.drinks = 0;
-        this.pizzas = 0;
-        this.newsFeedItems = new ArrayList<>();
+        this(email, username, profilePic, 0, 0, new ArrayList<>());
+    }
+
+    public User(String email, String username, String profilePic, int drinks, int pizzas, List<NewsFeedItem> newsFeedItems) {
+        super(email, username, profilePic);
+        this.drinks = drinks;
+        this.pizzas = pizzas;
+        this.newsFeedItems = newsFeedItems;
         this.skillList = new ArrayList<>();
 
         //Add default skill
@@ -50,15 +52,16 @@ public class User extends AbstractUser implements Serializable {
         skillList.add(new PronunciationSkill());
     }
 
-    public User(String email, String username, String profilePic, int drinks, int pizzas, List<NewsFeedItem> newsFeedItems) {
-        this.email = email;
-        this.username = username;
-        this.profilePic = profilePic;
-        this.drinks = drinks;
-        this.pizzas = pizzas;
-        this.newsFeedItems = newsFeedItems;
+    public User(Builder builder) {
+        super(builder);
+        this.skillList = builder.skillList;
+        this.conversations = builder.conversations;
+        this.drinks = builder.drinks;
+        this.pizzas = builder.pizzas;
+        this.newsFeedItems = builder.newsFeedItems;
     }
 
+    @PropertyName("skills")
     public List<Skill> getSkillList() {
         return skillList;
     }
@@ -91,6 +94,7 @@ public class User extends AbstractUser implements Serializable {
         this.pizzas = pizzas;
     }
 
+    @PropertyName("newsfeed_item")
     public List<NewsFeedItem> getNewsFeedItems() {
         return newsFeedItems;
     }
@@ -107,5 +111,47 @@ public class User extends AbstractUser implements Serializable {
         }
 
         return res / skillList.size();
+    }
+
+    public static class Builder extends AbstractUser.Builder<Builder> {
+        private List<Skill> skillList;
+        private int conversations;
+        private int drinks;
+        private int pizzas;
+        private List<NewsFeedItem> newsFeedItems;
+
+
+        public Builder() {
+
+        }
+
+        public Builder setSkillList(List<Skill> skillList) {
+            this.skillList = skillList;
+            return this;
+        }
+
+        public Builder setConversations(int conversations) {
+            this.conversations = conversations;
+            return this;
+        }
+
+        public Builder setDrinks(int drinks) {
+            this.drinks = drinks;
+            return this;
+        }
+
+        public Builder setPizzas(int pizzas) {
+            this.pizzas = pizzas;
+            return this;
+        }
+
+        public Builder setNewsFeedItems(List<NewsFeedItem> newsFeedItems) {
+            this.newsFeedItems = newsFeedItems;
+            return this;
+        }
+
+        public User build() {
+            return new User(this);
+        }
     }
 }
