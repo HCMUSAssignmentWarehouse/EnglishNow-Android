@@ -20,6 +20,7 @@ allprojects {
         google()
         jcenter()
         maven { url 'https://maven.google.com' }
+        maven { url 'https://tokbox.bintray.com/maven' }
     }
 }
 
@@ -46,4 +47,5 @@ ext {
     glideVersion = '4.4.0'
     archLifeCycleVersion = '1.0.0-beta2'
     eventBusVersion = '3.1.1'
+    opentokVersion = '2.12.1'
 }

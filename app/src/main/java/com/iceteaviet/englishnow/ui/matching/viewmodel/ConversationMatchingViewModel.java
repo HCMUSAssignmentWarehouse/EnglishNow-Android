@@ -10,7 +10,21 @@ import com.iceteaviet.englishnow.utils.rx.SchedulerProvider;
  */
 
 public class ConversationMatchingViewModel extends BaseViewModel<ConversationMatchingNavigator> {
+
+
     public ConversationMatchingViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
+    }
+
+    public void onFindButtonClicked() {
+        if (getNavigator().selfCheckRequiredPermissions()) {
+            startFinding();
+        } else {
+            getNavigator().requestPermissions();
+        }
+    }
+
+    public void startFinding() {
+
     }
 }

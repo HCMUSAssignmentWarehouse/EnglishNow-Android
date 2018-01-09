@@ -64,6 +64,9 @@ dependencies {
     implementation "com.facebook.android:facebook-login:${rootProject.facebookVersion}"
     implementation "com.google.android.gms:play-services-auth:${rootProject.googlePlayServiceVersion}"
 
+    //TokBox
+    implementation "com.opentok.android:opentok-android-sdk:${rootProject.opentokVersion}"
+
     //Rx
     implementation "io.reactivex.rxjava2:rxandroid:${rootProject.rxAndroidVersion}"
     implementation "io.reactivex.rxjava2:rxjava:${rootProject.rxJavaVersion}"

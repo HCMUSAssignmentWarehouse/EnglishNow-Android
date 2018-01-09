@@ -5,4 +5,7 @@ package com.iceteaviet.englishnow.ui.matching;
  */
 
 public interface ConversationMatchingNavigator {
+    void requestPermissions();
+
+    boolean selfCheckRequiredPermissions();
 }

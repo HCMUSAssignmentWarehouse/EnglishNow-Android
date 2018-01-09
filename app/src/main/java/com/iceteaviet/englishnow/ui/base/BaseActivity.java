@@ -65,7 +65,7 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
 
     @TargetApi(Build.VERSION_CODES.M)
     public boolean hasPermission(String permission) {
-        return /*Build.VERSION.SDK_INT < Build.VERSION_CODES.M || */
+        return Build.VERSION.SDK_INT < Build.VERSION_CODES.M ||
                 ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED;
     }
 

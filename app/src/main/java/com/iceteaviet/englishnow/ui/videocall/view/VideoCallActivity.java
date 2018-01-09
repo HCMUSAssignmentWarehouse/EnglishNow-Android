@@ -1,13 +1,69 @@
-package com.iceteaviet.englishnow.ui.videocall;
+package com.iceteaviet.englishnow.ui.videocall.view;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.FrameLayout;
 
-public class VideoCallActivity extends AppCompatActivity {
+import com.iceteaviet.englishnow.BR;
+import com.iceteaviet.englishnow.R;
+import com.iceteaviet.englishnow.databinding.ActivityVideoCallBinding;
+import com.iceteaviet.englishnow.ui.base.BaseActivity;
+import com.iceteaviet.englishnow.ui.videocall.VideoCallNavigator;
+import com.iceteaviet.englishnow.ui.videocall.viewmodel.VideoCallViewModel;
+
+import javax.inject.Inject;
+
+public class VideoCallActivity extends BaseActivity<ActivityVideoCallBinding, VideoCallViewModel> implements VideoCallNavigator {
+
+    @Inject
+    VideoCallViewModel videoCallViewModel;
+
+    ActivityVideoCallBinding videoCallBinding;
+
+    private FrameLayout publisherViewContainer;
+    private FrameLayout subscriberViewContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_video_call);
+        videoCallViewModel.setNavigator(this);
+        videoCallBinding = getViewDataBinding();
+
+        publisherViewContainer = videoCallBinding.publisherContainer;
+        subscriberViewContainer = videoCallBinding.subscriberContainer;
+
+        // initialize and connect to the session
+        videoCallViewModel.initializeSession(this, getString(R.string.tokbox_api_key), null);
+        videoCallViewModel.connect(null);
+    }
+
+    @Override
+    public void setPublisherCallView(View view) {
+        publisherViewContainer.addView(view);
+    }
+
+    @Override
+    public void setSubscriberCallView(View view) {
+        subscriberViewContainer.addView(view);
+    }
+
+    @Override
+    public void removeAllSubscriberViews() {
+        subscriberViewContainer.removeAllViews();
+    }
+
+    @Override
+    public VideoCallViewModel getViewModel() {
+        return videoCallViewModel;
+    }
+
+    @Override
+    public int getBindingVariable() {
+        return BR.viewModel;
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_video_call;
     }
 }

@@ -21,6 +21,7 @@
             android:layout_width="@dimen/find_button_width"
             android:layout_height="@dimen/find_button_width"
             android:background="@drawable/bg_rounded_button"
+            android:onClick="@{() -> viewModel.onFindButtonClicked()}"
             android:text="@string/find"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
