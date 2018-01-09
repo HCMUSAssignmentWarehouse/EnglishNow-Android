@@ -8,6 +8,7 @@ android {
         applicationId "com.iceteaviet.englishnow"
         minSdkVersion 21
         targetSdkVersion 27
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
         resConfigs "auto"
