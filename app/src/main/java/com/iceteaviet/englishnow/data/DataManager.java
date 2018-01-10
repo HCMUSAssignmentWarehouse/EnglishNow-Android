@@ -16,6 +16,7 @@ import io.reactivex.Observable;
  * Created by Genius Doan on 23/12/2017.
  */
 
+//TODO: Turn it into Facade Pattern
 public interface DataManager extends ApiDataSource, FirebaseHelper, PreferencesHelper {
     UserDataSource getUserRepository();
 

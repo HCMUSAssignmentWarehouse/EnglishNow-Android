@@ -13,11 +13,13 @@ import android.widget.Toast;
 
 import com.iceteaviet.englishnow.R;
 import com.iceteaviet.englishnow.data.DataManager;
-import com.iceteaviet.englishnow.data.model.firebase.Status;
 import com.iceteaviet.englishnow.data.model.firebase.UploadTaskMessage;
 import com.iceteaviet.englishnow.data.model.others.QueuedMedia;
 import com.iceteaviet.englishnow.ui.base.BaseViewModel;
 import com.iceteaviet.englishnow.ui.main.ComposerNavigator;
+import com.iceteaviet.englishnow.ui.main.NewsFeedPostingExecutor;
+import com.iceteaviet.englishnow.ui.main.StatusPostingTicket;
+import com.iceteaviet.englishnow.ui.main.VideoStatusPostingTicket;
 import com.iceteaviet.englishnow.utils.AppLogger;
 import com.iceteaviet.englishnow.utils.CommonUtils;
 import com.iceteaviet.englishnow.utils.CountUpDownLatch;
@@ -54,10 +56,12 @@ public class ComposerViewModel extends BaseViewModel<ComposerNavigator> {
     private ContentResolver contentResolver;
     private QueuedMedia queuedMedia;
     private Context context;
+    private NewsFeedPostingExecutor executor;
 
 
     public ComposerViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
+        executor = new NewsFeedPostingExecutor(dataManager);
     }
 
     public void onPostButtonClicked() {
@@ -326,17 +330,26 @@ public class ComposerViewModel extends BaseViewModel<ComposerNavigator> {
             return;
         }
 
-        Status.Builder builder = new Status.Builder()
-                .setOwnerUid(uid)
-                .setOwnerUsername(userDisplayName)
-                .setContent(content)
-                .setTimestamp(System.currentTimeMillis());
-
+        StatusPostingTicket ticket = new StatusPostingTicket(uid, userDisplayName, content);
         if (queuedMedia != null) {
-            builder = builder.setPhotoUrl(queuedMedia.getUploadUrl().getURL());
+            ticket.setPhotoUrl(queuedMedia.getUploadUrl().getURL());
         }
 
-        Status status = builder.build();
-        getDataManager().getNewsFeedItemRepository().createOrUpdate(status);
+        executor.setTicket(ticket);
+        executor.execute();
+    }
+
+    public void doPostVideoStatus() {
+        String uid = getDataManager().getCurrentUserUid();
+        String userDisplayName = getDataManager().getCurrentUserDisplayName();
+
+        if (uid == null || userDisplayName == null || queuedMedia == null) {
+            Toast.makeText(context, R.string.user_auth_not_found, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        VideoStatusPostingTicket ticket = new VideoStatusPostingTicket(uid, userDisplayName, queuedMedia.getUploadUrl().getURL());
+        executor.setTicket(ticket);
+        executor.execute();
     }
 }
