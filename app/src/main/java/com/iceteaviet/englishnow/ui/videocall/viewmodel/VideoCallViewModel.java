@@ -26,19 +26,21 @@ public class VideoCallViewModel extends BaseViewModel<VideoCallNavigator>
     private Session mSession;
     private Publisher mPublisher;
     private Subscriber mSubscriber;
+    private String sessionId;
+    private String token;
 
 
     public VideoCallViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
     }
 
-    public void initializeSession(Context context, String apiKey, String sessionId) {
+    public void initializeSession(Context context, String apiKey) {
         this.context = context;
         mSession = new Session.Builder(context, apiKey, sessionId).build();
         mSession.setSessionListener(this);
     }
 
-    public void connect(String token) {
+    public void connect() {
         mSession.connect(token);
     }
 
@@ -93,5 +95,13 @@ public class VideoCallViewModel extends BaseViewModel<VideoCallNavigator>
     @Override
     public void onError(PublisherKit publisherKit, OpentokError opentokError) {
         AppLogger.e("onError");
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

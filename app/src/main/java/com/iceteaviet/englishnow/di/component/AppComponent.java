@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.iceteaviet.englishnow.EnglishNowApp;
 import com.iceteaviet.englishnow.di.module.AppModule;
+import com.iceteaviet.englishnow.di.module.NetModule;
 import com.iceteaviet.englishnow.di.provider.ActivityProvider;
 
 import javax.inject.Singleton;
@@ -17,7 +18,7 @@ import dagger.android.AndroidInjectionModule;
  */
 
 @Singleton
-@Component(modules = {AndroidInjectionModule.class, AppModule.class, ActivityProvider.class})
+@Component(modules = {AndroidInjectionModule.class, AppModule.class, NetModule.class, ActivityProvider.class})
 //define what objects should be included as part of the dependency chain by modules
 public interface AppComponent {
     void inject(EnglishNowApp app);

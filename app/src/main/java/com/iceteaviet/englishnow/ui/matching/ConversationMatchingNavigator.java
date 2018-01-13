@@ -8,4 +8,12 @@ public interface ConversationMatchingNavigator {
     void requestPermissions();
 
     boolean selfCheckRequiredPermissions();
+
+    void handleError(Throwable throwable);
+
+    void navigateToVideoCallScreen(String sessionId, String token);
+
+    void changeViewsToFindingMode();
+
+    void changeViewsToNormalMode();
 }

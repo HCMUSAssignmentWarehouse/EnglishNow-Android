@@ -5,13 +5,16 @@ import android.content.Context;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
 import com.iceteaviet.englishnow.data.local.prefs.PreferencesHelper;
+import com.iceteaviet.englishnow.data.model.api.OpenTokRoom;
 import com.iceteaviet.englishnow.data.model.firebase.LoginRequest;
 import com.iceteaviet.englishnow.data.model.firebase.RegisterRequest;
 import com.iceteaviet.englishnow.data.model.others.StatusItemData;
+import com.iceteaviet.englishnow.data.remote.api.ApiDataSource;
 import com.iceteaviet.englishnow.data.remote.firebase.FirebaseHelper;
 import com.iceteaviet.englishnow.data.remote.firebase.MediaDataSource;
 import com.iceteaviet.englishnow.data.remote.firebase.NewsFeedItemDataSource;
 import com.iceteaviet.englishnow.data.remote.firebase.UserDataSource;
+import com.iceteaviet.englishnow.data.remote.firebase.VideoCallSessionDataSource;
 
 import java.util.List;
 
@@ -28,21 +31,26 @@ import io.reactivex.Single;
 @Singleton
 public class AppDataManager implements DataManager {
     private final Context context;
+    private final ApiDataSource apiDataSource;
     private final FirebaseHelper firebaseHelper;
     private final PreferencesHelper preferencesHelper;
     private final UserDataSource userRepository;
     private final NewsFeedItemDataSource newsFeedItemRepository;
     private final MediaDataSource mediaRepository;
+    private final VideoCallSessionDataSource videoCallSessionRepository;
 
     @Inject
-    public AppDataManager(Context context, FirebaseHelper firebaseHelper, PreferencesHelper preferencesHelper,
-                          UserDataSource userRepository, NewsFeedItemDataSource newsFeedItemRepository, MediaDataSource mediaRepository) {
+    public AppDataManager(Context context, FirebaseHelper firebaseHelper, PreferencesHelper preferencesHelper, ApiDataSource apiDataSource,
+                          UserDataSource userRepository, NewsFeedItemDataSource newsFeedItemRepository, MediaDataSource mediaRepository,
+                          VideoCallSessionDataSource videoCallSessionRepository) {
         this.context = context;
+        this.apiDataSource = apiDataSource;
         this.firebaseHelper = firebaseHelper;
         this.preferencesHelper = preferencesHelper;
         this.userRepository = userRepository;
         this.newsFeedItemRepository = newsFeedItemRepository;
         this.mediaRepository = mediaRepository;
+        this.videoCallSessionRepository = videoCallSessionRepository;
     }
 
     @Override
@@ -58,6 +66,11 @@ public class AppDataManager implements DataManager {
     @Override
     public MediaDataSource getMediaRepository() {
         return mediaRepository;
+    }
+
+    @Override
+    public VideoCallSessionDataSource getVideoCallSessionRepository() {
+        return videoCallSessionRepository;
     }
 
     @Override
@@ -83,6 +96,11 @@ public class AppDataManager implements DataManager {
     @Override
     public void logoutFirebase() {
         firebaseHelper.logoutFirebase();
+    }
+
+    @Override
+    public Single<String> doConversationMatching(String userUid) {
+        return firebaseHelper.doConversationMatching(userUid);
     }
 
     @Override
@@ -145,5 +163,10 @@ public class AppDataManager implements DataManager {
                         (user, status1) -> new StatusItemData(status1, user.getProfilePic())))
                 .toList()
                 .toObservable();
+    }
+
+    @Override
+    public Single<OpenTokRoom> getOpenTokRoomInfo(String roomName) {
+        return apiDataSource.getOpenTokRoomInfo(roomName);
     }
 }

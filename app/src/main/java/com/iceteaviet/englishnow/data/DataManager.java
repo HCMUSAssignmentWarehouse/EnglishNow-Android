@@ -7,6 +7,7 @@ import com.iceteaviet.englishnow.data.remote.firebase.FirebaseHelper;
 import com.iceteaviet.englishnow.data.remote.firebase.MediaDataSource;
 import com.iceteaviet.englishnow.data.remote.firebase.NewsFeedItemDataSource;
 import com.iceteaviet.englishnow.data.remote.firebase.UserDataSource;
+import com.iceteaviet.englishnow.data.remote.firebase.VideoCallSessionDataSource;
 
 import java.util.List;
 
@@ -23,6 +24,8 @@ public interface DataManager extends ApiDataSource, FirebaseHelper, PreferencesH
     NewsFeedItemDataSource getNewsFeedItemRepository();
 
     MediaDataSource getMediaRepository();
+
+    VideoCallSessionDataSource getVideoCallSessionRepository();
 
     Observable<List<StatusItemData>> fetchAllStatusItemData();
 }

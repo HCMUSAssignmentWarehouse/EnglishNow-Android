@@ -8,6 +8,7 @@ import com.iceteaviet.englishnow.BR;
 import com.iceteaviet.englishnow.R;
 import com.iceteaviet.englishnow.databinding.ActivityVideoCallBinding;
 import com.iceteaviet.englishnow.ui.base.BaseActivity;
+import com.iceteaviet.englishnow.ui.matching.view.ConversationMatchingActivity;
 import com.iceteaviet.englishnow.ui.videocall.VideoCallNavigator;
 import com.iceteaviet.englishnow.ui.videocall.viewmodel.VideoCallViewModel;
 
@@ -32,9 +33,12 @@ public class VideoCallActivity extends BaseActivity<ActivityVideoCallBinding, Vi
         publisherViewContainer = videoCallBinding.publisherContainer;
         subscriberViewContainer = videoCallBinding.subscriberContainer;
 
+        videoCallViewModel.setSessionId(getIntent().getStringExtra(ConversationMatchingActivity.EXTRA_SESSION_ID));
+        videoCallViewModel.setToken(getIntent().getStringExtra(ConversationMatchingActivity.EXTRA_SESSION_TOKEN));
+
         // initialize and connect to the session
-        videoCallViewModel.initializeSession(this, getString(R.string.tokbox_api_key), null);
-        videoCallViewModel.connect(null);
+        videoCallViewModel.initializeSession(this, getString(R.string.tokbox_api_key));
+        videoCallViewModel.connect();
     }
 
     @Override

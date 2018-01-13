@@ -30,4 +30,6 @@ public interface FirebaseHelper {
     String getCurrentUserPhotoUrl();
 
     void logoutFirebase();
+
+    Single<String> doConversationMatching(String userUid);
 }

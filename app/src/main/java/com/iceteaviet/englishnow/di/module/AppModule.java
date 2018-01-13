@@ -10,6 +10,8 @@ import com.iceteaviet.englishnow.data.AppDataManager;
 import com.iceteaviet.englishnow.data.DataManager;
 import com.iceteaviet.englishnow.data.local.prefs.AppPreferencesHelper;
 import com.iceteaviet.englishnow.data.local.prefs.PreferencesHelper;
+import com.iceteaviet.englishnow.data.remote.api.ApiDataSource;
+import com.iceteaviet.englishnow.data.remote.api.ApiRepository;
 import com.iceteaviet.englishnow.data.remote.firebase.AppFirebaseHelper;
 import com.iceteaviet.englishnow.data.remote.firebase.FirebaseHelper;
 import com.iceteaviet.englishnow.data.remote.firebase.MediaDataSource;
@@ -18,6 +20,8 @@ import com.iceteaviet.englishnow.data.remote.firebase.NewsFeedItemDataSource;
 import com.iceteaviet.englishnow.data.remote.firebase.NewsFeedItemRepository;
 import com.iceteaviet.englishnow.data.remote.firebase.UserDataSource;
 import com.iceteaviet.englishnow.data.remote.firebase.UserRepository;
+import com.iceteaviet.englishnow.data.remote.firebase.VideoCallSessionDataSource;
+import com.iceteaviet.englishnow.data.remote.firebase.VideoCallSessionRepository;
 import com.iceteaviet.englishnow.utils.rx.AppSchedulerProvider;
 import com.iceteaviet.englishnow.utils.rx.SchedulerProvider;
 
@@ -63,6 +67,12 @@ public class AppModule {
 
     @Provides
     @Singleton
+    ApiDataSource provideApiDataSource(ApiRepository repository) {
+        return repository;
+    }
+
+    @Provides
+    @Singleton
     UserDataSource provideUserDataSource(UserRepository userRepository) {
         return userRepository;
     }
@@ -77,6 +87,12 @@ public class AppModule {
     @Singleton
     MediaDataSource provideMediaDataSource(MediaRepository mediaRepository) {
         return mediaRepository;
+    }
+
+    @Provides
+    @Singleton
+    VideoCallSessionDataSource provideVideoCallSessionDataSource(VideoCallSessionRepository repository) {
+        return repository;
     }
 
     @Provides

@@ -5,11 +5,11 @@ package com.iceteaviet.englishnow.data.remote.api;
  */
 
 public class ApiEndPoint {
-    public static final String BASE_URL = "https://englishnow.herokuapp.com/";
+    public static final String OPENTOK_BASE_URL = "https://englishnow.herokuapp.com/";
     //Return an OpenTok API key, session ID, and token.
     //This will always return the same session ID, but will produce a new token each time it's called
     // — this results in each client receiving a unique token.
-    public static final String ENDPOINT_SESSION = BASE_URL + "/session";
+    public static final String ENDPOINT_SESSION = OPENTOK_BASE_URL + "/session";
 
     private ApiEndPoint() {
         // This class is not publicly instantiable
