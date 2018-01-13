@@ -4,12 +4,10 @@ import com.iceteaviet.englishnow.data.DataManager;
 import com.iceteaviet.englishnow.data.model.api.OpenTokRoom;
 import com.iceteaviet.englishnow.data.model.firebase.VideoCallSession;
 import com.iceteaviet.englishnow.data.remote.firebase.VideoCallSessionDataSource;
-import com.iceteaviet.englishnow.utils.AppLogger;
 
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
 
@@ -19,6 +17,7 @@ import io.reactivex.subjects.PublishSubject;
 
 //Facade
 public class ConversationMatchingHandler {
+    private static final String TAG = ConversationMatchingHandler.class.getSimpleName();
     private DataManager appDataManager;
     private VideoCallSessionDataSource repository;
     private PublishSubject<OpenTokRoom> matchingSubject;
@@ -35,25 +34,22 @@ public class ConversationMatchingHandler {
         return matchingSubject;
     }
 
-    public void doConversationMatching(String uid) {
-        AppLogger.d("Genius", "doConversationMatching");
+    public void startConversationMatching(String uid) {
         appDataManager.doConversationMatching(uid)
-                .subscribe(new Consumer<String>() {
-                    @Override
-                    public void accept(String opponentUid) throws Exception {
-                        createConversationRoom(uid, opponentUid);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        throwable.printStackTrace();
-                        matchingSubject.onError(throwable);
-                    }
+                .subscribe(opponentUid -> {
+                    appDataManager.removeLearnerFromAvailableList(uid);
+                    createConversationRoom(uid, opponentUid);
+                }, throwable -> {
+                    throwable.printStackTrace();
+                    matchingSubject.onError(throwable);
                 });
     }
 
+    public void stopConversationMatching(String uid) {
+        appDataManager.removeLearnerFromAvailableList(uid);
+    }
+
     private void createConversationRoom(String uid, String opponentUid) {
-        AppLogger.d("Genius", "createConversationRoom");
         Single<OpenTokRoom> roomSingle = appDataManager.getOpenTokRoomInfo(buildRoomName(uid, opponentUid));
         roomSingle.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -67,7 +63,6 @@ public class ConversationMatchingHandler {
     }
 
     private void waitForSessionCreated(String sessionId) {
-        AppLogger.d("Genius", "waitForSessionCreated");
         Disposable d = repository.fetch(sessionId)
                 .subscribe(session -> {
                     if (session.getSessionId() != null && !session.getSessionId().isEmpty()
@@ -86,7 +81,6 @@ public class ConversationMatchingHandler {
     }
 
     private void createOrUpdateSession(OpenTokRoom openTokRoom, String uid) {
-        AppLogger.d("Genius", "waitForSessionCreated");
         repository.fetchOnce(openTokRoom.getSessionId())
                 .subscribe(session -> {
                     if (session == null || session.getSessionId() == null || session.getSessionId().isEmpty()) {

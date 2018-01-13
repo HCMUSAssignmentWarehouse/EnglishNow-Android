@@ -24,4 +24,7 @@
     <color name="colorDeepOrange700">#E64A19</color>
     <color name="colorDeepOrange500">#FF5722</color>
     <color name="colorRed500">#F44336</color>
+    <color name="colorRed700">#D32F2F</color>
+    <color name="color_grey_700_half_opacity">#80616161</color>
+    <color name="color_grey_900_half_opacity">#80212121</color>
 </resources>

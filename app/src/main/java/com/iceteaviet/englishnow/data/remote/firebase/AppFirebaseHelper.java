@@ -180,4 +180,9 @@ public class AppFirebaseHelper implements FirebaseHelper {
         database.getReference(AVAILABLE_LEARNERS).child(opponentUid).child(CHILD_SUBSCRIBER_UID).setValue(uid);
         database.getReference(AVAILABLE_LEARNERS).child(opponentUid).child(CHILD_MATCHED).setValue(true);
     }
+
+    @Override
+    public void removeLearnerFromAvailableList(String uid) {
+        database.getReference(AVAILABLE_LEARNERS).child(uid).removeValue();
+    }
 }

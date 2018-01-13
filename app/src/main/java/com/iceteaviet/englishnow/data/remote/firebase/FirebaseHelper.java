@@ -32,4 +32,6 @@ public interface FirebaseHelper {
     void logoutFirebase();
 
     Single<String> doConversationMatching(String userUid);
+
+    void removeLearnerFromAvailableList(String uid);
 }
