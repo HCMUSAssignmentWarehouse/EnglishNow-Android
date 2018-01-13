@@ -44,7 +44,7 @@ public class ConversationMatchingViewModel extends BaseViewModel<ConversationMat
     }
 
     private void stopFinding() {
-        handler.stopConversationMatching();
+        handler.stopConversationMatching(getDataManager().getCurrentUserUid());
     }
 
     public void startFinding() {

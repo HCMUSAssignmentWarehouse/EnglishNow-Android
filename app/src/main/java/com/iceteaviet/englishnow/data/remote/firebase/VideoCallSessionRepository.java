@@ -121,4 +121,9 @@ public class VideoCallSessionRepository implements VideoCallSessionDataSource {
                     }
                 }));
     }
+
+    @Override
+    public void delete(String sessionId) {
+        database.getReference(SESSIONS).child(sessionId).removeValue();
+    }
 }

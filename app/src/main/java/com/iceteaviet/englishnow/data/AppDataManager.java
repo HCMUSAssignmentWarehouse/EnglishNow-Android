@@ -104,6 +104,11 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public void removeLearnerFromAvailableList(String uid) {
+        firebaseHelper.removeLearnerFromAvailableList(uid);
+    }
+
+    @Override
     public String getCurrentUserDisplayName() {
         return firebaseHelper.getCurrentUserDisplayName();
     }

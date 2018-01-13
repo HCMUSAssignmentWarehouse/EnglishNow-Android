@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.widget.Button;
 
@@ -103,6 +104,9 @@ public class ConversationMatchingActivity extends BaseActivity<ActivityConversat
 
     @Override
     public void handleError(Throwable throwable) {
+        Snackbar mySnackbar = Snackbar.make(findViewById(R.id.cl_root_view),
+                throwable.getMessage(), Snackbar.LENGTH_SHORT);
+        mySnackbar.show();
         throwable.printStackTrace();
     }
 
