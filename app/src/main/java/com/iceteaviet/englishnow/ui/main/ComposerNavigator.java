@@ -17,7 +17,7 @@ public interface ComposerNavigator {
 
     void openPickChooseDialog();
 
-    void displayTransientError(@StringRes int stringId);
+    void handleError(@StringRes int stringId);
 
     void addMediaPreview(QueuedMedia item, Bitmap preview);
 

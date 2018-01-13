@@ -1,4 +1,4 @@
-package com.iceteaviet.englishnow.data.remote.firebase;
+package com.iceteaviet.englishnow.data.remote.firebase.videocall;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -13,8 +13,6 @@ import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import io.reactivex.SingleEmitter;
-import io.reactivex.SingleOnSubscribe;
 
 /**
  * Created by Genius Doan on 11/01/2018.
@@ -59,25 +57,20 @@ public class VideoCallSessionRepository implements VideoCallSessionDataSource {
 
     @Override
     public Single<Boolean> isExist(String sessionId) {
-        return Single.create(new SingleOnSubscribe<Boolean>() {
+        return Single.create(e -> database.getReference(SESSIONS).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void subscribe(SingleEmitter<Boolean> e) throws Exception {
-                database.getReference(SESSIONS).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.hasChildren())
-                            e.onSuccess(true);
-                        else
-                            e.onSuccess(false);
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        e.onError(databaseError.toException());
-                    }
-                });
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren())
+                    e.onSuccess(true);
+                else
+                    e.onSuccess(false);
             }
-        });
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                e.onError(databaseError.toException());
+            }
+        }));
     }
 
     @Override

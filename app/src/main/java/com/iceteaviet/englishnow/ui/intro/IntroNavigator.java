@@ -5,7 +5,7 @@ package com.iceteaviet.englishnow.ui.intro;
  */
 
 public interface IntroNavigator {
-    void goToNextScreen();
+    void navigateToNextScreen();
 
     void skip();
 }

@@ -5,5 +5,5 @@ package com.iceteaviet.englishnow.ui.about;
  */
 
 public interface AboutNavigator {
-    void goBack();
+    void navigateBack();
 }

@@ -1,6 +1,5 @@
 package com.iceteaviet.englishnow.ui.newsfeed.view;
 
-import android.arch.lifecycle.Observer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,10 +13,7 @@ import com.iceteaviet.englishnow.ui.base.BaseFragment;
 import com.iceteaviet.englishnow.ui.main.StatusAdapter;
 import com.iceteaviet.englishnow.ui.main.view.StatusComposerDialog;
 import com.iceteaviet.englishnow.ui.newsfeed.NewsFeedNavigator;
-import com.iceteaviet.englishnow.ui.newsfeed.viewmodel.StatusItemViewModel;
 import com.iceteaviet.englishnow.ui.newsfeed.viewmodel.StatusViewModel;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -27,13 +23,12 @@ import javax.inject.Inject;
 
 public class NewsFeedFragment extends BaseFragment<FragmentNewsfeedBinding, StatusViewModel> implements NewsFeedNavigator {
 
-    public static final String TAG = "NewsFeedFragment";
+    public static final String TAG = NewsFeedFragment.class.getSimpleName();
 
     @Inject
-    StatusViewModel statusViewModel;
+    protected StatusViewModel statusViewModel;
 
     private FragmentNewsfeedBinding viewBinding;
-
 
     private RecyclerView recyclerView;
     private StatusAdapter adapter;
@@ -74,7 +69,7 @@ public class NewsFeedFragment extends BaseFragment<FragmentNewsfeedBinding, Stat
     }
 
     @Override
-    public void goBack() {
+    public void navigateBack() {
         getBaseActivity().onFragmentDetached(TAG);
     }
 
@@ -84,19 +79,13 @@ public class NewsFeedFragment extends BaseFragment<FragmentNewsfeedBinding, Stat
     }
 
     private void setup() {
-        viewBinding.fabCompose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                StatusComposerDialog dialog = StatusComposerDialog.newInstance();
-                dialog.setOnPostedListener(new StatusComposerDialog.StatusComposerDialogListener() {
-                    @Override
-                    public void onPosted(String body) {
-                        //Trigger refresh
-                    }
-                });
+        viewBinding.fabCompose.setOnClickListener(view -> {
+            StatusComposerDialog dialog = StatusComposerDialog.newInstance();
+            dialog.setOnPostedListener(body -> {
+                //Trigger refresh
+            });
 
-                dialog.show(getFragmentManager());
-            }
+            dialog.show(getFragmentManager());
         });
 
         setupNewsFeedItemsRecyclerView();
@@ -111,11 +100,6 @@ public class NewsFeedFragment extends BaseFragment<FragmentNewsfeedBinding, Stat
     }
 
     private void subscribeToLiveData() {
-        statusViewModel.getStatusItemsLiveData().observe(getBaseActivity(), new Observer<List<StatusItemViewModel>>() {
-            @Override
-            public void onChanged(@Nullable List<StatusItemViewModel> statusItemViewModels) {
-                statusViewModel.setStatusItems(statusItemViewModels);
-            }
-        });
+        statusViewModel.getStatusItemsLiveData().observe(getBaseActivity(), statusItemViewModels -> statusViewModel.setStatusItems(statusItemViewModels));
     }
 }

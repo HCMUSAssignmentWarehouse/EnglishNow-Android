@@ -1,6 +1,5 @@
 package com.iceteaviet.englishnow.ui.auth.viewmodel;
 
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
 import com.iceteaviet.englishnow.data.DataManager;
 import com.iceteaviet.englishnow.data.model.firebase.RegisterRequest;
@@ -9,8 +8,6 @@ import com.iceteaviet.englishnow.ui.auth.RegisterNavigator;
 import com.iceteaviet.englishnow.ui.base.BaseViewModel;
 import com.iceteaviet.englishnow.utils.InputUtils;
 import com.iceteaviet.englishnow.utils.rx.SchedulerProvider;
-
-import io.reactivex.functions.Consumer;
 
 /**
  * Created by Genius Doan on 28/12/2017.
@@ -41,30 +38,24 @@ public class RegisterViewModel extends BaseViewModel<RegisterNavigator> {
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
                 .registerFirebaseWithEmail(new RegisterRequest.ServerRegisterRequest(email, username, password))
-                .subscribe(new Consumer<AuthResult>() {
-                    @Override
-                    public void accept(AuthResult authResult) throws Exception {
-                        // Sign in success, update UI with the signed-in user's information
-                        FirebaseUser firebaseUser = authResult.getUser();
+                .subscribe(authResult -> {
+                    // Sign in success, update UI with the signed-in user's information
+                    FirebaseUser firebaseUser = authResult.getUser();
 
-                        if (firebaseUser != null) {
-                            //push new user to firebase
-                            User user = new User(email, username,
-                                    firebaseUser.getPhotoUrl() == null ? "" : firebaseUser.getPhotoUrl().toString());
-                            getDataManager().getUserRepository().createOrUpdate(firebaseUser.getUid(), user);
+                    if (firebaseUser != null) {
+                        //push new user to firebase
+                        User user = new User(email, username,
+                                firebaseUser.getPhotoUrl() == null ? "" : firebaseUser.getPhotoUrl().toString());
+                        getDataManager().getUserRepository().createOrUpdate(firebaseUser.getUid(), user);
 
-                            //Go to post login activity
-                            getNavigator().navigateToPostLoginScreen();
-                        }
-                        setIsLoading(false);
+                        //Go to post login activity
+                        getNavigator().navigateToPostLoginScreen();
                     }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        // If register fails, display a message to the user.
-                        getNavigator().handleError(throwable);
-                        setIsLoading(false);
-                    }
+                    setIsLoading(false);
+                }, throwable -> {
+                    // If register fails, display a message to the user.
+                    getNavigator().handleError(throwable);
+                    setIsLoading(false);
                 }));
     }
 }

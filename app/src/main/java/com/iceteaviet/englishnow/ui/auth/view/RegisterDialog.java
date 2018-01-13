@@ -6,9 +6,12 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.iceteaviet.englishnow.R;
 import com.iceteaviet.englishnow.databinding.DialogSignUpBinding;
@@ -30,9 +33,18 @@ public class RegisterDialog extends BaseDialog implements RegisterNavigator {
     public static final String TAG = RegisterDialog.class.getSimpleName();
 
     @Inject
-    RegisterViewModel registerViewModel;
+    protected RegisterViewModel registerViewModel;
 
-    DialogSignUpBinding signUpBinding;
+    private DialogSignUpBinding signUpBinding;
+
+    private TextInputEditText emailInput;
+    private TextInputEditText passwordInput;
+    private TextInputEditText userNameInput;
+    private TextInputEditText rePasswordInput;
+    private TextInputLayout emailInputLayout;
+    private TextInputLayout passwordInputLayout;
+    private TextInputLayout userNameInputLayout;
+    private TextInputLayout rePasswordInputLayout;
 
     static RegisterDialog newInstance() {
         RegisterDialog d = new RegisterDialog();
@@ -62,14 +74,32 @@ public class RegisterDialog extends BaseDialog implements RegisterNavigator {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         signUpBinding = DataBindingUtil.inflate(inflater, R.layout.dialog_sign_up, container, false);
-        View convertView = signUpBinding.getRoot();
+        return signUpBinding.getRoot();
+    }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        bindViews();
         AndroidInjection.inject(this);
 
         signUpBinding.setViewModel(registerViewModel);
         registerViewModel.setNavigator(this);
 
-        return convertView;
+        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+    }
+
+    private void bindViews() {
+        emailInput = signUpBinding.edtEmail;
+        passwordInput = signUpBinding.edtPassword;
+        rePasswordInput = signUpBinding.edtRePassword;
+        userNameInput = signUpBinding.edtUsername;
+
+        emailInputLayout = signUpBinding.emailInputLayout;
+        passwordInputLayout = signUpBinding.passwordInputLayout;
+        rePasswordInputLayout = signUpBinding.rePasswordInputLayout;
+        userNameInputLayout = signUpBinding.usernameInputLayout;
     }
 
     @NonNull
@@ -84,24 +114,24 @@ public class RegisterDialog extends BaseDialog implements RegisterNavigator {
     @Override
     public void register() {
         //Check info
-        String email = signUpBinding.edtEmail.getText().toString();
-        String username = signUpBinding.edtUsername.getText().toString();
-        String password = signUpBinding.edtPassword.getText().toString();
-        String rePassword = signUpBinding.edtRePassword.getText().toString();
+        String email = emailInput.getText().toString();
+        String username = userNameInput.getText().toString();
+        String password = passwordInput.getText().toString();
+        String rePassword = rePasswordInput.getText().toString();
 
         if (!registerViewModel.isEmailValid(email)) {
-            signUpBinding.emailInputLayout.setError(getString(R.string.invalid_email));
+            emailInputLayout.setError(getString(R.string.invalid_email));
         } else if (!registerViewModel.isUsernameValid(username)) {
-            signUpBinding.usernameInputLayout.setError(getString(R.string.invalid_username));
+            userNameInputLayout.setError(getString(R.string.invalid_username));
         } else if (!registerViewModel.isPasswordValid(password)) {
-            signUpBinding.passwordInputLayout.setError(getString(R.string.invalid_password));
+            passwordInputLayout.setError(getString(R.string.invalid_password));
         } else if (!password.equals(rePassword)) {
-            signUpBinding.rePasswordInputLayout.setError(getString(R.string.re_password_not_match));
+            rePasswordInputLayout.setError(getString(R.string.re_password_not_match));
         } else {
-            signUpBinding.emailInputLayout.setErrorEnabled(false);
-            signUpBinding.passwordInputLayout.setErrorEnabled(false);
-            signUpBinding.rePasswordInputLayout.setErrorEnabled(false);
-            signUpBinding.usernameInputLayout.setErrorEnabled(false);
+            emailInputLayout.setErrorEnabled(false);
+            passwordInputLayout.setErrorEnabled(false);
+            rePasswordInputLayout.setErrorEnabled(false);
+            userNameInputLayout.setErrorEnabled(false);
             registerViewModel.doRegister(email, username, password);
         }
     }
@@ -110,8 +140,8 @@ public class RegisterDialog extends BaseDialog implements RegisterNavigator {
     public void handleError(Throwable throwable) {
         throwable.printStackTrace();
         CommonUtils.showAlertDialog(getActivity(), throwable.getMessage());
-        signUpBinding.edtPassword.setText("");
-        signUpBinding.edtRePassword.setText("");
+        passwordInput.setText("");
+        rePasswordInput.setText("");
     }
 
     @Override

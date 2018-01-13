@@ -2,6 +2,8 @@ package com.iceteaviet.englishnow.ui.auth.view;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 
 import com.iceteaviet.englishnow.BR;
 import com.iceteaviet.englishnow.R;
@@ -14,29 +16,38 @@ import com.iceteaviet.englishnow.utils.CommonUtils;
 
 import javax.inject.Inject;
 
-import butterknife.ButterKnife;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasFragmentInjector;
 
 //TODO: Add Smart Lock for passwords: https://developers.google.com/identity/smartlock-passwords/android/
-// Disable login button base on input
 public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewModel> implements LoginNavigator, HasFragmentInjector {
     @Inject
-    LoginViewModel loginViewModel;
+    protected LoginViewModel loginViewModel;
 
     @Inject
-    DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
+    protected DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
 
-    ActivityLoginBinding activityLoginBinding;
+    private ActivityLoginBinding activityLoginBinding;
+
+    private TextInputEditText emailInput;
+    private TextInputEditText passwordInput;
+    private TextInputLayout emailInputLayout;
+    private TextInputLayout passwordInputLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityLoginBinding = getViewDataBinding();
         loginViewModel.setNavigator(this);
+        bindViews();
+    }
 
-        ButterKnife.bind(this);
+    private void bindViews() {
+        emailInput = activityLoginBinding.edtEmail;
+        passwordInput = activityLoginBinding.edtPassword;
+        emailInputLayout = activityLoginBinding.emailInputLayout;
+        passwordInputLayout = activityLoginBinding.passwordInputLayout;
     }
 
     @Override
@@ -64,21 +75,21 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     public void handleError(Throwable throwable) {
         throwable.printStackTrace();
         CommonUtils.showAlertDialog(this, getString(R.string.email_password_incorrect));
-        activityLoginBinding.edtPassword.setText("");
+        passwordInput.setText("");
     }
 
     @Override
     public void login() {
-        String email = activityLoginBinding.edtEmail.getText().toString();
-        String password = activityLoginBinding.edtPassword.getText().toString();
+        String email = emailInput.getText().toString();
+        String password = passwordInput.getText().toString();
 
         if (!loginViewModel.isEmailValid(email)) {
-            activityLoginBinding.emailInputLayout.setError(getString(R.string.invalid_email));
+            emailInputLayout.setError(getString(R.string.invalid_email));
         } else if (!loginViewModel.isPasswordValid(password)) {
-            activityLoginBinding.passwordInputLayout.setError(getString(R.string.invalid_password));
+            passwordInputLayout.setError(getString(R.string.invalid_password));
         } else {
-            activityLoginBinding.emailInputLayout.setErrorEnabled(false);
-            activityLoginBinding.passwordInputLayout.setErrorEnabled(false);
+            emailInputLayout.setErrorEnabled(false);
+            passwordInputLayout.setErrorEnabled(false);
             hideKeyboard();
             loginViewModel.doLogin(email, password);
         }

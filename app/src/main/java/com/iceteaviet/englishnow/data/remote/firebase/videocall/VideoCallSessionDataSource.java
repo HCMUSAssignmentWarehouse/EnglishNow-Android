@@ -1,4 +1,4 @@
-package com.iceteaviet.englishnow.data.remote.firebase;
+package com.iceteaviet.englishnow.data.remote.firebase.videocall;
 
 import com.iceteaviet.englishnow.data.model.firebase.VideoCallSession;
 

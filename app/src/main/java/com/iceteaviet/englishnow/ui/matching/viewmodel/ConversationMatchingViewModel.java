@@ -1,7 +1,7 @@
 package com.iceteaviet.englishnow.ui.matching.viewmodel;
 
 import com.iceteaviet.englishnow.data.DataManager;
-import com.iceteaviet.englishnow.data.remote.ConversationMatchingHandler;
+import com.iceteaviet.englishnow.data.remote.facade.ConversationMatchingHandler;
 import com.iceteaviet.englishnow.ui.base.BaseViewModel;
 import com.iceteaviet.englishnow.ui.matching.ConversationMatchingNavigator;
 import com.iceteaviet.englishnow.utils.rx.SchedulerProvider;

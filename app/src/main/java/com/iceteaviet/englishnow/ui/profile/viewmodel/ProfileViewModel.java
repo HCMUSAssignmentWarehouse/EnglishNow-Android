@@ -9,8 +9,6 @@ import com.iceteaviet.englishnow.ui.base.BaseViewModel;
 import com.iceteaviet.englishnow.ui.profile.ProfileNavigator;
 import com.iceteaviet.englishnow.utils.rx.SchedulerProvider;
 
-import io.reactivex.functions.Consumer;
-
 /**
  * Created by Genius Doan on 02/01/2018.
  */
@@ -32,18 +30,10 @@ public class ProfileViewModel extends BaseViewModel<ProfileNavigator> {
                 .fetch()
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
-                .subscribe(new Consumer<User>() {
-                    @Override
-                    public void accept(User user) throws Exception {
-                        if (user != null)
-                            userLiveData.setValue(user);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        throwable.printStackTrace();
-                    }
-                })
+                .subscribe(user -> {
+                    if (user != null)
+                        userLiveData.setValue(user);
+                }, throwable -> throwable.printStackTrace())
         );
     }
 

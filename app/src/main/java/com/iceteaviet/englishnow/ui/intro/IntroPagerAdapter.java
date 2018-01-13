@@ -77,6 +77,6 @@ public final class IntroPagerAdapter extends FragmentPagerAdapter {
      */
     @Override
     public int getCount() {
-        return 3;
+        return mIntroTitleIds.length;
     }
 }

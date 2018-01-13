@@ -31,7 +31,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="16dp"
                 android:background="@android:color/transparent"
-                android:onClick="@{() -> viewModel.onNavBackClick()}"
+                android:onClick="@{() -> viewModel.onNavBackButtonClick()}"
                 android:tint="@android:color/white"
                 app:srcCompat="@drawable/ic_keyboard_backspace" />
 

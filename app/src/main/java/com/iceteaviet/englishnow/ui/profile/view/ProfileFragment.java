@@ -1,13 +1,11 @@
 package com.iceteaviet.englishnow.ui.profile.view;
 
-import android.arch.lifecycle.Observer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.iceteaviet.englishnow.BR;
 import com.iceteaviet.englishnow.R;
-import com.iceteaviet.englishnow.data.model.firebase.User;
 import com.iceteaviet.englishnow.databinding.FragmentProfileBinding;
 import com.iceteaviet.englishnow.ui.base.BaseFragment;
 import com.iceteaviet.englishnow.ui.profile.ProfileNavigator;
@@ -20,11 +18,10 @@ import javax.inject.Inject;
  */
 
 public class ProfileFragment extends BaseFragment<FragmentProfileBinding, ProfileViewModel> implements ProfileNavigator {
-
-    public static final String TAG = "ProfileFragment";
+    public static final String TAG = ProfileFragment.class.getSimpleName();
 
     @Inject
-    ProfileViewModel profileViewModel;
+    protected ProfileViewModel profileViewModel;
 
     public static ProfileFragment newInstance() {
         Bundle args = new Bundle();
@@ -62,7 +59,7 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding, Profil
     }
 
     @Override
-    public void goBack() {
+    public void navigateBack() {
         getBaseActivity().onFragmentDetached(TAG);
     }
 
@@ -80,11 +77,6 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding, Profil
     }
 
     private void subscribeToLiveData() {
-        profileViewModel.getUserLiveData().observe(getBaseActivity(), new Observer<User>() {
-            @Override
-            public void onChanged(@Nullable User user) {
-                profileViewModel.setUser(user);
-            }
-        });
+        profileViewModel.getUserLiveData().observe(getBaseActivity(), user -> profileViewModel.setUser(user));
     }
 }

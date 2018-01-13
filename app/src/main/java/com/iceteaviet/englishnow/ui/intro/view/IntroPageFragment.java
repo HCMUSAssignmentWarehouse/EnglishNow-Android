@@ -13,9 +13,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.iceteaviet.englishnow.R;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
  * Created by Genius Doan on 12/27/2017.
  */
@@ -27,11 +24,8 @@ public class IntroPageFragment extends android.app.Fragment {
     private static final String ARG_KEY_DRAWABLE_ID = "arg_drawable_id";
     private static final String ARG_KEY_COLOR = "arg_color";
 
-    @BindView(R.id.intro_title)
     TextView tvIntroTitle;
-    @BindView(R.id.intro_description)
     TextView tvIntroDes;
-    @BindView(R.id.intro_image)
     ImageView imageView;
 
     public IntroPageFragment() {
@@ -55,8 +49,13 @@ public class IntroPageFragment extends android.app.Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.intro_page_fragment, container, false);
-        ButterKnife.bind(this, view);
+        return inflater.inflate(R.layout.intro_page_fragment, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        bindViews(view);
 
         Bundle args = getArguments();
         tvIntroTitle.setText(args.getCharSequence(ARG_KEY_TITLE));
@@ -64,7 +63,11 @@ public class IntroPageFragment extends android.app.Fragment {
         Glide.with(imageView.getContext())
                 .load(args.getInt(ARG_KEY_DRAWABLE_ID))
                 .into(imageView);
+    }
 
-        return view;
+    private void bindViews(View view) {
+        tvIntroTitle = view.findViewById(R.id.intro_title);
+        tvIntroDes = view.findViewById(R.id.intro_description);
+        imageView = view.findViewById(R.id.intro_image);
     }
 }

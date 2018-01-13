@@ -11,6 +11,7 @@ import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -42,12 +43,12 @@ import dagger.android.HasFragmentInjector;
 public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel> implements MainNavigator, HasFragmentInjector {
 
     @Inject
-    ViewModelProvider.Factory viewModelFactory;
+    protected ViewModelProvider.Factory viewModelFactory;
 
     @Inject
-    DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
+    protected DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
 
-    ActivityMainBinding activityMainBinding;
+    protected ActivityMainBinding activityMainBinding;
     private MainViewModel mainViewModel;
 
     private DrawerLayout drawerLayout;
@@ -267,6 +268,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     @Override
     public void handleError(Throwable throwable) {
         throwable.printStackTrace();
+        Snackbar.make(activityMainBinding.flRootView, throwable.getMessage(), Snackbar.LENGTH_LONG).show();
     }
 
     @Override

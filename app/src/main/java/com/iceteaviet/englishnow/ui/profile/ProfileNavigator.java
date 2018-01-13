@@ -5,5 +5,5 @@ package com.iceteaviet.englishnow.ui.profile;
  */
 
 public interface ProfileNavigator {
-    void goBack();
+    void navigateBack();
 }

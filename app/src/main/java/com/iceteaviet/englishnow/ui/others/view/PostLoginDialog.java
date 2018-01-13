@@ -30,9 +30,9 @@ public class PostLoginDialog extends BaseDialog implements PostLoginNavigator {
     public static final String TAG = RegisterDialog.class.getSimpleName();
 
     @Inject
-    PostLoginViewModel postLoginViewModel;
+    protected PostLoginViewModel postLoginViewModel;
 
-    DialogPostSignInBinding dialogPostSignInBinding;
+    private DialogPostSignInBinding dialogPostSignInBinding;
 
     public static PostLoginDialog newInstance() {
         PostLoginDialog d = new PostLoginDialog();

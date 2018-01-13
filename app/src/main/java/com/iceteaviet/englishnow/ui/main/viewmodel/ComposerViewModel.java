@@ -15,11 +15,11 @@ import com.iceteaviet.englishnow.R;
 import com.iceteaviet.englishnow.data.DataManager;
 import com.iceteaviet.englishnow.data.model.firebase.UploadTaskMessage;
 import com.iceteaviet.englishnow.data.model.others.QueuedMedia;
+import com.iceteaviet.englishnow.data.remote.firebase.newsfeed.NewsFeedPostingExecutor;
+import com.iceteaviet.englishnow.data.remote.firebase.newsfeed.StatusPostingTicket;
+import com.iceteaviet.englishnow.data.remote.firebase.newsfeed.VideoStatusPostingTicket;
 import com.iceteaviet.englishnow.ui.base.BaseViewModel;
 import com.iceteaviet.englishnow.ui.main.ComposerNavigator;
-import com.iceteaviet.englishnow.ui.main.NewsFeedPostingExecutor;
-import com.iceteaviet.englishnow.ui.main.StatusPostingTicket;
-import com.iceteaviet.englishnow.ui.main.VideoStatusPostingTicket;
 import com.iceteaviet.englishnow.utils.AppLogger;
 import com.iceteaviet.englishnow.utils.CommonUtils;
 import com.iceteaviet.englishnow.utils.CountUpDownLatch;
@@ -109,7 +109,7 @@ public class ComposerViewModel extends BaseViewModel<ComposerNavigator> {
         long mediaSize = FileUtils.getMediaSize(contentResolver, uri);
 
         if (mediaSize == FileUtils.MEDIA_SIZE_UNKNOWN) {
-            getNavigator().displayTransientError(R.string.error_media_upload_opening);
+            getNavigator().handleError(R.string.error_media_upload_opening);
             return;
         }
 
@@ -119,19 +119,19 @@ public class ComposerViewModel extends BaseViewModel<ComposerNavigator> {
             switch (topLevelType) {
                 case "video": {
                     if (mediaSize > STATUS_MEDIA_SIZE_LIMIT) {
-                        getNavigator().displayTransientError(R.string.error_media_upload_size);
+                        getNavigator().handleError(R.string.error_media_upload_size);
                         return;
                     }
                     if (queuedMedia != null
                             && queuedMedia.getType() == QueuedMedia.Type.IMAGE) {
-                        getNavigator().displayTransientError(R.string.error_media_upload_image_or_video);
+                        getNavigator().handleError(R.string.error_media_upload_image_or_video);
                         return;
                     }
                     Bitmap bitmap = FileUtils.getVideoThumbnail(context, uri, THUMBNAIL_SIZE);
                     if (bitmap != null) {
                         addMediaToQueue(QueuedMedia.Type.VIDEO, bitmap, uri, mediaSize, null);
                     } else {
-                        getNavigator().displayTransientError(R.string.error_media_upload_opening);
+                        getNavigator().handleError(R.string.error_media_upload_opening);
                     }
                     break;
                 }
@@ -140,17 +140,17 @@ public class ComposerViewModel extends BaseViewModel<ComposerNavigator> {
                     if (bitmap != null) {
                         addMediaToQueue(QueuedMedia.Type.IMAGE, bitmap, uri, mediaSize, null);
                     } else {
-                        getNavigator().displayTransientError(R.string.error_media_upload_opening);
+                        getNavigator().handleError(R.string.error_media_upload_opening);
                     }
                     break;
                 }
                 default: {
-                    getNavigator().displayTransientError(R.string.error_media_upload_type);
+                    getNavigator().handleError(R.string.error_media_upload_type);
                     break;
                 }
             }
         } else {
-            getNavigator().displayTransientError(R.string.error_media_upload_type);
+            getNavigator().handleError(R.string.error_media_upload_type);
         }
     }
 
@@ -251,7 +251,7 @@ public class ComposerViewModel extends BaseViewModel<ComposerNavigator> {
     }
 
     private void onMediaDownsizeFailure(QueuedMedia item) {
-        getNavigator().displayTransientError(R.string.error_media_upload_size);
+        getNavigator().handleError(R.string.error_media_upload_size);
         removeMediaFromQueue(item);
     }
 
@@ -306,7 +306,7 @@ public class ComposerViewModel extends BaseViewModel<ComposerNavigator> {
         if (!throwable.getMessage().contains("cancel")) { //TODO: Support
             /* if the upload was voluntarily cancelled, such as if the user clicked on it to remove
              * it from the queue, then don't display this error message. */
-            getNavigator().displayTransientError(R.string.error_media_upload_sending);
+            getNavigator().handleError(R.string.error_media_upload_sending);
         }
 
         getNavigator().cancelFinishingUploadDialog();

@@ -7,8 +7,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
 
-import com.iceteaviet.englishnow.ui.base.AnimationAdapter;
-
 /**
  * Created by Genius Doan on 23/12/2017.
  */

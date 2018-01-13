@@ -16,7 +16,7 @@ public class AboutViewModel extends BaseViewModel<AboutNavigator> {
         super(dataManager, schedulerProvider);
     }
 
-    public void onNavBackClick() {
-        getNavigator().goBack();
+    public void onNavBackButtonClick() {
+        getNavigator().navigateBack();
     }
 }

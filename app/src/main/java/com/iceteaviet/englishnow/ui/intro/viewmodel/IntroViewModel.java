@@ -15,7 +15,7 @@ public class IntroViewModel extends BaseViewModel<IntroNavigator> {
     }
 
     public void onNextButtonClicked() {
-        getNavigator().goToNextScreen();
+        getNavigator().navigateToNextScreen();
     }
 
     public void onSkipButtonClicked() {

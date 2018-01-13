@@ -1,4 +1,4 @@
-package com.iceteaviet.englishnow.ui.main;
+package com.iceteaviet.englishnow.data.remote.firebase.newsfeed;
 
 import com.iceteaviet.englishnow.data.DataManager;
 import com.iceteaviet.englishnow.data.model.firebase.VideoStatus;

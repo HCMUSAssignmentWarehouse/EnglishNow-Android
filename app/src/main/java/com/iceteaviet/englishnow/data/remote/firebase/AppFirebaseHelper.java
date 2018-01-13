@@ -19,7 +19,6 @@ import javax.inject.Singleton;
 
 import io.reactivex.Single;
 import io.reactivex.SingleEmitter;
-import io.reactivex.SingleOnSubscribe;
 
 /**
  * Created by Genius Doan on 12/26/2017.
@@ -116,37 +115,32 @@ public class AppFirebaseHelper implements FirebaseHelper {
 
     @Override
     public Single<String> doConversationMatching(String userUid) {
-        return Single.create(new SingleOnSubscribe<String>() {
+        return Single.create(e -> database.getReference(AVAILABLE_LEARNERS).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void subscribe(SingleEmitter<String> e) throws Exception {
-                database.getReference(AVAILABLE_LEARNERS).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.hasChildren()) {
-                            for (DataSnapshot child : dataSnapshot.getChildren()) {
-                                Boolean matched = child.child(CHILD_MATCHED) == null ? false : child.child(CHILD_MATCHED).getValue(Boolean.class);
-                                if (!matched) {
-                                    String opponentUid = child.getKey();
-                                    subscribeToAvailableSpeaker(userUid, opponentUid);
-                                    e.onSuccess(opponentUid);
-                                    return;
-                                }
-                            }
-
-                            //If every child not is already matched -> publish a new one
-                            publishConversationMatchingRequest(userUid, e);
-                        } else {
-                            publishConversationMatchingRequest(userUid, e);
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+                    for (DataSnapshot child : dataSnapshot.getChildren()) {
+                        Boolean matched = child.child(CHILD_MATCHED) == null ? false : child.child(CHILD_MATCHED).getValue(Boolean.class);
+                        if (!matched) {
+                            String opponentUid = child.getKey();
+                            subscribeToAvailableSpeaker(userUid, opponentUid);
+                            e.onSuccess(opponentUid);
+                            return;
                         }
                     }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        databaseError.toException().printStackTrace();
-                    }
-                });
+                    //If every child not is already matched -> publish a new one
+                    publishConversationMatchingRequest(userUid, e);
+                } else {
+                    publishConversationMatchingRequest(userUid, e);
+                }
             }
-        });
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                databaseError.toException().printStackTrace();
+            }
+        }));
     }
 
     private void publishConversationMatchingRequest(String userUid, SingleEmitter<String> e) {

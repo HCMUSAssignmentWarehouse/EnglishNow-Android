@@ -48,14 +48,6 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
         mViewDataBinding.executePendingBindings();
     }
 
-    //TODO: unwrap to support custom font
-    /*
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
-    */
-
     @TargetApi(Build.VERSION_CODES.M)
     public void requestPermissionsSafely(String[] permissions, int requestCode) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

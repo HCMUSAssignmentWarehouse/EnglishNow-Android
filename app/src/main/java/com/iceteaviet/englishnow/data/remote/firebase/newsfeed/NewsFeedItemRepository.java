@@ -1,4 +1,4 @@
-package com.iceteaviet.englishnow.data.remote.firebase;
+package com.iceteaviet.englishnow.data.remote.firebase.newsfeed;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

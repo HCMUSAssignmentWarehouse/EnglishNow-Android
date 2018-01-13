@@ -1,9 +1,9 @@
-package com.iceteaviet.englishnow.data.remote;
+package com.iceteaviet.englishnow.data.remote.facade;
 
 import com.iceteaviet.englishnow.data.DataManager;
 import com.iceteaviet.englishnow.data.model.api.OpenTokRoom;
 import com.iceteaviet.englishnow.data.model.firebase.VideoCallSession;
-import com.iceteaviet.englishnow.data.remote.firebase.VideoCallSessionDataSource;
+import com.iceteaviet.englishnow.data.remote.firebase.videocall.VideoCallSessionDataSource;
 
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;

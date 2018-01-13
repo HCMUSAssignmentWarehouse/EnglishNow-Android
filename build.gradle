@@ -35,7 +35,6 @@ ext {
     runnerVersion = '1.0.1'
     espressoVersion = '3.0.1'
     constraintLayoutVersion = '1.0.2'
-    butterKnifeVersion = '8.8.1'
     rxAndroidVersion = '2.0.1'
     rxJavaVersion = '2.1.7'
     daggerVersion = '2.14'

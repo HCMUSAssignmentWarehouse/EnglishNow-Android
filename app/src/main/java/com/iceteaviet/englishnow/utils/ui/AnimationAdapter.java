@@ -1,8 +1,6 @@
-package com.iceteaviet.englishnow.ui.base;
+package com.iceteaviet.englishnow.utils.ui;
 
 import android.animation.Animator;
-
-import com.iceteaviet.englishnow.utils.ui.EspressoIdlingResource;
 
 /**
  * Created by Genius Doan on 08/01/2018.

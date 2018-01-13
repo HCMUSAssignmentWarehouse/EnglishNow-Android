@@ -28,8 +28,10 @@ public class ConversationMatchingActivity extends BaseActivity<ActivityConversat
     private static final int RC_SETTINGS_SCREEN_PERM = 123;
     private static final int RC_VIDEO_APP_PERM = 124;
     @Inject
-    ConversationMatchingViewModel conversationMatchingViewModel;
-    ActivityConversationMatchingBinding conversationMatchingBinding;
+    protected ConversationMatchingViewModel conversationMatchingViewModel;
+
+    private ActivityConversationMatchingBinding conversationMatchingBinding;
+
     private Button findButton;
 
     @Override
@@ -37,10 +39,10 @@ public class ConversationMatchingActivity extends BaseActivity<ActivityConversat
         super.onCreate(savedInstanceState);
         conversationMatchingViewModel.setNavigator(this);
         conversationMatchingBinding = getViewDataBinding();
-        setup();
+        bindViews();
     }
 
-    private void setup() {
+    private void bindViews() {
         findButton = conversationMatchingBinding.btnFind;
     }
 

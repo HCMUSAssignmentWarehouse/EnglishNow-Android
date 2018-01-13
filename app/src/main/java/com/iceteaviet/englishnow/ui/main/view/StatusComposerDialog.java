@@ -6,7 +6,6 @@ import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -31,6 +30,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.iceteaviet.englishnow.R;
@@ -40,6 +40,7 @@ import com.iceteaviet.englishnow.ui.base.BaseDialog;
 import com.iceteaviet.englishnow.ui.custom.ProgressImageView;
 import com.iceteaviet.englishnow.ui.main.ComposerNavigator;
 import com.iceteaviet.englishnow.ui.main.viewmodel.ComposerViewModel;
+import com.iceteaviet.englishnow.utils.AppConstants;
 import com.iceteaviet.englishnow.utils.CountUpDownLatch;
 
 import java.io.File;
@@ -60,18 +61,18 @@ public class StatusComposerDialog extends BaseDialog implements ComposerNavigato
     private static final int PERMISSIONS_REQUEST_CAMERA = 2;
 
     @Inject
-    ComposerViewModel composerViewModel;
+    protected ComposerViewModel composerViewModel;
 
-    DialogComposeStatusBinding composerBinding;
+    private DialogComposeStatusBinding composerBinding;
 
-
-    Button postButton;
-    EditText textEditor;
-    TextView charCountTextView;
-    ImageButton pickButton;
-    ImageButton saveDraftButton;
-    ProgressImageView progressImageView;
-    Button deletePhotoButton;
+    private Button postButton;
+    private EditText textEditor;
+    private TextView charCountTextView;
+    private ImageButton pickButton;
+    private ImageButton saveDraftButton;
+    private ProgressImageView progressImageView;
+    private Button deletePhotoButton;
+    private RelativeLayout photoContainer;
 
     private Uri photoUploadUri;
 
@@ -145,13 +146,7 @@ public class StatusComposerDialog extends BaseDialog implements ComposerNavigato
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //get view
-        postButton = composerBinding.btnPost;
-        charCountTextView = composerBinding.tvCountChar;
-        textEditor = composerBinding.editor;
-        pickButton = composerBinding.composePhotoPick;
-        saveDraftButton = composerBinding.composeSaveDraft;
-        progressImageView = composerBinding.ivPhoto;
-        deletePhotoButton = composerBinding.btnDeletePhoto;
+        bindViews();
 
         setCharsCounter(textEditor);
         progressImageView.setSmoothProgressEnabled(true);
@@ -159,6 +154,17 @@ public class StatusComposerDialog extends BaseDialog implements ComposerNavigato
         //
         textEditor.requestFocus();
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+    }
+
+    private void bindViews() {
+        postButton = composerBinding.btnPost;
+        charCountTextView = composerBinding.tvCountChar;
+        textEditor = composerBinding.editor;
+        pickButton = composerBinding.composePhotoPick;
+        saveDraftButton = composerBinding.composeSaveDraft;
+        progressImageView = composerBinding.ivPhoto;
+        deletePhotoButton = composerBinding.btnDeletePhoto;
+        photoContainer = composerBinding.photoContainer;
     }
 
     @Override
@@ -264,12 +270,12 @@ public class StatusComposerDialog extends BaseDialog implements ComposerNavigato
                 try {
                     photoFile = composerViewModel.createNewImageFile();
                 } catch (IOException ex) {
-                    displayTransientError(R.string.error_media_upload_opening);
+                    handleError(R.string.error_media_upload_opening);
                 }
                 // Continue only if the File was successfully created
                 if (photoFile != null) {
                     photoUploadUri = FileProvider.getUriForFile(getActivity(),
-                            "com.iceteaviet.englishnow.fileprovider",
+                            AppConstants.APP_PROVIDER_AUTHORITY,
                             photoFile);
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUploadUri);
                     startActivityForResult(intent, ComposerViewModel.MEDIA_TAKE_PHOTO_RESULT);
@@ -310,17 +316,11 @@ public class StatusComposerDialog extends BaseDialog implements ComposerNavigato
     public void addMediaPreview(QueuedMedia item, Bitmap preview) {
         item.setPreview(progressImageView);
         ImageView view = progressImageView;
-        Resources resources = getResources();
-        int side = resources.getDimensionPixelSize(R.dimen.compose_media_preview_side);
-        int margin = resources.getDimensionPixelSize(R.dimen.compose_media_preview_margin);
-        int marginBottom = resources.getDimensionPixelSize(
-                R.dimen.compose_media_preview_margin_bottom);
-
         view.setScaleType(ImageView.ScaleType.CENTER_CROP);
         view.setImageBitmap(preview);
         view.setContentDescription(getString(R.string.action_delete));
 
-        composerBinding.photoContainer.setVisibility(View.VISIBLE);
+        photoContainer.setVisibility(View.VISIBLE);
         deletePhotoButton.setEnabled(false);
         deletePhotoButton.setOnClickListener(v -> composerViewModel.removeMediaFromQueue(item));
 
@@ -346,7 +346,7 @@ public class StatusComposerDialog extends BaseDialog implements ComposerNavigato
 
     @Override
     public void removeMediaPreview(QueuedMedia item) {
-        composerBinding.photoContainer.setVisibility(View.GONE);
+        photoContainer.setVisibility(View.GONE);
         removeUrlFromEditable(textEditor.getEditableText(), item.getUploadUrl());
         enableMediaButtons();
     }
@@ -367,7 +367,7 @@ public class StatusComposerDialog extends BaseDialog implements ComposerNavigato
     }
 
     @Override
-    public void displayTransientError(@StringRes int stringId) {
+    public void handleError(@StringRes int stringId) {
         Snackbar.make(composerBinding.rlRootView, stringId, Snackbar.LENGTH_LONG).show();
     }
 

@@ -10,26 +10,17 @@ import android.widget.TextView;
 
 import com.iceteaviet.englishnow.R;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Created by Genius Doan on 03/01/2018.
  */
 
 public class SkillRatingBar extends RelativeLayout {
-
-    @BindView(R.id.tv_skill_name)
     protected TextView tvSkillName;
-
-    @BindView(R.id.rating_bar)
     protected RatingBar ratingBar;
 
     private String skillName;
     private float rating = 0f;
-
-    private Unbinder unbinder;
 
     public SkillRatingBar(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -51,14 +42,18 @@ public class SkillRatingBar extends RelativeLayout {
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         // View is now detached, and about to be destroyed
-        unbinder.unbind();
     }
 
     private void initialize(AttributeSet attrs) {
         View rootView = inflate(getContext(), R.layout.skill_rating_bar, this);
-        unbinder = ButterKnife.bind(this, rootView);
+        bindViews(rootView);
         initStyles(attrs);
         initViews();
+    }
+
+    private void bindViews(View rootView) {
+        tvSkillName = findViewById(R.id.tv_skill_name);
+        ratingBar = findViewById(R.id.rating_bar);
     }
 
     private void initViews() {

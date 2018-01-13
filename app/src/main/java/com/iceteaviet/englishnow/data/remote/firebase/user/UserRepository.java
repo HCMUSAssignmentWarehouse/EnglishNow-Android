@@ -1,4 +1,4 @@
-package com.iceteaviet.englishnow.data.remote.firebase;
+package com.iceteaviet.englishnow.data.remote.firebase.user;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

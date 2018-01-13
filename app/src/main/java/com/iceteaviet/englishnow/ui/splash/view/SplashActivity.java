@@ -24,12 +24,12 @@ import dagger.android.HasFragmentInjector;
 
 public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashViewModel> implements SplashNavigator, HasFragmentInjector {
     @Inject
-    SplashViewModel splashViewModel;
+    protected SplashViewModel splashViewModel;
 
     @Inject
-    DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
+    protected DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
 
-    ActivitySplashBinding activitySplashBinding;
+    private ActivitySplashBinding activitySplashBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

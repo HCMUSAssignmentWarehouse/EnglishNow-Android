@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.Button;
 
 import com.iceteaviet.englishnow.BR;
 import com.iceteaviet.englishnow.R;
@@ -28,12 +29,18 @@ public class IntroActivity extends BaseActivity<ActivityIntroBinding, IntroViewM
             R.color.intro_informative_background_color,
             R.color.intro_social_networking_background_color
     };
-    @Inject
-    IntroViewModel introViewModel;
 
-    ActivityIntroBinding activityIntroBinding;
-    ArgbEvaluator mArgbEvaluator;
-    ViewPager.OnPageChangeListener onPageChangeListener;
+    @Inject
+    protected IntroViewModel introViewModel;
+
+    private ActivityIntroBinding activityIntroBinding;
+
+    private ViewPager viewPager;
+    private IntroIndicator introIndicator;
+    private Button nextButton;
+
+    private ArgbEvaluator mArgbEvaluator;
+    private ViewPager.OnPageChangeListener onPageChangeListener;
     private IntroPagerAdapter mPagerAdapter;
 
     @Override
@@ -44,11 +51,13 @@ public class IntroActivity extends BaseActivity<ActivityIntroBinding, IntroViewM
         activityIntroBinding = getViewDataBinding();
         mArgbEvaluator = new ArgbEvaluator();
 
-        mPagerAdapter = new IntroPagerAdapter(this, activityIntroBinding.introPager);
-        activityIntroBinding.introPager.setAdapter(mPagerAdapter);
-        activityIntroBinding.introIndicator.setViewPager(activityIntroBinding.introPager);
+        bindViews();
 
-        ViewCompat.setBackgroundTintList(activityIntroBinding.nextBtn, ColorStateList.valueOf(Color.WHITE));
+        mPagerAdapter = new IntroPagerAdapter(this, viewPager);
+        viewPager.setAdapter(mPagerAdapter);
+        introIndicator.setViewPager(viewPager);
+
+        ViewCompat.setBackgroundTintList(nextButton, ColorStateList.valueOf(Color.WHITE));
 
         if (OsUtils.isAtLeastL()) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
@@ -62,15 +71,15 @@ public class IntroActivity extends BaseActivity<ActivityIntroBinding, IntroViewM
                 int bgColor = getResources().getColor(mIntroBgColorIds[position]);
                 int nextBgColor = getResources().getColor(mIntroBgColorIds[position == mPagerAdapter.getCount() - 1 ? position : position + 1]);
                 int colorUpdate = (Integer) mArgbEvaluator.evaluate(positionOffset, bgColor, nextBgColor);
-                activityIntroBinding.introPager.setBackgroundColor(colorUpdate);
+                viewPager.setBackgroundColor(colorUpdate);
             }
 
             @Override
             public void onPageSelected(int position) {
                 if (position == mPagerAdapter.getCount() - 1) {
-                    activityIntroBinding.nextBtn.setText(R.string.intro_get_started);
+                    nextButton.setText(R.string.intro_get_started);
                 } else {
-                    activityIntroBinding.nextBtn.setText(R.string.intro_next);
+                    nextButton.setText(R.string.intro_next);
                 }
             }
 
@@ -80,12 +89,18 @@ public class IntroActivity extends BaseActivity<ActivityIntroBinding, IntroViewM
             }
         };
 
-        activityIntroBinding.introPager.addOnPageChangeListener(onPageChangeListener);
+        viewPager.addOnPageChangeListener(onPageChangeListener);
+    }
+
+    private void bindViews() {
+        viewPager = activityIntroBinding.introPager;
+        introIndicator = activityIntroBinding.introIndicator;
+        nextButton = activityIntroBinding.nextBtn;
     }
 
     @Override
     protected void onDestroy() {
-        activityIntroBinding.introPager.removeOnPageChangeListener(onPageChangeListener);
+        viewPager.removeOnPageChangeListener(onPageChangeListener);
         super.onDestroy();
     }
 
@@ -105,18 +120,18 @@ public class IntroActivity extends BaseActivity<ActivityIntroBinding, IntroViewM
     }
 
     @Override
-    public void goToNextScreen() {
-        final int currentPos = activityIntroBinding.introPager.getCurrentItem();
+    public void navigateToNextScreen() {
+        final int currentPos = viewPager.getCurrentItem();
         if (currentPos == mPagerAdapter.getCount() - 1) {
             onIntroFinished();
         } else {
-            activityIntroBinding.introPager.setCurrentItem(currentPos + 1);
+            viewPager.setCurrentItem(currentPos + 1);
         }
     }
 
     @Override
     public void skip() {
-        activityIntroBinding.introPager.setCurrentItem(mPagerAdapter.getCount() - 1, true);
+        viewPager.setCurrentItem(mPagerAdapter.getCount() - 1, true);
     }
 
     private void onIntroFinished() {

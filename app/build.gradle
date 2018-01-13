@@ -95,7 +95,6 @@ dependencies {
     implementation "org.greenrobot:eventbus:${rootProject.eventBusVersion}"
 
     //Others
-    implementation "com.jakewharton:butterknife:${rootProject.butterKnifeVersion}"
     implementation "com.jakewharton.timber:timber:${rootProject.timberVersion}"
 
     //Test dependency
@@ -105,7 +104,6 @@ dependencies {
     androidTestImplementation "com.android.support.test.espresso:espresso-core:${rootProject.espressoVersion}"
 
     //Annotation processor
-    annotationProcessor "com.jakewharton:butterknife-compiler:${rootProject.butterKnifeVersion}"
     annotationProcessor "com.google.dagger:dagger-compiler:${rootProject.daggerVersion}"
     annotationProcessor "com.google.dagger:dagger-android-processor:${rootProject.daggerVersion}"
     annotationProcessor "android.arch.lifecycle:compiler:${rootProject.archLifeCycleVersion}"

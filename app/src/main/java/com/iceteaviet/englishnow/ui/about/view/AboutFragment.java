@@ -18,10 +18,10 @@ import javax.inject.Inject;
 
 public class AboutFragment extends BaseFragment<FragmentAboutBinding, AboutViewModel> implements AboutNavigator {
 
-    public static final String TAG = "AboutFragment";
+    public static final String TAG = AboutFragment.class.getSimpleName();
 
     @Inject
-    AboutViewModel mAboutViewModel;
+    protected AboutViewModel mAboutViewModel;
 
     public static AboutFragment newInstance() {
         Bundle args = new Bundle();
@@ -52,7 +52,7 @@ public class AboutFragment extends BaseFragment<FragmentAboutBinding, AboutViewM
     }
 
     @Override
-    public void goBack() {
+    public void navigateBack() {
         getBaseActivity().onFragmentDetached(TAG);
     }
 
@@ -60,5 +60,4 @@ public class AboutFragment extends BaseFragment<FragmentAboutBinding, AboutViewM
     public void onDestroyView() {
         super.onDestroyView();
     }
-
 }
