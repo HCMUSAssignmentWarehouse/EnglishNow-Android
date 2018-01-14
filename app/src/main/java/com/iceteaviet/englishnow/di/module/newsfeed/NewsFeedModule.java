@@ -22,6 +22,6 @@ public class NewsFeedModule {
 
     @Provides
     public NewsFeedPagerAdapter provideNewsFeedPagerAdapter(NewsFeedFragment fragment) {
-        return new NewsFeedPagerAdapter(fragment.getFragmentManager());
+        return new NewsFeedPagerAdapter(fragment.getChildFragmentManager());
     }
 }
