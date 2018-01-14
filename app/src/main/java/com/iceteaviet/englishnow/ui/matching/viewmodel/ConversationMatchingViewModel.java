@@ -18,6 +18,8 @@ public class ConversationMatchingViewModel extends BaseViewModel<ConversationMat
     public ConversationMatchingViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
         handler = new ConversationMatchingHandler(dataManager, schedulerProvider, getCompositeDisposable(), dataManager.getVideoCallSessionRepository());
+
+        //Subscribe to data-stream to know when the matching complete and get the data
         getCompositeDisposable().add(handler.getMatchingSubject()
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.ui())

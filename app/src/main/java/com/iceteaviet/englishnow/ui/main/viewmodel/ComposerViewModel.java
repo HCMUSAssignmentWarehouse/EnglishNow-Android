@@ -231,10 +231,12 @@ public class ComposerViewModel extends BaseViewModel<ComposerNavigator> {
 
                             @Override
                             public void accept(UploadTaskMessage uploadTaskMessage) throws Exception {
+                                //Parse messages to get information about the Uploading Task
                                 int progress = (int) Math.round(uploadTaskMessage.getProgress());
                                 if (progress == lastProgress)
                                     return;
 
+                                //Update
                                 item.getPreview().setProgress(progress);
                                 if (progress == 100)
                                     onUploadSuccess(item, uploadTaskMessage.getResult());
@@ -334,7 +336,7 @@ public class ComposerViewModel extends BaseViewModel<ComposerNavigator> {
             ticket.setPhotoUrl(queuedMedia.getUploadUrl().getURL());
         }
 
-        NewsFeedPostingExecutor.getInstance().execute(ticket);
+        NewsFeedPostingExecutor.getInstance().execute(ticket); //Execute strategy
     }
 
     public void doPostVideoStatus() {
@@ -347,6 +349,7 @@ public class ComposerViewModel extends BaseViewModel<ComposerNavigator> {
         }
 
         VideoStatusPostingTicket ticket = new VideoStatusPostingTicket(uid, userDisplayName, queuedMedia.getUploadUrl().getURL());
-        NewsFeedPostingExecutor.getInstance().execute(ticket);
+
+        NewsFeedPostingExecutor.getInstance().execute(ticket); //Execute strategy
     }
 }

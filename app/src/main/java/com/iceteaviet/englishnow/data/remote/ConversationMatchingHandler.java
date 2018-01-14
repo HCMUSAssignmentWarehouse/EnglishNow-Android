@@ -123,7 +123,7 @@ public class ConversationMatchingHandler {
                         if (session.getSessionId() != null && !session.getSessionId().isEmpty()
                                 && session.getSpeakerToken() != null && !session.getSpeakerToken().isEmpty()
                                 && session.getLearnerToken() != null && !session.getLearnerToken().isEmpty()) {
-                            //Start call
+                            //Successfully, add data to stream and send onNext event back to ViewModel
                             matchingSubject.onNext(currentRoom);
                             matchingSubject.onComplete();
                         } else {
