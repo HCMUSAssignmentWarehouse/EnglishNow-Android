@@ -2,7 +2,7 @@ package com.iceteaviet.englishnow.ui.auth.viewmodel;
 
 import com.google.firebase.auth.FirebaseUser;
 import com.iceteaviet.englishnow.data.DataManager;
-import com.iceteaviet.englishnow.data.model.firebase.LoginRequest;
+import com.iceteaviet.englishnow.data.model.firebase.message.LoginMessage;
 import com.iceteaviet.englishnow.ui.auth.LoginNavigator;
 import com.iceteaviet.englishnow.ui.base.BaseViewModel;
 import com.iceteaviet.englishnow.utils.InputUtils;
@@ -36,7 +36,7 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
     public void doLogin(String email, String password) {
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
-                .loginFirebaseWithEmail(new LoginRequest.ServerLoginRequest(email, password))
+                .loginFirebaseWithEmail(new LoginMessage.ServerLoginRequest(email, password))
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(authResult -> {

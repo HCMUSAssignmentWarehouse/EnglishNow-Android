@@ -11,7 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Genius Doan on 28/12/2017.
+ * Created by Genius Doan on 11/01/2018.
+ *
+ * Model for storing information about a normal user
+ *
+ * Implements Serializable to mark that this object can stream into to a sequence of byte
+ * and restore these objects from this stream of bytes
  */
 
 @IgnoreExtraProperties

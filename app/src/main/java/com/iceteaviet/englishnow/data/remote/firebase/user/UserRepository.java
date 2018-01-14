@@ -10,14 +10,19 @@ import com.google.firebase.database.ValueEventListener;
 import com.iceteaviet.englishnow.data.model.firebase.User;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import io.reactivex.Observable;
 import io.reactivex.Single;
 
 /**
  * Created by Genius Doan on 08/01/2018.
+ *
+ * Repository to mediates between the view-model and Firebase data mapping layers
+ * To create or fetch information about users from Firebase database
  */
 
+@Singleton
 public class UserRepository implements UserDataSource {
     private static final String USER_PROFILE = "user_profile";
 
@@ -79,6 +84,11 @@ public class UserRepository implements UserDataSource {
                 }
             });
         });
+    }
+
+    @Override
+    public void remove(String userUid) {
+        database.getReference(USER_PROFILE).child(userUid).removeValue();
     }
 
     @Override

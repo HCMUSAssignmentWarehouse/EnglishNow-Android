@@ -4,15 +4,20 @@ import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.PropertyName;
 import com.iceteaviet.englishnow.data.model.firebase.Comment;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
 /**
- * Created by Genius Doan on 02/01/2018.
+ * Created by Genius Doan on 11/01/2018.
+ *
+ * Model for storing abstract information about a newsfeed item
+ *
+ * Implements Serializable to mark that this object can stream into to a sequence of byte
+ * and restore these objects from this stream of bytes
  */
-
 @IgnoreExtraProperties
-public abstract class NewsFeedItem {
+public abstract class NewsFeedItem implements Serializable {
     @PropertyName("like_number")
     protected int likeCount = 0;
 
@@ -101,6 +106,7 @@ public abstract class NewsFeedItem {
         this.likes = likes;
     }
 
+    //Base class of Builder design pattern that used for constructing NewsFeedItems
     public static class Builder<T extends Builder<T>> {
         protected int likeCount = 0;
         protected long timestamp;

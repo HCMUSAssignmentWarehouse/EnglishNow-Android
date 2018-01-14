@@ -5,6 +5,8 @@ import com.iceteaviet.englishnow.data.model.firebase.Status;
 
 /**
  * Created by Genius Doan on 10/01/2018.
+ *
+ * Strategy options for posting text/image status
  */
 
 public class StatusPostingTicket implements NewsFeedPostingTicket<Status> {

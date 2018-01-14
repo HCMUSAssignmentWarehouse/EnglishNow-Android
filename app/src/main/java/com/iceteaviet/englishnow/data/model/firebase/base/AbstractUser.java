@@ -3,12 +3,19 @@ package com.iceteaviet.englishnow.data.model.firebase.base;
 import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.PropertyName;
 
+import java.io.Serializable;
+
 /**
- * Created by Genius Doan on 28/12/2017.
+ * Created by Genius Doan on 11/01/2018.
+ *
+ * Model for storing abstract information about a user
+ *
+ * Implements Serializable to mark that this object can stream into to a sequence of byte
+ * and restore these objects from this stream of bytes
  */
 
 @IgnoreExtraProperties
-public abstract class AbstractUser {
+public abstract class AbstractUser implements Serializable {
     @PropertyName("email")
     protected String email;
     @PropertyName("username")
@@ -59,6 +66,7 @@ public abstract class AbstractUser {
         this.profilePic = profilePic;
     }
 
+    //Base builder class to construct variant type of users
     public static class Builder<T extends Builder<T>> {
         protected String email;
         protected String username;

@@ -8,6 +8,8 @@ import dagger.android.ContributesAndroidInjector;
 
 /**
  * Created by Genius Doan on 28/12/2017.
+ *
+ * Generate dependencies for sub-component of LoginActivity (Fragments, DialogFragments,..)
  */
 
 @Module

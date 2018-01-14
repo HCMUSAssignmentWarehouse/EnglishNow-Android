@@ -2,11 +2,18 @@ package com.iceteaviet.englishnow.data.model.api;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by Genius Doan on 11/01/2018.
+ *
+ * Model for getting OpenTok room information
+ *
+ * Implements Serializable to mark that this object can stream into to a sequence of byte
+ * and restore these objects from this stream of bytes
  */
 
-public class OpenTokRoom {
+public class OpenTokRoom implements Serializable {
     @SerializedName("apiKey")
     protected String apiKey;
     @SerializedName("sessionId")

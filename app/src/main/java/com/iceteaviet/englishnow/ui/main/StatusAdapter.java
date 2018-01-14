@@ -9,10 +9,13 @@ import android.view.ViewGroup;
 import com.iceteaviet.englishnow.R;
 import com.iceteaviet.englishnow.databinding.StatusItemBinding;
 import com.iceteaviet.englishnow.ui.base.BaseRecyclerViewAdapter;
+import com.iceteaviet.englishnow.ui.base.BaseViewHolder;
 import com.iceteaviet.englishnow.ui.newsfeed.viewmodel.StatusItemViewModel;
 
 /**
  * Created by Genius Doan on 02/01/2018.
+ *
+ * Adapter to convert list data into Views
  */
 
 public class StatusAdapter extends BaseRecyclerViewAdapter<StatusItemViewModel> {
@@ -36,10 +39,11 @@ public class StatusAdapter extends BaseRecyclerViewAdapter<StatusItemViewModel> 
 
     private void bindStatusItemView(RecyclerView.ViewHolder holder, int position) {
         StatusItemViewHolder viewHolder = (StatusItemViewHolder) holder;
-        viewHolder.bind((StatusItemViewModel) mItems.get(position));
+        viewHolder.onBind(position);
     }
 
-    public class StatusItemViewHolder extends RecyclerView.ViewHolder {
+    //ViewHolder pattern
+    public class StatusItemViewHolder extends BaseViewHolder {
         private StatusItemBinding statusItemBinding;
 
         public StatusItemViewHolder(StatusItemBinding binding) {
@@ -47,8 +51,9 @@ public class StatusAdapter extends BaseRecyclerViewAdapter<StatusItemViewModel> 
             statusItemBinding = binding;
         }
 
-        public void bind(StatusItemViewModel status) {
-            statusItemBinding.setViewModel(status);
+        @Override
+        public void onBind(int position) {
+            statusItemBinding.setViewModel(mItems.get(position));
         }
     }
 }

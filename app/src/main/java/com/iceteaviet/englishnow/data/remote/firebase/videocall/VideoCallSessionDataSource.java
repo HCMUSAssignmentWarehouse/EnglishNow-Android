@@ -22,5 +22,5 @@ public interface VideoCallSessionDataSource {
 
     Observable<VideoCallSession> fetch(String sessionId);
 
-    void delete(String sessionId);
+    void remove(String sessionId);
 }

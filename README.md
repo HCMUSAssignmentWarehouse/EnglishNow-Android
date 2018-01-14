@@ -4,9 +4,12 @@
 
 English Now is an awesome Android app based on MVVM architecture with Android Data Binding using Dagger 2, RxJava2, new Android Arch Components, OpenTok client sdk, Firebase and NodeJS server.
 
- It allows a users to practice speaking, writing, chatting in English. By the time using this app, English level of users will be improved.
+It allows a users to practice speaking, writing, chatting in English. By the time using this app, English level of users will be improved.
 
-Time spent: **20** hours spent in total
+Time spent: **48** hours spent in total
+
+## Requirements
+Apply software architecture techniques inside this [list](https://github.com/HCMUS-AssignmentWarehouse/EnglishNow-Android-MVVM/blob/master/requirement.md)
 
 ## User Stories
 
@@ -59,7 +62,7 @@ Tester **MUST** sign up and sign in in-app.
 - [Dagger 2](https://github.com/google/dagger) - A fast dependency injector for Android and Java.
 - [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/index.html) - A collection of libraries that help you design robust, testable, and maintainable apps.
 - [Retrofit](https://github.com/square/retrofit) - Type-safe HTTP client for Android and Java by Square, Inc
-- [ButterKnife](https://github.com/JakeWharton/butterknife) - Bind Android views and callbacks to fields and methods
+- [EventBus](https://github.com/greenrobot/EventBus) - A publish/subscribe event bus for Android and Java that simplifies communication between Activities, Fragments, Threads, Services, etc. Less code, better quality.
 - [Timber](https://github.com/JakeWharton/timber) - A logger with a small, extensible API which provides utility on top of Android's normal Log class
 - [Glide](https://github.com/bumptech/glide) - An image loading and caching library for Android focused on smooth scrolling
 - [CircleImageView](https://github.com/hdodenhof/CircleImageView) - A circular ImageView for Android

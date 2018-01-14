@@ -97,7 +97,7 @@ public class VideoCallViewModel extends BaseViewModel<VideoCallNavigator>
         //called when the client disconnects from the OpenTok session.
         AppLogger.e("onDisconnected");
         getNavigator().closeCallScreen();
-        getDataManager().getVideoCallSessionRepository().delete(session.getSessionId());
+        getDataManager().getVideoCallSessionRepository().remove(session.getSessionId());
     }
 
     @Override

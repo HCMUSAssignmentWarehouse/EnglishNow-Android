@@ -6,23 +6,34 @@ import com.iceteaviet.englishnow.utils.AppLogger;
 
 /**
  * Created by Genius Doan on 10/01/2018.
+ *
+ * Use for execute a newsfeed item posting ticket.
+ * Design pattern applied: Singleton, Facade, context to execute Strategy Pattern
  */
 
-//Design Pattern: Facade, context for execute Strategy Pattern
 public class NewsFeedPostingExecutor {
     private static final String TAG = NewsFeedPostingExecutor.class.getSimpleName();
-    private NewsFeedPostingTicket ticket;
+    private static NewsFeedPostingExecutor instance = null;
     private DataManager dataManager;
 
-    public NewsFeedPostingExecutor(DataManager dataManager) {
+    private NewsFeedPostingExecutor() {
+        //Singleton
+    }
+
+    public static NewsFeedPostingExecutor getInstance() {
+        //Lazy init
+        if (instance == null) {
+            instance = new NewsFeedPostingExecutor();
+        }
+
+        return instance;
+    }
+
+    public void setDataManager(DataManager dataManager) {
         this.dataManager = dataManager;
     }
 
-    public void setTicket(NewsFeedPostingTicket ticket) {
-        this.ticket = ticket;
-    }
-
-    public void execute() {
+    public void execute(NewsFeedPostingTicket ticket) {
         NewsFeedItem item = ticket.buildNewsFeedItem();
         if (item != null)
             ticket.post(dataManager, item);

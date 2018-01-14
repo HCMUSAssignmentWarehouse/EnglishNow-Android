@@ -10,8 +10,8 @@ import com.iceteaviet.englishnow.data.AppDataManager;
 import com.iceteaviet.englishnow.data.DataManager;
 import com.iceteaviet.englishnow.data.local.prefs.AppPreferencesHelper;
 import com.iceteaviet.englishnow.data.local.prefs.PreferencesHelper;
-import com.iceteaviet.englishnow.data.remote.api.ApiDataSource;
-import com.iceteaviet.englishnow.data.remote.api.ApiRepository;
+import com.iceteaviet.englishnow.data.remote.api.ApiHelper;
+import com.iceteaviet.englishnow.data.remote.api.AppApiHelper;
 import com.iceteaviet.englishnow.data.remote.firebase.AppFirebaseHelper;
 import com.iceteaviet.englishnow.data.remote.firebase.FirebaseHelper;
 import com.iceteaviet.englishnow.data.remote.firebase.media.MediaDataSource;
@@ -32,6 +32,9 @@ import dagger.Provides;
 
 /**
  * Created by Genius Doan on 12/24/2017.
+ *
+ * You need to define what objects should be included as part of the dependency chain by creating a Dagger 2 module.
+ * This AppModule is used to provide dependencies about general object that needed throughout the app.
  */
 
 //Because we wish to setup caching, we need an Application context
@@ -67,7 +70,7 @@ public class AppModule {
 
     @Provides
     @Singleton
-    ApiDataSource provideApiDataSource(ApiRepository repository) {
+    ApiHelper provideApiDataSource(AppApiHelper repository) {
         return repository;
     }
 

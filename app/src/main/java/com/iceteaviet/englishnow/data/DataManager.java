@@ -2,7 +2,7 @@ package com.iceteaviet.englishnow.data;
 
 import com.iceteaviet.englishnow.data.local.prefs.PreferencesHelper;
 import com.iceteaviet.englishnow.data.model.others.StatusItemData;
-import com.iceteaviet.englishnow.data.remote.api.ApiDataSource;
+import com.iceteaviet.englishnow.data.remote.api.ApiHelper;
 import com.iceteaviet.englishnow.data.remote.firebase.FirebaseHelper;
 import com.iceteaviet.englishnow.data.remote.firebase.media.MediaDataSource;
 import com.iceteaviet.englishnow.data.remote.firebase.newsfeed.NewsFeedItemDataSource;
@@ -17,8 +17,7 @@ import io.reactivex.Observable;
  * Created by Genius Doan on 23/12/2017.
  */
 
-//TODO: Turn it into Facade Pattern
-public interface DataManager extends ApiDataSource, FirebaseHelper, PreferencesHelper {
+public interface DataManager extends ApiHelper, FirebaseHelper, PreferencesHelper {
     UserDataSource getUserRepository();
 
     NewsFeedItemDataSource getNewsFeedItemRepository();

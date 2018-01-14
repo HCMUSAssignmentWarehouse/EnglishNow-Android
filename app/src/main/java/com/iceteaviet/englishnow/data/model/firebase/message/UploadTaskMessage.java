@@ -1,9 +1,12 @@
-package com.iceteaviet.englishnow.data.model.firebase;
+package com.iceteaviet.englishnow.data.model.firebase.message;
 
 import android.net.Uri;
 
 /**
  * Created by Genius Doan on 06/01/2018.
+ *
+ * Store information about a upload task response
+ * Use it as a message for response information from data manager back to View-Model.
  */
 
 public class UploadTaskMessage {

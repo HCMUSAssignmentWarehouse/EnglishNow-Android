@@ -1,14 +1,17 @@
-package com.iceteaviet.englishnow.data.model.firebase;
+package com.iceteaviet.englishnow.data.model.firebase.message;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Genius Doan on 12/26/2017.
+ *
+ * Store information about a login request.
+ * Use it as a message for transport information from View-Model to data manager
  */
 
-public class LoginRequest {
-    private LoginRequest() {
+public class LoginMessage {
+    private LoginMessage() {
         // This class is not publicly instantiable
     }
 

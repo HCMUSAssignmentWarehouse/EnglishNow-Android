@@ -10,9 +10,11 @@ import io.reactivex.Single;
  */
 
 public interface UserDataSource {
+    void createOrUpdate(String userUid, User user);
+
     Observable<User> fetch();
 
     Single<User> fetchOnce(String uid);
 
-    void createOrUpdate(String userUid, User user);
+    void remove(String userUid);
 }

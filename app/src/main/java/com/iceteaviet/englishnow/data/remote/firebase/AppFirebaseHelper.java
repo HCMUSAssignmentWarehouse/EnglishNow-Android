@@ -8,8 +8,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.iceteaviet.englishnow.data.model.firebase.LoginRequest;
-import com.iceteaviet.englishnow.data.model.firebase.RegisterRequest;
+import com.iceteaviet.englishnow.data.model.firebase.message.LoginMessage;
+import com.iceteaviet.englishnow.data.model.firebase.message.RegisterMessage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +22,8 @@ import io.reactivex.SingleEmitter;
 
 /**
  * Created by Genius Doan on 12/26/2017.
+ *
+ * Entry point contains methods that help interacting with Firebase
  */
 
 @Singleton
@@ -46,14 +48,14 @@ public class AppFirebaseHelper implements FirebaseHelper {
     }
 
     @Override
-    public Single<AuthResult> loginFirebaseWithEmail(LoginRequest.ServerLoginRequest request) {
+    public Single<AuthResult> loginFirebaseWithEmail(LoginMessage.ServerLoginRequest request) {
         return Single.create(emitter -> mAuth.signInWithEmailAndPassword(request.getEmail(), request.getPassword())
                 .addOnSuccessListener(authResult -> emitter.onSuccess(authResult))
                 .addOnFailureListener(e -> emitter.onError(e)));
     }
 
     @Override
-    public Single<AuthResult> registerFirebaseWithEmail(RegisterRequest.ServerRegisterRequest request) {
+    public Single<AuthResult> registerFirebaseWithEmail(RegisterMessage.ServerRequest request) {
         return Single.create(emitter -> mAuth.createUserWithEmailAndPassword(request.getEmail(), request.getPassword())
                 .addOnSuccessListener(authResult -> {
                     //update display name

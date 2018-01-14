@@ -3,16 +3,20 @@ package com.iceteaviet.englishnow.data.model.others;
 import android.net.Uri;
 import android.text.style.URLSpan;
 
-import com.iceteaviet.englishnow.data.model.firebase.UploadTaskMessage;
+import com.iceteaviet.englishnow.data.model.firebase.message.UploadTaskMessage;
 import com.iceteaviet.englishnow.ui.custom.ProgressImageView;
+
+import java.io.Serializable;
 
 import io.reactivex.Observable;
 
 /**
  * Created by Genius Doan on 05/01/2018.
+ *
+ * Model for storing information about queued media to upload
  */
 
-public final class QueuedMedia {
+public final class QueuedMedia implements Serializable {
     private Type type;
     private ProgressImageView preview;
     private Uri localUri;

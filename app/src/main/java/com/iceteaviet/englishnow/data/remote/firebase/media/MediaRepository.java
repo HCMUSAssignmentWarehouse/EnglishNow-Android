@@ -5,18 +5,22 @@ import android.net.Uri;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.iceteaviet.englishnow.data.model.firebase.UploadTaskMessage;
+import com.iceteaviet.englishnow.data.model.firebase.message.UploadTaskMessage;
 import com.iceteaviet.englishnow.utils.AppLogger;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 
 /**
  * Created by Genius Doan on 08/01/2018.
+ *
+ * Repository to mediates between the view-model and Firebase storage mapping layers
  */
 
+@Singleton
 public class MediaRepository implements MediaDataSource {
     private static final String TAG = MediaRepository.class.getSimpleName();
     private static final String STATUS_IMAGES = "status_images";
@@ -43,6 +47,18 @@ public class MediaRepository implements MediaDataSource {
             StorageReference photoRef = storage.getReference(STATUS_VIDEOS).child(data.getLastPathSegment());
             putFile(data, photoRef, e);
         });
+    }
+
+    @Override
+    public Observable<UploadTaskMessage> updatePhoto(Uri data) {
+        //TODO: Implement me
+        return null;
+    }
+
+    @Override
+    public Observable<UploadTaskMessage> updateVideo(Uri data) {
+        //TODO: Implement me
+        return null;
     }
 
     @Override

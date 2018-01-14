@@ -1,18 +1,21 @@
-package com.iceteaviet.englishnow.data.model.firebase;
+package com.iceteaviet.englishnow.data.model.firebase.message;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Genius Doan on 28/12/2017.
+ *
+ * Store information about a register request.
+ * Use it as a message for transport information from View-Model to data managers
  */
 
-public class RegisterRequest {
-    private RegisterRequest() {
+public class RegisterMessage {
+    private RegisterMessage() {
 
     }
 
-    public static class ServerRegisterRequest {
+    public static class ServerRequest {
         @Expose
         @SerializedName("email")
         private String email;
@@ -25,7 +28,7 @@ public class RegisterRequest {
         @SerializedName("password")
         private String password;
 
-        public ServerRegisterRequest(String email, String username, String password) {
+        public ServerRequest(String email, String username, String password) {
             this.email = email;
             this.username = username;
             this.password = password;
@@ -60,7 +63,7 @@ public class RegisterRequest {
             if (this == object) return true;
             if (object == null || getClass() != object.getClass()) return false;
 
-            ServerRegisterRequest that = (ServerRegisterRequest) object;
+            ServerRequest that = (ServerRequest) object;
 
             if (email != null ? !email.equals(that.email) : that.email != null) return false;
             return password != null ? password.equals(that.password) : that.password == null;

@@ -4,15 +4,21 @@ import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.PropertyName;
 import com.iceteaviet.englishnow.data.model.firebase.base.NewsFeedItem;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
 /**
- * Created by Genius Doan on 02/01/2018.
+ * Created by Genius Doan on 11/01/2018.
+ *
+ * Model for storing information about a status
+ *
+ * Implements Serializable to mark that this object can stream into to a sequence of byte
+ * and restore these objects from this stream of bytes
  */
 
 @IgnoreExtraProperties
-public class Status extends NewsFeedItem {
+public class Status extends NewsFeedItem implements Serializable {
     @PropertyName("content")
     protected String content;
 
@@ -52,6 +58,7 @@ public class Status extends NewsFeedItem {
         this.photoUrl = photoUrl;
     }
 
+    //Builder design pattern
     public static class Builder extends NewsFeedItem.Builder<Builder> {
         protected String content;
         protected String photoUrl;

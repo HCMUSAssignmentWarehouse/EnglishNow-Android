@@ -18,6 +18,8 @@ import dagger.android.ContributesAndroidInjector;
 
 /**
  * Created by Genius Doan on 12/27/2017.
+ *
+ * Generates an AndroidInjector for activities and implement with it's sub-component
  */
 
 @Module

@@ -2,8 +2,8 @@ package com.iceteaviet.englishnow.data.remote.firebase;
 
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
-import com.iceteaviet.englishnow.data.model.firebase.LoginRequest;
-import com.iceteaviet.englishnow.data.model.firebase.RegisterRequest;
+import com.iceteaviet.englishnow.data.model.firebase.message.LoginMessage;
+import com.iceteaviet.englishnow.data.model.firebase.message.RegisterMessage;
 
 import io.reactivex.Single;
 
@@ -12,12 +12,11 @@ import io.reactivex.Single;
  */
 
 public interface FirebaseHelper {
-    //Authentication
     boolean isLoggedIn();
 
-    Single<AuthResult> loginFirebaseWithEmail(LoginRequest.ServerLoginRequest request);
+    Single<AuthResult> loginFirebaseWithEmail(LoginMessage.ServerLoginRequest request);
 
-    Single<AuthResult> registerFirebaseWithEmail(RegisterRequest.ServerRegisterRequest request);
+    Single<AuthResult> registerFirebaseWithEmail(RegisterMessage.ServerRequest request);
 
     Single<String> updateUserDisplayName(FirebaseUser user, String displayName);
 

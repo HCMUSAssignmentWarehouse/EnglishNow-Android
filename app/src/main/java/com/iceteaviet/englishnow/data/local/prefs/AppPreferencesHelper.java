@@ -7,6 +7,8 @@ import javax.inject.Inject;
 
 /**
  * Created by Genius Doan on 27/12/2017.
+ *
+ * Entry point contains methods that help interacting with application's SharedPreferences
  */
 
 public class AppPreferencesHelper implements PreferencesHelper {

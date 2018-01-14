@@ -10,14 +10,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import io.reactivex.Observable;
 import io.reactivex.Single;
 
 /**
  * Created by Genius Doan on 08/01/2018.
+ *
+ * Repository to mediates between the view-model and Firebase data mapping layers
+ * To create or fetch information about newsfeed items from Firebase database
  */
 
+@Singleton
 public class NewsFeedItemRepository implements NewsFeedItemDataSource {
     private static final String STATUS = "status";
 
@@ -70,6 +75,11 @@ public class NewsFeedItemRepository implements NewsFeedItemDataSource {
                         emitter.onError(databaseError.toException());
                     }
                 }));
+    }
+
+    @Override
+    public void remove(Status status) {
+        //TODO: Implement me
     }
 
     @Override

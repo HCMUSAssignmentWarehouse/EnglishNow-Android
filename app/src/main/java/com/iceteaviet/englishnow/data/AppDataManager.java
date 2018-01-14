@@ -6,10 +6,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
 import com.iceteaviet.englishnow.data.local.prefs.PreferencesHelper;
 import com.iceteaviet.englishnow.data.model.api.OpenTokRoom;
-import com.iceteaviet.englishnow.data.model.firebase.LoginRequest;
-import com.iceteaviet.englishnow.data.model.firebase.RegisterRequest;
+import com.iceteaviet.englishnow.data.model.firebase.message.LoginMessage;
+import com.iceteaviet.englishnow.data.model.firebase.message.RegisterMessage;
 import com.iceteaviet.englishnow.data.model.others.StatusItemData;
-import com.iceteaviet.englishnow.data.remote.api.ApiDataSource;
+import com.iceteaviet.englishnow.data.remote.api.ApiHelper;
 import com.iceteaviet.englishnow.data.remote.firebase.FirebaseHelper;
 import com.iceteaviet.englishnow.data.remote.firebase.media.MediaDataSource;
 import com.iceteaviet.englishnow.data.remote.firebase.newsfeed.NewsFeedItemDataSource;
@@ -26,12 +26,15 @@ import io.reactivex.Single;
 
 /**
  * Created by Genius Doan on 23/12/2017.
+ *
+ * Facade design pattern
+ * Provides a simplified interface to manage and execute data operation throughout the app.
  */
 
 @Singleton
 public class AppDataManager implements DataManager {
     private final Context context;
-    private final ApiDataSource apiDataSource;
+    private final ApiHelper apiHelper;
     private final FirebaseHelper firebaseHelper;
     private final PreferencesHelper preferencesHelper;
     private final UserDataSource userRepository;
@@ -40,11 +43,11 @@ public class AppDataManager implements DataManager {
     private final VideoCallSessionDataSource videoCallSessionRepository;
 
     @Inject
-    public AppDataManager(Context context, FirebaseHelper firebaseHelper, PreferencesHelper preferencesHelper, ApiDataSource apiDataSource,
+    public AppDataManager(Context context, FirebaseHelper firebaseHelper, PreferencesHelper preferencesHelper, ApiHelper apiHelper,
                           UserDataSource userRepository, NewsFeedItemDataSource newsFeedItemRepository, MediaDataSource mediaRepository,
                           VideoCallSessionDataSource videoCallSessionRepository) {
         this.context = context;
-        this.apiDataSource = apiDataSource;
+        this.apiHelper = apiHelper;
         this.firebaseHelper = firebaseHelper;
         this.preferencesHelper = preferencesHelper;
         this.userRepository = userRepository;
@@ -79,12 +82,12 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Single<AuthResult> loginFirebaseWithEmail(LoginRequest.ServerLoginRequest request) {
+    public Single<AuthResult> loginFirebaseWithEmail(LoginMessage.ServerLoginRequest request) {
         return firebaseHelper.loginFirebaseWithEmail(request);
     }
 
     @Override
-    public Single<AuthResult> registerFirebaseWithEmail(RegisterRequest.ServerRegisterRequest request) {
+    public Single<AuthResult> registerFirebaseWithEmail(RegisterMessage.ServerRequest request) {
         return firebaseHelper.registerFirebaseWithEmail(request);
     }
 
@@ -172,6 +175,6 @@ public class AppDataManager implements DataManager {
 
     @Override
     public Single<OpenTokRoom> getOpenTokRoomInfo(String roomName) {
-        return apiDataSource.getOpenTokRoomInfo(roomName);
+        return apiHelper.getOpenTokRoomInfo(roomName);
     }
 }

@@ -2,8 +2,8 @@ package com.iceteaviet.englishnow.ui.auth.viewmodel;
 
 import com.google.firebase.auth.FirebaseUser;
 import com.iceteaviet.englishnow.data.DataManager;
-import com.iceteaviet.englishnow.data.model.firebase.RegisterRequest;
 import com.iceteaviet.englishnow.data.model.firebase.User;
+import com.iceteaviet.englishnow.data.model.firebase.message.RegisterMessage;
 import com.iceteaviet.englishnow.ui.auth.RegisterNavigator;
 import com.iceteaviet.englishnow.ui.base.BaseViewModel;
 import com.iceteaviet.englishnow.utils.InputUtils;
@@ -37,7 +37,7 @@ public class RegisterViewModel extends BaseViewModel<RegisterNavigator> {
     public void doRegister(String email, String username, String password) {
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
-                .registerFirebaseWithEmail(new RegisterRequest.ServerRegisterRequest(email, username, password))
+                .registerFirebaseWithEmail(new RegisterMessage.ServerRequest(email, username, password))
                 .subscribe(authResult -> {
                     // Sign in success, update UI with the signed-in user's information
                     FirebaseUser firebaseUser = authResult.getUser();

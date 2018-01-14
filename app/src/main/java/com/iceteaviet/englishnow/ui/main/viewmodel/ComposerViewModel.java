@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.iceteaviet.englishnow.R;
 import com.iceteaviet.englishnow.data.DataManager;
-import com.iceteaviet.englishnow.data.model.firebase.UploadTaskMessage;
+import com.iceteaviet.englishnow.data.model.firebase.message.UploadTaskMessage;
 import com.iceteaviet.englishnow.data.model.others.QueuedMedia;
 import com.iceteaviet.englishnow.data.remote.firebase.newsfeed.NewsFeedPostingExecutor;
 import com.iceteaviet.englishnow.data.remote.firebase.newsfeed.StatusPostingTicket;
@@ -56,12 +56,11 @@ public class ComposerViewModel extends BaseViewModel<ComposerNavigator> {
     private ContentResolver contentResolver;
     private QueuedMedia queuedMedia;
     private Context context;
-    private NewsFeedPostingExecutor executor;
 
 
     public ComposerViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
-        executor = new NewsFeedPostingExecutor(dataManager);
+        NewsFeedPostingExecutor.getInstance().setDataManager(dataManager);
     }
 
     public void onPostButtonClicked() {
@@ -335,8 +334,7 @@ public class ComposerViewModel extends BaseViewModel<ComposerNavigator> {
             ticket.setPhotoUrl(queuedMedia.getUploadUrl().getURL());
         }
 
-        executor.setTicket(ticket);
-        executor.execute();
+        NewsFeedPostingExecutor.getInstance().execute(ticket);
     }
 
     public void doPostVideoStatus() {
@@ -349,7 +347,6 @@ public class ComposerViewModel extends BaseViewModel<ComposerNavigator> {
         }
 
         VideoStatusPostingTicket ticket = new VideoStatusPostingTicket(uid, userDisplayName, queuedMedia.getUploadUrl().getURL());
-        executor.setTicket(ticket);
-        executor.execute();
+        NewsFeedPostingExecutor.getInstance().execute(ticket);
     }
 }

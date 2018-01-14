@@ -5,19 +5,23 @@ import com.iceteaviet.englishnow.data.model.api.OpenTokRoomService;
 import com.iceteaviet.englishnow.di.OpenTokApiClient;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import io.reactivex.Single;
 import retrofit2.Retrofit;
 
 /**
  * Created by Genius Doan on 12/27/2017.
+ *
+ * Entry point contains methods that help interacting with API calls
  */
 
-public class ApiRepository implements ApiDataSource {
+@Singleton
+public class AppApiHelper implements ApiHelper {
     private Retrofit openTokClient;
 
     @Inject
-    public ApiRepository(@OpenTokApiClient Retrofit openTokClient) {
+    public AppApiHelper(@OpenTokApiClient Retrofit openTokClient) {
         this.openTokClient = openTokClient;
     }
 

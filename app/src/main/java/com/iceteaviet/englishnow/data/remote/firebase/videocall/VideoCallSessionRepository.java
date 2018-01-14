@@ -10,14 +10,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import io.reactivex.Observable;
 import io.reactivex.Single;
 
 /**
  * Created by Genius Doan on 11/01/2018.
+ *
+ * Repository to mediates between the view-model and Firebase data mapping layers
+ * To create or fetch information about video call sessions from Firebase database
  */
 
+@Singleton
 public class VideoCallSessionRepository implements VideoCallSessionDataSource {
     private static final String SESSIONS = "sessions";
 
@@ -116,7 +121,7 @@ public class VideoCallSessionRepository implements VideoCallSessionDataSource {
     }
 
     @Override
-    public void delete(String sessionId) {
+    public void remove(String sessionId) {
         database.getReference(SESSIONS).child(sessionId).removeValue();
     }
 }

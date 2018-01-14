@@ -7,6 +7,8 @@ import java.util.List;
 
 /**
  * Created by Genius Doan on 02/01/2018.
+ *
+ * Base Adapter for implement RecyclerView adapter
  */
 
 public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

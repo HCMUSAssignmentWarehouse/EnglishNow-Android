@@ -12,10 +12,11 @@ import io.reactivex.Single;
  */
 
 public interface NewsFeedItemDataSource {
+    void createOrUpdate(Status status);
+
     Observable<List<Status>> fetchAll();
 
     Single<List<Status>> fetchAllOnce();
 
-
-    void createOrUpdate(Status status);
+    void remove(Status status);
 }

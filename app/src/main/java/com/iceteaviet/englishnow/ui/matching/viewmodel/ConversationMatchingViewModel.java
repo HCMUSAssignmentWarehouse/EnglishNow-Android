@@ -1,7 +1,7 @@
 package com.iceteaviet.englishnow.ui.matching.viewmodel;
 
 import com.iceteaviet.englishnow.data.DataManager;
-import com.iceteaviet.englishnow.data.remote.facade.ConversationMatchingHandler;
+import com.iceteaviet.englishnow.data.remote.ConversationMatchingHandler;
 import com.iceteaviet.englishnow.ui.base.BaseViewModel;
 import com.iceteaviet.englishnow.ui.matching.ConversationMatchingNavigator;
 import com.iceteaviet.englishnow.utils.rx.SchedulerProvider;
@@ -17,7 +17,7 @@ public class ConversationMatchingViewModel extends BaseViewModel<ConversationMat
 
     public ConversationMatchingViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
-        handler = new ConversationMatchingHandler(getDataManager(), getDataManager().getVideoCallSessionRepository());
+        handler = new ConversationMatchingHandler(dataManager, schedulerProvider, getCompositeDisposable(), dataManager.getVideoCallSessionRepository());
         getCompositeDisposable().add(handler.getMatchingSubject()
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.ui())

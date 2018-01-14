@@ -2,7 +2,7 @@ package com.iceteaviet.englishnow.data.remote.firebase.media;
 
 import android.net.Uri;
 
-import com.iceteaviet.englishnow.data.model.firebase.UploadTaskMessage;
+import com.iceteaviet.englishnow.data.model.firebase.message.UploadTaskMessage;
 
 import io.reactivex.Observable;
 
@@ -11,10 +11,13 @@ import io.reactivex.Observable;
  */
 
 public interface MediaDataSource {
-    //Storage
     Observable<UploadTaskMessage> putPhoto(Uri data);
 
     Observable<UploadTaskMessage> putVideo(Uri data);
+
+    Observable<UploadTaskMessage> updatePhoto(Uri data);
+
+    Observable<UploadTaskMessage> updateVideo(Uri data);
 
     void deletePhoto(String fileName);
 

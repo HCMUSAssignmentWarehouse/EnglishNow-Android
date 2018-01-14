@@ -4,6 +4,8 @@ import com.iceteaviet.englishnow.data.model.firebase.Status;
 
 /**
  * Created by Genius Doan on 02/01/2018.
+ *
+ * Model for storing information about all parts that needed when display a status
  */
 
 public class StatusItemData {

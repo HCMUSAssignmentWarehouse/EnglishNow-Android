@@ -14,6 +14,8 @@ import dagger.android.ContributesAndroidInjector;
 
 /**
  * Created by Genius Doan on 03/01/2018.
+ *
+ * Generate dependencies for sub-component of MainActivity (Fragments, DialogFragments,..)
  */
 
 @Module
