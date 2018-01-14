@@ -32,7 +32,7 @@ import dagger.Provides;
 
 /**
  * Created by Genius Doan on 12/24/2017.
- *
+ * <p>
  * You need to define what objects should be included as part of the dependency chain by creating a Dagger 2 module.
  * This AppModule is used to provide dependencies about general object that needed throughout the app.
  */

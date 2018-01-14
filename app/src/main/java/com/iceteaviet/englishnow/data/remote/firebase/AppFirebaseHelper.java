@@ -22,7 +22,7 @@ import io.reactivex.SingleEmitter;
 
 /**
  * Created by Genius Doan on 12/26/2017.
- *
+ * <p>
  * Entry point contains methods that help interacting with Firebase
  */
 

@@ -8,7 +8,7 @@ import dagger.android.ContributesAndroidInjector;
 
 /**
  * Created by Genius Doan on 28/12/2017.
- *
+ * <p>
  * Generate dependencies for PostLoginDialog that used inside Login/Splash activity
  */
 

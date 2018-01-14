@@ -7,7 +7,7 @@ import javax.inject.Qualifier;
 
 /**
  * Created by Genius Doan on 11/01/2018.
- *
+ * <p>
  * If we need two different objects of the same return type, we can use the Qualifier annotation.
  */
 

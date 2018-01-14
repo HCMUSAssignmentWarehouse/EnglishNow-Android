@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Genius Doan on 12/26/2017.
- *
+ * <p>
  * Store information about a login request.
  * Use it as a message for transport information from View-Model to data manager
  */

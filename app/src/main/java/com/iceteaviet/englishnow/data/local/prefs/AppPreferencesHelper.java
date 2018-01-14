@@ -7,7 +7,7 @@ import javax.inject.Inject;
 
 /**
  * Created by Genius Doan on 27/12/2017.
- *
+ * <p>
  * Entry point contains methods that help interacting with application's SharedPreferences
  */
 

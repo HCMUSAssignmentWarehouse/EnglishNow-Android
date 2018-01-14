@@ -15,7 +15,7 @@ import dagger.android.AndroidInjectionModule;
 
 /**
  * Created by Genius Doan on 12/24/2017.
- *
+ * <p>
  * The injector class used in Dagger 2 is called a component.
  * It create a bridge class to assigns references in our activities, services, or fragments
  * to have access to singleton objects which provided by @Module

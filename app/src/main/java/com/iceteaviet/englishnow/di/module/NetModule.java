@@ -21,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by Genius Doan on 11/01/2018.
- *
+ * <p>
  * Provide dependencies about network stuffs
  */
 

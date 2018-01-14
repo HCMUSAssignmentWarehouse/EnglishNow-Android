@@ -1,4 +1,4 @@
-package com.iceteaviet.englishnow.ui.newsfeed.viewmodel;
+package com.iceteaviet.englishnow.ui.newsfeed.status.viewmodel;
 
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;

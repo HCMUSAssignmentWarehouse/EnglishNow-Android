@@ -47,12 +47,6 @@
                         app:titleTextAppearance="@style/Toolbar.TitleText"
                         app:titleTextColor="@android:color/white"
                         tools:title="@string/app_name" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/colorGrey300" />
-
                 </android.support.design.widget.AppBarLayout>
 
                 <!-- The main content view -->

@@ -7,9 +7,9 @@ import java.io.Serializable;
 
 /**
  * Created by Genius Doan on 11/01/2018.
- *
+ * <p>
  * Model for storing information about a video call session that already matched two learners
- *
+ * <p>
  * Implements Serializable to mark that this object can stream into to a sequence of byte
  * and restore these objects from this stream of bytes
  */

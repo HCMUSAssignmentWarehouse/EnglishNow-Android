@@ -2,8 +2,9 @@ package com.iceteaviet.englishnow.di.module.main;
 
 import android.arch.lifecycle.ViewModelProvider;
 
-import com.iceteaviet.englishnow.ViewModelProviderFactory;
 import com.iceteaviet.englishnow.data.DataManager;
+import com.iceteaviet.englishnow.di.MainViewModelProviderFactory;
+import com.iceteaviet.englishnow.ui.base.ViewModelProviderFactory;
 import com.iceteaviet.englishnow.ui.main.viewmodel.MainViewModel;
 import com.iceteaviet.englishnow.utils.rx.SchedulerProvider;
 
@@ -23,7 +24,8 @@ public class MainModule {
     }
 
     @Provides
-    ViewModelProvider.Factory mainViewModelProvider(MainViewModel mainViewModel) {
+    @MainViewModelProviderFactory
+    ViewModelProvider.Factory mainViewModelProviderFactory(MainViewModel mainViewModel) {
         return new ViewModelProviderFactory<>(mainViewModel);
     }
 }

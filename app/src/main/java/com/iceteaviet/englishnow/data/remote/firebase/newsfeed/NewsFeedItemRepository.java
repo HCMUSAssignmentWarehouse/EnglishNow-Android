@@ -17,7 +17,7 @@ import io.reactivex.Single;
 
 /**
  * Created by Genius Doan on 08/01/2018.
- *
+ * <p>
  * Repository to mediates between the view-model and Firebase data mapping layers
  * To create or fetch information about newsfeed items from Firebase database
  */

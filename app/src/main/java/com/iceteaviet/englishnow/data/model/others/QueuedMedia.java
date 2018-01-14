@@ -12,7 +12,7 @@ import io.reactivex.Observable;
 
 /**
  * Created by Genius Doan on 05/01/2018.
- *
+ * <p>
  * Model for storing information about queued media to upload
  */
 

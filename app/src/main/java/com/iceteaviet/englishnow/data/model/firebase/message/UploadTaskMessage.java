@@ -4,7 +4,7 @@ import android.net.Uri;
 
 /**
  * Created by Genius Doan on 06/01/2018.
- *
+ * <p>
  * Store information about a upload task response
  * Use it as a message for response information from data manager back to View-Model.
  */

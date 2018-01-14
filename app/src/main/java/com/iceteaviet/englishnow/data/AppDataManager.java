@@ -26,7 +26,7 @@ import io.reactivex.Single;
 
 /**
  * Created by Genius Doan on 23/12/2017.
- *
+ * <p>
  * Facade design pattern
  * Provides a simplified interface to manage and execute data operation throughout the app.
  */

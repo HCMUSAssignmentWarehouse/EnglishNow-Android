@@ -10,9 +10,9 @@ import java.util.Set;
 
 /**
  * Created by Genius Doan on 11/01/2018.
- *
+ * <p>
  * Model for storing information about a status
- *
+ * <p>
  * Implements Serializable to mark that this object can stream into to a sequence of byte
  * and restore these objects from this stream of bytes
  */

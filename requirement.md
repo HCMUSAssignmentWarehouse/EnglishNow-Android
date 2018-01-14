@@ -13,7 +13,7 @@ The more using Technology in this below list, the better.
  * [x] [Dependency Injection (DI)][5]: Is a design pattern that demonstrates how to create loosely coupled classes. 
  * [x] [Builder][6]: constructs complex objects by separating construction and representation.
  * [ ] [Abstract factory][7]: groups object factories that have a common theme.
- * [ ] [Factory method][8]: creates objects without specifying the exact class to create.
+ * [x] [Factory method][8]: creates objects without specifying the exact class to create.
  * [ ] [Prototype][9]: creates objects by cloning an existing object.
  * [x] [Singleton][10]: restricts object creation for a class to only one instance.
  * [ ] Create new object by instance: 

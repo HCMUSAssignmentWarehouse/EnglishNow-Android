@@ -56,4 +56,7 @@
     <string name="error_report_too_few_statuses">At least one status must be reported.</string>
     <string name="user_auth_not_found">User authentication not found!</string>
     <string name="whats_happen">What\'s happened?</string>
+    <string name="status">Status</string>
+    <string name="video_status">Video</string>
+    <string name="oops_nothing_here">Oops, seem like there is nothing here...</string>
 </resources>

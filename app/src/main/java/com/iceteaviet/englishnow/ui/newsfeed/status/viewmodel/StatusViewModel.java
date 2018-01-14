@@ -1,4 +1,4 @@
-package com.iceteaviet.englishnow.ui.newsfeed.viewmodel;
+package com.iceteaviet.englishnow.ui.newsfeed.status.viewmodel;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.databinding.ObservableArrayList;
@@ -6,18 +6,18 @@ import android.databinding.ObservableArrayList;
 import com.iceteaviet.englishnow.data.DataManager;
 import com.iceteaviet.englishnow.data.model.firebase.Status;
 import com.iceteaviet.englishnow.ui.base.BaseViewModel;
-import com.iceteaviet.englishnow.ui.newsfeed.NewsFeedNavigator;
+import com.iceteaviet.englishnow.ui.newsfeed.status.StatusNavigator;
 import com.iceteaviet.englishnow.utils.rx.SchedulerProvider;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Genius Doan on 12/27/2017.
+ * Created by Genius Doan on 14/01/2018.
  */
 
-public class StatusViewModel extends BaseViewModel<NewsFeedNavigator> {
-    private final ObservableArrayList<StatusItemViewModel> statusItems = new ObservableArrayList<>(); //TODO: try to use list viewmodel
+public class StatusViewModel extends BaseViewModel<StatusNavigator> {
+    private final ObservableArrayList<StatusItemViewModel> statusItems = new ObservableArrayList<>();
     private final MutableLiveData<List<StatusItemViewModel>> statusItemsLiveData;
 
     public StatusViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
@@ -35,6 +35,8 @@ public class StatusViewModel extends BaseViewModel<NewsFeedNavigator> {
                 .subscribe(statusList -> {
                     if (statusList != null) {
                         statusItemsLiveData.setValue(getViewModelList(statusList));
+
+                        getNavigator().setPlaceHolderTextVisible(statusList.size() == 0);
                     }
                 }, throwable -> throwable.printStackTrace()));
     }

@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * Created by Genius Doan on 02/01/2018.
- *
+ * <p>
  * Base Adapter for implement RecyclerView adapter
  */
 

@@ -12,7 +12,7 @@ import retrofit2.Retrofit;
 
 /**
  * Created by Genius Doan on 12/27/2017.
- *
+ * <p>
  * Entry point contains methods that help interacting with API calls
  */
 

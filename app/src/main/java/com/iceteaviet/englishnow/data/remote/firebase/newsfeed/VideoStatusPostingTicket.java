@@ -5,7 +5,7 @@ import com.iceteaviet.englishnow.data.model.firebase.VideoStatus;
 
 /**
  * Created by Genius Doan on 10/01/2018.
- *
+ * <p>
  * Strategy options for posting video status
  */
 

@@ -1,4 +1,4 @@
-package com.iceteaviet.englishnow.ui.main;
+package com.iceteaviet.englishnow.ui.newsfeed.videostatus;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
@@ -10,18 +10,18 @@ import com.iceteaviet.englishnow.R;
 import com.iceteaviet.englishnow.databinding.StatusItemBinding;
 import com.iceteaviet.englishnow.ui.base.BaseRecyclerViewAdapter;
 import com.iceteaviet.englishnow.ui.base.BaseViewHolder;
-import com.iceteaviet.englishnow.ui.newsfeed.viewmodel.StatusItemViewModel;
+import com.iceteaviet.englishnow.ui.newsfeed.status.viewmodel.StatusItemViewModel;
 
 /**
  * Created by Genius Doan on 02/01/2018.
- *
+ * <p>
  * Adapter to convert list data into Views
  */
 
-public class StatusAdapter extends BaseRecyclerViewAdapter<StatusItemViewModel> {
+public class VideoStatusAdapter extends BaseRecyclerViewAdapter<StatusItemViewModel> {
     protected Context mContext;
 
-    public StatusAdapter(Context context) {
+    public VideoStatusAdapter(Context context) {
         super();
         mContext = context;
     }
@@ -29,7 +29,7 @@ public class StatusAdapter extends BaseRecyclerViewAdapter<StatusItemViewModel> 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         StatusItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.status_item, parent, false);
-        return new StatusItemViewHolder(binding);
+        return new VideoStatusAdapter.StatusItemViewHolder(binding);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class StatusAdapter extends BaseRecyclerViewAdapter<StatusItemViewModel> 
     }
 
     private void bindStatusItemView(RecyclerView.ViewHolder holder, int position) {
-        StatusItemViewHolder viewHolder = (StatusItemViewHolder) holder;
+        VideoStatusAdapter.StatusItemViewHolder viewHolder = (VideoStatusAdapter.StatusItemViewHolder) holder;
         viewHolder.onBind(position);
     }
 

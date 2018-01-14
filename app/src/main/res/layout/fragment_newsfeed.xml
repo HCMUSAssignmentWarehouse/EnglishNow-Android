@@ -6,32 +6,36 @@
 
         <variable
             name="viewModel"
-            type="com.iceteaviet.englishnow.ui.newsfeed.viewmodel.StatusViewModel" />
+            type="com.iceteaviet.englishnow.ui.newsfeed.viewmodel.NewsFeedViewModel" />
 
     </data>
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <ScrollView
-            android:id="@+id/scrollView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
             <LinearLayout
                 android:id="@+id/activityMain"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_status_container"
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/tabLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    app:tabGravity="fill"
+                    app:tabIndicatorColor="@color/colorAccent"
+                    app:tabIndicatorHeight="2dp"
+                    app:tabSelectedTextColor="@android:color/white"
+                    app:tabTextColor="@color/colorGrey300" />
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/newsfeed_view_pager"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:items="@{viewModel.statusItems}" />
+                    android:clipToPadding="false" />
             </LinearLayout>
-        </ScrollView>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_compose"
@@ -41,7 +45,7 @@
             android:src="@drawable/ic_pen"
             app:backgroundTint="@color/colorAccent"
             app:fabSize="normal"
-            app:layout_anchor="@id/scrollView"
+            app:layout_anchor="@id/activityMain"
             app:layout_anchorGravity="bottom|right|end" />
     </android.support.design.widget.CoordinatorLayout>
 </layout>

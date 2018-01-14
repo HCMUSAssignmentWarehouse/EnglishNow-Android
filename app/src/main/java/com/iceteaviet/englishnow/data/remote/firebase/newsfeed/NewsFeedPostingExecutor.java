@@ -6,7 +6,7 @@ import com.iceteaviet.englishnow.utils.AppLogger;
 
 /**
  * Created by Genius Doan on 10/01/2018.
- *
+ * <p>
  * Use for execute a newsfeed item posting ticket.
  * Design pattern applied: Singleton, Facade, context to execute Strategy Pattern
  */

@@ -5,10 +5,11 @@ import com.iceteaviet.englishnow.data.model.firebase.base.NewsFeedItem;
 
 /**
  * Created by Genius Doan on 10/01/2018.
- *
+ * <p>
  * Provide skeleton/interface for Strategy Pattern that used to posting newsfeed item
  */
 
+//TODO: Support factory
 public interface NewsFeedPostingTicket<T extends NewsFeedItem> {
     T buildNewsFeedItem();
 

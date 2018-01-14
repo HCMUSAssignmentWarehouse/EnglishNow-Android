@@ -25,6 +25,7 @@ import com.iceteaviet.englishnow.BuildConfig;
 import com.iceteaviet.englishnow.R;
 import com.iceteaviet.englishnow.databinding.ActivityMainBinding;
 import com.iceteaviet.englishnow.databinding.NavigationHeaderMainBinding;
+import com.iceteaviet.englishnow.di.MainViewModelProviderFactory;
 import com.iceteaviet.englishnow.ui.about.view.AboutFragment;
 import com.iceteaviet.englishnow.ui.auth.view.LoginActivity;
 import com.iceteaviet.englishnow.ui.base.BaseActivity;
@@ -43,7 +44,8 @@ import dagger.android.HasFragmentInjector;
 public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel> implements MainNavigator, HasFragmentInjector {
 
     @Inject
-    protected ViewModelProvider.Factory viewModelFactory;
+    protected @MainViewModelProviderFactory
+    ViewModelProvider.Factory viewModelFactory;
 
     @Inject
     protected DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;

@@ -1,7 +1,9 @@
 package com.iceteaviet.englishnow.di.module.newsfeed;
 
 import com.iceteaviet.englishnow.data.DataManager;
-import com.iceteaviet.englishnow.ui.newsfeed.viewmodel.StatusViewModel;
+import com.iceteaviet.englishnow.ui.newsfeed.NewsFeedPagerAdapter;
+import com.iceteaviet.englishnow.ui.newsfeed.view.NewsFeedFragment;
+import com.iceteaviet.englishnow.ui.newsfeed.viewmodel.NewsFeedViewModel;
 import com.iceteaviet.englishnow.utils.rx.SchedulerProvider;
 
 import dagger.Module;
@@ -14,7 +16,12 @@ import dagger.Provides;
 @Module
 public class NewsFeedModule {
     @Provides
-    public StatusViewModel provideNewsfeedViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
-        return new StatusViewModel(dataManager, schedulerProvider);
+    public NewsFeedViewModel provideNewsfeedViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
+        return new NewsFeedViewModel(dataManager, schedulerProvider);
+    }
+
+    @Provides
+    public NewsFeedPagerAdapter provideNewsFeedPagerAdapter(NewsFeedFragment fragment) {
+        return new NewsFeedPagerAdapter(fragment.getFragmentManager());
     }
 }
