@@ -1,6 +1,8 @@
 # EnglishNow-Android
 
-[![Build Status](https://travis-ci.org/HCMUS-AssignmentWarehouse/EnglishNow-Android-MVVM.svg?branch=master)](https://travis-ci.org/HCMUS-AssignmentWarehouse/EnglishNow-Android-MVVM) [![Coverage Status](https://coveralls.io/repos/github/HCMUS-AssignmentWarehouse/EnglishNow-Android-MVVM/badge.svg?branch=master)](https://coveralls.io/github/HCMUS-AssignmentWarehouse/EnglishNow-Android-MVVM?branch=master) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/2d20119e49e2458bbb2dfc9dcd662c40)](https://www.codacy.com/app/nhoxbypass/EnglishNow-Android-MVVM?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=HCMUS-AssignmentWarehouse/EnglishNow-Android-MVVM&amp;utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.org/HCMUSAssignmentWarehouse/EnglishNow-Android.svg?branch=master)](https://travis-ci.org/HCMUSAssignmentWarehouse/EnglishNow-Android)
+[![Coverage Status](https://coveralls.io/repos/github/HCMUS-AssignmentWarehouse/EnglishNow-Android-MVVM/badge.svg?branch=master)](https://coveralls.io/github/HCMUS-AssignmentWarehouse/EnglishNow-Android-MVVM?branch=master) 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2d20119e49e2458bbb2dfc9dcd662c40)](https://www.codacy.com/app/nhoxbypass/EnglishNow-Android-MVVM?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=HCMUS-AssignmentWarehouse/EnglishNow-Android-MVVM&amp;utm_campaign=Badge_Grade)
 
 English Now is an awesome Android app based on MVVM architecture with Android Data Binding using Dagger 2, RxJava2, new Android Arch Components, OpenTok client sdk, Firebase and NodeJS server.
 
