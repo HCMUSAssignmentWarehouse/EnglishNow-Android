@@ -17,7 +17,7 @@ def coverageSourceDirs = [
         '../app/src/main/java'
 ]
 
-task jacocoTestReport(type: JacocoReport, dependsOn: "testProdDebugUnitTest") {
+task jacocoTestReport(type: JacocoReport, dependsOn: "testProductionDebugUnitTest") {
     group = "Reporting"
 
     description = "Generate Jacoco coverage reports"
