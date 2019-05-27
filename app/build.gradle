@@ -3,11 +3,12 @@ apply plugin: "com.github.kt3k.coveralls"
 apply from: '../app/coverage.gradle'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "com.iceteaviet.englishnow"
         minSdkVersion 21
-        targetSdkVersion 27
+        targetSdkVersion 28
         multiDexEnabled true
         versionCode 1
         versionName "1.0"
